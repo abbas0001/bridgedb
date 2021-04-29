@@ -54,6 +54,10 @@ from Crypto.PublicKey import RSA
 from twisted.internet import ssl
 from twisted.python.procutils import which
 
+from service_identity.cryptography import verify_certificate_hostname
+from cryptography.x509 import load_pem_x509_certificate
+from service_identity import VerificationError, CertificateError, SubjectAltNameWarning
+
 #: The hash digest to use for HMACs.
 DIGESTMOD = hashlib.sha1
 
@@ -340,16 +344,26 @@ class SSLVerifyingContextFactory(ssl.CertificateOptions):
         """
         commonName = x509.get_subject().commonName
         logging.debug("Received cert at level %d: '%s'" % (depth, commonName))
+        x509 = x509.to_cryptography()
 
         # We only want to verify that the hostname matches for the level 0
         # certificate:
         if okay and (depth == 0):
-            cn = commonName.replace('*', '.*')
-            hostnamesMatch = re.search(cn, self.hostname)
-            if not hostnamesMatch:
+            try:
+                verify_certificate_hostname(x509, self.hostname)
+                logging.debug("Valid certificate subject CN for '%s': '%s'"
+                              % (self.hostname, commonName))
+                return True
+            except VerificationError:
                 logging.warn("Invalid certificate subject CN for '%s': '%s'"
                              % (self.hostname, commonName))
                 return False
-            logging.debug("Valid certificate subject CN for '%s': '%s'"
-                          % (self.hostname, commonName))
-        return True
+            except CertificateError:
+                logging.warn("Certificate contains invalid or unexpected data")
+                return False
+            except SubjectAltNameWarning:
+                logging.warn("Certificate contains no SAN, fallback to common name")
+                cn = commonName.replace('*', '.*')
+                hostnamesMatch = re.search(cn, self.hostname)
+                hostnamesMatch = True if hostnamesMatch else False
+                return hostnamesMatch
