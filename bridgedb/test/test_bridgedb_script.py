@@ -43,7 +43,7 @@ class BridgeDBCliTest(unittest.TestCase):
         during other tests, so we can safely decrease the sleep time on CI
         machines.
         """
-        if os.environ.get("TRAVIS"):
+        if os.environ.get("CI"):
             time.sleep(10)
         else:
             time.sleep(20)

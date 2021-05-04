@@ -202,6 +202,9 @@ class GimpCaptchaTests(unittest.TestCase):
 
     def test_get_unreadableCaptchaFile(self):
         """An unreadable CAPTCHA file should raise GimpCaptchaError."""
+        if os.geteuid() == 0:
+            raise unittest.SkipTest("Being root I do have permissions to read any file, this test will fail")
+
         os.makedirs(self.badCacheDir)
         badFile = os.path.join(self.badCacheDir, 'uNr34dA81e.jpg')
         with open(badFile, 'w') as fh:

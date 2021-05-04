@@ -7,6 +7,6 @@
 #
 coverage==5.1
 mechanize==0.4.5
-pep8==1.7.1
+pycodestyle==2.7.0
 pylint==2.5.2
 sure==1.4.11

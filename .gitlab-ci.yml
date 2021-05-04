@@ -1,0 +1,27 @@
+cache:
+  paths:
+    - .cache/pip
+    - /var/cache/apt
+
+image:  python:3.8
+
+.install-bridgedb-template: &install-bridgedb-template
+  before_script:
+    - apt-get update
+    - ./scripts/install-dependencies
+    - make install
+    - pip install -r .test.requirements.txt
+    - ./scripts/setup-tests
+    - bridgedb -r run &
+
+test:
+  <<: *install-bridgedb-template
+  script:
+    - make coverage-test
+
+pycodestyle:
+  allow_failure: true
+  before_script:
+    - pip install pycodestyle
+  script:
+    - make pycodestyle

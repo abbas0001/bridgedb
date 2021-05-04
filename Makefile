@@ -20,8 +20,10 @@ all: uninstall clean install coverage-test
 test:
 	python setup.py test
 
-pep8:
-	find bridgedb/*.py | xargs pep8
+pep8: pycodestyle
+
+pycodestyle:
+	pycodestyle bridgedb
 
 pylint:
 	pylint --rcfile=./.pylintrc ./bridgedb/

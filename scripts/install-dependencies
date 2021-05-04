@@ -21,6 +21,10 @@ if [ "$TRAVIS" == "true" ] ; then
 else
     DEPENDS="${DEPENDS} python-pip flog"
 fi
+
+if [ "$CI" == "true" ] ; then
+    APT_FLAGS="-y ${APT_FLAGS}"
+fi
     
 MISSING=""
 for dep in $DEPENDS ; do
