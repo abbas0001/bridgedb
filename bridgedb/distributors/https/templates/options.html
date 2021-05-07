@@ -27,9 +27,9 @@
         <div class="container-fluid-inner-5">
           <p class="bs-component">
           % if langOverride:
-            <a href="./bridges?lang=${lang}">
+            <a href="./bridges?transport=obfs4&lang=${lang}">
           % else:
-            <a href="./bridges">
+            <a href="./bridges?transport=obfs4">
           % endif
               <button class="btn btn-success btn-lg btn-block"
                       id="just-give-me-bridges-btn"
