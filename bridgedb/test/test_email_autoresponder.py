@@ -59,16 +59,18 @@ class CreateResponseBodyTests(unittest.TestCase):
         bridges."""
         lines = self._getIncomingLines("testing@localhost")
         lines[4] = "transport obfs3"
-        ret = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
+        ret, qrcode = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
         self.assertSubstring("Here are your bridges:", ret)
+        self.assertIsNotNone(qrcode)
 
     def test_createResponseBody_bridges_obfs3(self):
         """A request for 'get transport obfs3' should receive a response."""
         lines = self._getIncomingLines("testing@localhost")
         lines[4] = "get transport obfs3"
-        ret = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
+        ret, qrcode = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
         self.assertSubstring("Here are your bridges", ret)
         self.assertSubstring("obfs3", ret)
+        self.assertIsInstance(qrcode, bytes)
 
     def test_createResponseBody_bridges_obfsobfswebz(self):
         """We should only pay attention to the *last* in a crazy request."""
@@ -76,9 +78,10 @@ class CreateResponseBodyTests(unittest.TestCase):
         lines[4] = "get unblocked webz"
         lines.append("get transport obfs2")
         lines.append("get transport obfs3")
-        ret = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
+        ret, qrcode = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
         self.assertSubstring("Here are your bridges", ret)
         self.assertSubstring("obfs3", ret)
+        self.assertIsInstance(qrcode, bytes)
 
     def test_createResponseBody_bridges_obfsobfswebzipv6(self):
         """We should *still* only pay attention to the *last* request."""
@@ -87,9 +90,10 @@ class CreateResponseBodyTests(unittest.TestCase):
         lines.append("get unblocked webz")
         lines.append("get ipv6")
         lines.append("get transport obfs2")
-        ret = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
+        ret, qrcode = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
         self.assertSubstring("Here are your bridges", ret)
         self.assertSubstring("obfs2", ret)
+        self.assertIsInstance(qrcode, bytes)
 
     def test_createResponseBody_two_requests_TooSoonEmail(self):
         """The same client making two requests in a row should receive a
@@ -100,10 +104,12 @@ class CreateResponseBodyTests(unittest.TestCase):
         ctx = _createMailServerContext(self.config, dist)
 
         lines = self._getIncomingLines("testing@localhost")
-        first = autoresponder.createResponseBody(lines, ctx, self.toAddress)
+        first, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
         self.assertSubstring("Here are your bridges", first)
-        second = autoresponder.createResponseBody(lines, ctx, self.toAddress)
+        self.assertIsInstance(qrcode, bytes)
+        second, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
         self.assertSubstring("Please slow down", second)
+        self.assertIsNone(qrcode)
 
     def test_createResponseBody_three_requests_TooSoonEmail(self):
         """Alice making a request, next Bob making a request, and then Alice again,
@@ -115,18 +121,21 @@ class CreateResponseBodyTests(unittest.TestCase):
         ctx = _createMailServerContext(self.config, dist)
 
         aliceLines = self._getIncomingLines("alice@localhost")
-        aliceFirst = autoresponder.createResponseBody(aliceLines, ctx,
-                                                      self.toAddress)
+        aliceFirst, qrcode = autoresponder.createResponseBody(aliceLines, ctx,
+                                                              self.toAddress)
         self.assertSubstring("Here are your bridges", aliceFirst)
+        self.assertIsInstance(qrcode, bytes)
 
         bobLines = self._getIncomingLines("bob@localhost")
-        bobFirst = autoresponder.createResponseBody(bobLines, ctx,
-                                                    self.toAddress)
+        bobFirst, qrcode = autoresponder.createResponseBody(bobLines, ctx,
+                                                            self.toAddress)
         self.assertSubstring("Here are your bridges", bobFirst)
+        self.assertIsInstance(qrcode, bytes)
 
-        aliceSecond = autoresponder.createResponseBody(aliceLines, ctx,
-                                                       self.toAddress)
+        aliceSecond, qrcode  = autoresponder.createResponseBody(aliceLines, ctx,
+                                                                self.toAddress)
         self.assertSubstring("Please slow down", aliceSecond)
+        self.assertIsNone(qrcode)
 
     def test_createResponseBody_three_requests_IgnoreEmail(self):
         """The same client making three requests in a row should receive a
@@ -138,140 +147,18 @@ class CreateResponseBodyTests(unittest.TestCase):
         ctx = _createMailServerContext(self.config, dist)
 
         lines = self._getIncomingLines("testing@localhost")
-        first = autoresponder.createResponseBody(lines, ctx, self.toAddress)
+        first, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
         self.assertSubstring("Here are your bridges", first)
-        second = autoresponder.createResponseBody(lines, ctx, self.toAddress)
+        self.assertIsInstance(qrcode, bytes)
+        second, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
         self.assertSubstring("Please slow down", second)
-        third = autoresponder.createResponseBody(lines, ctx, self.toAddress)
+        self.assertIsNone(qrcode)
+        third, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
         self.assertIsNone(third)
-        fourth = autoresponder.createResponseBody(lines, ctx, self.toAddress)
+        self.assertIsNone(qrcode)
+        fourth, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
         self.assertIsNone(fourth)
-
-
-class EmailResponseTests(unittest.TestCase):
-    """Tests for ``generateResponse()`` and ``EmailResponse``."""
-
-    def setUp(self):
-        self.fromAddr = "bridges@torproject.org"
-        self.clientAddr = "user@example.com"
-        self.body = """\
-People think that time is strictly linear, but, in reality, it's actually just
-a ball of timey-wimey, wibbly-warbly... stuff."""
-
-    def tearDown(self):
-        autoresponder.safelog.safe_logging = True
-
-    def test_EmailResponse_generateResponse(self):
-        response = autoresponder.generateResponse(self.fromAddr,
-                                                  self.clientAddr,
-                                                  self.body)
-        self.assertIsInstance(response, autoresponder.EmailResponse)
-
-    def test_EmailResponse_generateResponse_noSafelog(self):
-        autoresponder.safelog.safe_logging = False
-        response = autoresponder.generateResponse(self.fromAddr,
-                                                  self.clientAddr,
-                                                  self.body)
-        self.assertIsInstance(response, autoresponder.EmailResponse)
-
-    def test_EmailResponse_generateResponse_mailfile(self):
-        response = autoresponder.generateResponse(self.fromAddr,
-                                                  self.clientAddr,
-                                                  self.body)
-        self.assertIsInstance(response.mailfile, (io.BytesIO, io.StringIO))
-
-    def test_EmailResponse_generateResponse_withInReplyTo(self):
-        response = autoresponder.generateResponse(self.fromAddr,
-                                                  self.clientAddr,
-                                                  self.body,
-                                                  messageID="NSA")
-        contents = str(response.readContents()).replace('\x00', '')
-        self.assertIsInstance(response.mailfile, (io.BytesIO, io.StringIO))
-        self.assertSubstring("In-Reply-To: NSA", contents)
-
-    def test_EmailResponse_generateResponse_readContents(self):
-        response = autoresponder.generateResponse(self.fromAddr,
-                                                  self.clientAddr,
-                                                  self.body)
-        contents = str(response.readContents()).replace('\x00', '')
-        self.assertSubstring('timey-wimey, wibbly-warbly... stuff.', contents)
-
-    def test_EmailResponse_additionalHeaders(self):
-        response = autoresponder.EmailResponse()
-        response.writeHeaders(self.fromAddr, self.clientAddr,
-                              subject="Re: echelon", inReplyTo="NSA",
-                              X_been_there="They were so 2004")
-        contents = str(response.readContents()).replace('\x00', '')
-        self.assertIsInstance(response.mailfile, (io.BytesIO, io.StringIO))
-        self.assertSubstring("In-Reply-To: NSA", contents)
-        self.assertSubstring("X-been-there: They were so 2004", contents)
-
-    def test_EmailResponse_close(self):
-        """Calling EmailResponse.close() should close the ``mailfile`` and set
-        ``closed=True``.
-        """
-        response = autoresponder.EmailResponse()
-        self.assertEqual(response.closed, False)
-        response.close()
-        self.assertEqual(response.closed, True)
-        self.assertRaises(ValueError, response.write, self.body)
-
-    def test_EmailResponse_read(self):
-        """Calling EmailResponse.read() should read bytes from the file."""
-        response = autoresponder.EmailResponse()
-        response.write(self.body)
-        response.rewind()
-        contents = response.read().replace(b'\x00', b'').decode('utf-8')
-        # The newlines in the email body should have been replaced with
-        # ``EmailResponse.delimiter``.
-        delimited = self.body.replace('\n', response.delimiter) \
-                    + response.delimiter
-        self.assertEqual(delimited, contents)
-
-    def test_EmailResponse_read_three_bytes(self):
-        """EmailResponse.read(3) should read three bytes from the file."""
-        response = autoresponder.EmailResponse()
-        response.write(self.body)
-        response.rewind()
-        contents = response.read(3).replace(b'\x00', b'').decode('utf-8')
-        self.assertEqual(contents, self.body[:3])
-
-    def test_EmailResponse_write(self):
-        """Calling EmailResponse.write() should write to the mailfile."""
-        response = autoresponder.EmailResponse()
-        response.write(self.body)
-        contents = str(response.readContents()).replace('\x00', '')
-        # The newlines in the email body should have been replaced with
-        # ``EmailResponse.delimiter``.
-        delimited = self.body.replace('\n', response.delimiter) \
-                    + response.delimiter
-        self.assertEqual(delimited, contents)
-
-    def test_EmailResponse_write_withRetNewlines(self):
-        """Calling EmailResponse.write() with '\r\n' in the lines should call
-        writelines(), which splits up the lines and then calls write() again.
-        """
-        response = autoresponder.EmailResponse()
-        response.write(self.body.replace('\n', '\r\n'))
-        contents = str(response.readContents()).replace('\x00', '')
-        # The newlines in the email body should have been replaced with
-        # ``EmailResponse.delimiter``.
-        delimited = self.body.replace('\n', response.delimiter) \
-                    + response.delimiter
-        self.assertEqual(delimited, contents)
-
-    def test_EmailResponse_writelines_list(self):
-        """Calling EmailResponse.writelines() with a list should write the
-        concatenated contents of the list into the mailfile.
-        """
-        response = autoresponder.EmailResponse()
-        response.writelines(self.body.split('\n'))
-        contents = str(response.readContents()).replace('\x00', '')
-        # The newlines in the email body should have been replaced with
-        # ``EmailResponse.delimiter``.
-        delimited = self.body.replace('\n', response.delimiter) \
-                    + response.delimiter
-        self.assertEqual(delimited, contents)
+        self.assertIsNone(qrcode)
 
 
 class SMTPAutoresponderTests(unittest.TestCase):
