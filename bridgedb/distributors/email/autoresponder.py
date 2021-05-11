@@ -93,7 +93,7 @@ def createResponseBody(lines, context, client, lang='en'):
         email response which we should send out and the qrcode image of the
         bridges if we provide bridges.
     """
-    translator = translations.installTranslations(lang)
+    translator = translations.installTranslations([lang])
     bridges = None
     try:
         bridgeRequest = request.determineBridgeRequestOptions(lines)
@@ -237,7 +237,7 @@ class SMTPAutoresponder(smtp.SMTPClient):
         # The string EMAIL_MISC_TEXT[1] shows up in an email if BridgeDB
         # responds with bridges.  Everything else we count as an invalid
         # request.
-        translator = translations.installTranslations(lang)
+        translator = translations.installTranslations([lang])
         if body is not None and translator.gettext(strings.EMAIL_MISC_TEXT[1]) in body:
             emailMetrix.recordValidEmailRequest(self)
         else:
