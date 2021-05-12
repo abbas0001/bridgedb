@@ -4,10 +4,9 @@
 HACKING
 =======
 
-Hack on whatever you like. Ticket are [here][trac]. If you're doing something
-big that doesn't have a ticket, you should probably make one. If you don't
-want to register for a Trac account, you can use the ```cypherpunks``` account
-with password ```writecode```.
+Hack on whatever you like. Issues are [here][issues]. If you're doing something
+big that doesn't have a ticket, you should probably make one. If you don't have
+an account you can [request an account][gitlab accounts]
 
 ## Generating bridge descriptors
 
@@ -21,16 +20,6 @@ It is recommended that you generate at least 250 descriptors for testing.
 Ideally, even more descriptors should be generated, somewhere in the realm of
 2000, as certain bugs do not emerge until BridgeDB is processing thousands of
 descriptors.
-
-## Git Workflow
-
-See this article on git branching [workflow][workflow]. The only modifications
-we make are:
-
-  * Tagging is done in the ```release-*``` branches, rather than in master.
-  * It's okay to use either the ```feature/*``` and ```fix/*``` branch naming
-    scheme, or follow little-t Tor's branch naming scheme,
-    i.e. ```bug666-description-r1```.
 
 ## Making a release
 
@@ -82,6 +71,6 @@ tagged release at that point, i.e.:
 
 References
 ----------
-[trac]: https://trac.torproject.org/projects/tor/query?status=!closed&component=Circumvention%2FBridgeDB
-[workflow]: https://nvie.com/posts/a-successful-git-branching-model/
+[issues]: https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues
+[gitlab accounts]: https://gitlab.onionize.space/
 [pur]: https://pypi.org/project/pur/
