@@ -21,6 +21,67 @@ Ideally, even more descriptors should be generated, somewhere in the realm of
 2000, as certain bugs do not emerge until BridgeDB is processing thousands of
 descriptors.
 
+## Running an email distributor
+
+### Configure postfix as relay
+
+Let's start installing postfix, in debian derivates we can do it using apt:
+
+    $ sudo apt install postfix
+
+Configure postfix to use it in ```/etc/postfix/main.cf```:
+
+    smtpd_relay_restrictions = permit_sasl_authenticated
+        permit_mynetworks
+        reject_unauth_destination
+    relayhost = [smtp.example.com]:587'
+    local_recipient_maps =
+    # enable SASL authentication
+    smtp_sasl_auth_enable = yes
+    # disallow methods that allow anonymous authentication.
+    smtp_sasl_security_options = noanonymous
+    # where to find sasl_passwd
+    smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+    # Enable STARTTLS encryption
+    smtp_use_tls = yes
+    # where to find CA certificates
+    smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+
+We'll use postfix to relay all the email over an existing smtp account in an email
+provider. Let's add the smtp account into ```/etc/postfix/sasl_passwd```:
+
+    [smtp.example.com]:587 user:password
+
+Set the rights correctly and postmap it so postfix can use it:
+
+    $ sudo chown root:root /etc/postfix/sasl_passwd
+    $ sudo chmod 600 /etc/postfix/sasl_passwd
+    $ sudo postmap /etc/postfix/sasl_passwd
+
+And restart postfix:
+
+    $ sudo systemctl restart postfix
+
+### Configure bridgedb.conf
+
+    EMAIL_DIST = True
+    EMAIL_FROM_ADDR = "user@example.com"
+    EMAIL_SMTP_FROM_ADDR = "user@example.com"
+    EMAIL_SMTP_HOST = "127.0.0.1"
+    EMAIL_SMTP_PORT = 25
+    EMAIL_DOMAIN_RULES = {'my.email.provider': ["ignore_dots"]}
+    EMAIL_BIND_IP = "127.0.0.1"
+    EMAIL_PORT = 6725
+
+### Send bridge request to our local bridgedb
+
+We use swaks to request bridges:
+
+    echo "get transport obfs4" | swaks --to user@example.com --from my.account@my.email.provider --server 127.0.0.1:6725 --body - --header 'Subject: gimme'
+
+And bridgedb will send us an email to ```my.accout@my.email.provider``` using
+```smtp.example.com``` as smtp with the bridges.
+
 ## Making a release
 
 ### Updating dependencies
