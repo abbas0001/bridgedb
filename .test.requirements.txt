@@ -5,8 +5,8 @@
 #     $ pip install -r .test.requirements.txt
 #     $ make coverage
 #
-coverage==5.1
+coverage==5.5
 mechanize==0.4.5
 pycodestyle==2.7.0
-pylint==2.5.2
+pylint==2.8.2
 sure==1.4.11
