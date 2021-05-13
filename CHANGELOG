@@ -1,3 +1,29 @@
+Changes in version 0.12.0 - 2021-05-13
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/15404
+    The email distributor now uses the right language to reply emails sent to the
+    <user>+<lang>@<domain> address.
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40008
+    Attach a QR code of bridges in the email sent by the email distributor.
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40011
+    Give obfs4 bridges by default on the https distributor.
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/27984
+    Changed the hostname check by using verify_certificate_hostname from the service
+    identity package for complete hostname verification.
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40006
+    Pass extrainfo file objects to Stem so that if an exception is raised on a single
+    descriptor, the rest of the file can be parsed starting at the file seek position.
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/33835
+    Only process text/plain part of emails.
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/33647
+    Make init hook compatible with Python 3.
+
     * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/33835
     If a user sends a multipart email to our autoresponder, we now only parse
     the part that has a text/plain encoding.
