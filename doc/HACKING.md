@@ -84,38 +84,26 @@ And bridgedb will send us an email to ```my.accout@my.email.provider``` using
 
 ## Making a release
 
-### Updating dependencies
+### Update translation strings
 
-We maintain three requirements.txt files:
+Get the newly completed translations:
 
-* requirements.txt (for BridgeDB)
-* .travis.requirements.txt (for Travis CI)
-* .test.requirements.txt (for unit tests)
+    ./maint/get-completed-translations
 
-Each of these files contains pinned dependencies, which are guaranteed to work
-for a given release.  Before releasing a new version of BridgeDB, we should
-update our dependencies.  The tool [pur][pur] (available through pip) helps us
-with this.  It checks a given requirements.txt file and updates each dependency
-to its latest version:
-
-    pur -r REQUIREMENTS_FILE
+And commit them into the repo.
 
 ### Bumping the version number
 
 Bumping the version number at release time (which, for BridgeDB really means
 deploy time, as of right now) means doing the following:
 
-    $ git checkout develop
+    $ git checkout main
     [merge some fix/bug/feature/etc branches]
-    $ git checkout -b release-0.0.2 develop
     [bump version number in CHANGELOG]
     [pip maintainance commands *would* go here, if we ever have any]
-    $ git checkout master
-    $ git merge -S --no-ff release-0.0.2
-    $ git tag -a -s bridgedb-0.0.2
-    $ git checkout develop
-    $ git merge -S --no-ff master
-    $ git push <remote> master develop
+    $ git tag -a -s bridgedb-0.x.x
+    [Release BridgeDB version 0.x.x.]
+    $ git push <remote> main
 
 And be sure not to forget to do:
 
@@ -129,6 +117,24 @@ tagged release at that point, i.e.:
     >>> import bridgedb
     >>> bridgedb.__version__
     0.0.1-git528ff30c
+
+### Updating dependencies
+
+After doing the release lets update the dependencies so we use the newest 
+versions in the following development cycle. We maintain three requirements.txt
+files:
+
+* requirements.txt (for BridgeDB)
+* .travis.requirements.txt (for Travis CI)
+* .test.requirements.txt (for unit tests)
+
+Each of these files contains pinned dependencies, which are guaranteed to work
+for a given release.  Before releasing a new version of BridgeDB, we should
+update our dependencies.  The tool [pur][pur] (available through pip) helps us
+with this.  It checks a given requirements.txt file and updates each dependency
+to its latest version:
+
+    pur -r REQUIREMENTS_FILE
 
 References
 ----------
