@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Tor Project\n"
 "Report-Msgid-Bugs-To: 'https://trac.torproject.org/projects/tor/newticket?component=BridgeDB&keywords=bridgedb-reported,msgid&cc=isis,sysrqb&owner=isis'\n"
 "POT-Creation-Date: 2020-05-14 14:21-0700\n"
-"PO-Revision-Date: 2020-05-17 14:41+0000\n"
+"PO-Revision-Date: 2020-10-24 11:38+0000\n"
 "Last-Translator: milotype <mail@milotype.de>\n"
 "Language-Team: Croatian (http://www.transifex.com/otf/torproject/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgstr "Izvorni kod"
 
 #: bridgedb/distributors/https/templates/base.html:100
 msgid "Changelog"
-msgstr "Zapisnik o promjenama"
+msgstr "Zapis promjena"
 
 #: bridgedb/distributors/https/templates/bridges.html:35
 msgid "Select All"
@@ -85,7 +85,7 @@ msgstr "QR kod za tvoje retke mostova"
 
 #: bridgedb/distributors/https/templates/bridges.html:63
 msgid "It seems there was an error getting your QRCode."
-msgstr "Čini se da je došlo do greške pri dobavljanju tvog QR koda."
+msgstr "Čini se da je došlo do greške pri dohvaćanju tvog QR koda."
 
 #: bridgedb/distributors/https/templates/bridges.html:68
 msgid ""
@@ -128,7 +128,7 @@ msgstr "Korak %s2%s"
 #: bridgedb/distributors/https/templates/index.html:30
 #, python-format
 msgid "Get %s bridges %s"
-msgstr "Preuzmi %s mostove %s"
+msgstr "Nabavi %s mostove %s"
 
 #: bridgedb/distributors/https/templates/index.html:40
 #, python-format
@@ -176,11 +176,11 @@ msgstr "%sD%sa!"
 #: bridgedb/distributors/https/templates/options.html:154
 #, python-format
 msgid "%sG%set Bridges"
-msgstr "%sP%sreuzmi mostove"
+msgstr "%sN%sabavi mostove"
 
 #: bridgedb/strings.py:33
 msgid "[This is an automated email.]"
-msgstr "[Ovo je automatski generiran email.]"
+msgstr "[Ovo je automatski generiran e-mail.]"
 
 #: bridgedb/strings.py:35
 msgid "Here are your bridges:"
@@ -191,7 +191,7 @@ msgstr "Ovo su tvoji mostovi:"
 msgid ""
 "You have exceeded the rate limit. Please slow down! The minimum time between\n"
 "emails is %s hours. All further emails during this time period will be ignored."
-msgstr "Premašio/la si ograničenje. Uspori! Minimalno vrijeme između emailova\niznosi %s sata/sati. Svi daljnji emailovi u ovom razdoblju će se zanemariti."
+msgstr "Premašio/la si ograničenje. Uspori! Minimalno vrijeme između e-mailova\niznosi %s h. Svi daljnji emailovi u ovom razdoblju će se zanemariti."
 
 #: bridgedb/strings.py:40
 msgid ""
@@ -233,7 +233,7 @@ msgid ""
 "Pluggable Transports %s which maybe doesn't sound as cool, but they can still\n"
 "help to circumvent internet censorship in many cases.\n"
 "\n"
-msgstr "Nadalje, BridgeDB ima mnoštvo dobrih, starih mostova %s bez ikakvih\npriključnih transporta %s koji možda ne zvuče najbolje, ali često mogu\npomoći zaobići internetsku cenzuru.\n"
+msgstr "Nadalje, BridgeDB ima mnoge dobre, stare mostove %s bez\npriključnih transporta %s to možda ne zvuči posebno, ali često mogu\npomoći zaobići internetsku cenzuru.\n"
 
 #: bridgedb/strings.py:78 bridgedb/test/test_https.py:356
 msgid "What are bridges?"
@@ -260,7 +260,7 @@ msgstr "Drugi način dobivanja mostova jest slanje e-maila na %s. Ostavi polje p
 
 #: bridgedb/strings.py:94
 msgid "My bridges don't work! I need help!"
-msgstr "Moji mostovi ne rade! Treba mi pomoć!"
+msgstr "Moji mostovi ne rade! Trebam pomoć!"
 
 #. TRANSLATORS: Please DO NOT translate "Tor Browser".
 #. TRANSLATORS: The two '%s' are substituted with "Tor Browser Manual" and
@@ -292,7 +292,7 @@ msgid ""
 "the pseudo-mechanism \"None\".  The following list briefly explains how these\n"
 "mechanisms work and our %sBridgeDB metrics%s visualize how popular each of the\n"
 "mechanisms is."
-msgstr "BridgeDB implementira četiri mehanizma za distribuciju mostova: „HTTPS”, „Moat”,\n„E-pošta” i „Rezervirano”. Mostovi koji se ne distribuiraju preko BridgeDB-a koriste\npseudo-mehanizam „Bez”. Sljedeći popis ukratko objašnjava kako ti mehanizmi\nrade, a naše %smetrike BridgeDB-a%s prikazuju popularnost svakog\npojedinog mehanizma."
+msgstr "BridgeDB implementira četiri mehanizma za distribuciju mostova: „HTTPS”, „Moat”,\n„E-mail” i „Rezervirano”. Mostovi koji se ne distribuiraju preko BridgeDB-a koriste\npseudo-mehanizam „Bez”. Sljedeći popis ukratko objašnjava kako ti mehanizmi\nrade, a naše %smetrike BridgeDB-a%s prikazuju popularnost svakog\npojedinog mehanizma."
 
 #: bridgedb/strings.py:115
 #, python-format
@@ -318,7 +318,7 @@ msgid ""
 "Users can request bridges from the \"Email\" distribution mechanism by sending an\n"
 "email to %sbridges@torproject.org%s and writing \"get transport obfs4\" in the\n"
 "email body."
-msgstr "Korisnici mogu zatražiti mostove putem mehanizma za distribuciju „E-pošta”, slanjem\ne-pošte na %sbridges@torproject.org%s i upisom „preuzmi obfs4 transport” u\nsadržaju e-pošte."
+msgstr "Korisnici mogu zatražiti mostove putem „E-mail” mehanizma za distribuciju, slanjem\ne-maila na %sbridges@torproject.org%s i upisom „get transport obfs4” u\npolje sadržaja e-maila."
 
 #: bridgedb/strings.py:129
 msgid "Reserved"

@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the bridgedb project.
 # 
 # Translators:
-# AO <ao@localizationlab.org>, 2018-2020
+# AO <ao@localizationlab.org>, 2018-2021
 # apaddlingduck, 2014
 # Boubou <cece31840@gmail.com>, 2015
 # Cryptie <cryptie@fsfe.org>, 2014
@@ -12,7 +12,7 @@
 # AO <ao@localizationlab.org>, 2017-2018
 # AO <ao@localizationlab.org>, 2016-2017
 # Frisson Reynald <frissonreynald@yahoo.fr>, 2014
-# hpatte, 2014
+# 9c0dfc95f4cd74427a954d3bb24cbf11_3e36064, 2014
 # Lucas Leroy <lerlucas@rocketmail.com>, 2014
 # Lunar <lunar@torproject.org>, 2013
 # Onizuka, 2013
@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: Tor Project\n"
 "Report-Msgid-Bugs-To: 'https://trac.torproject.org/projects/tor/newticket?component=BridgeDB&keywords=bridgedb-reported,msgid&cc=isis,sysrqb&owner=isis'\n"
 "POT-Creation-Date: 2020-05-14 14:21-0700\n"
-"PO-Revision-Date: 2020-05-15 14:55+0000\n"
+"PO-Revision-Date: 2021-01-21 21:09+0000\n"
 "Last-Translator: AO <ao@localizationlab.org>\n"
 "Language-Team: French (http://www.transifex.com/otf/torproject/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgstr ""
 #. "Tor Browser"
 #: bridgedb/distributors/https/server.py:154
 msgid "Sorry! Something went wrong with your request."
-msgstr "Désolé ! Un problème est survenu à la suite de votre requête."
+msgstr "Désolé. Un problème est survenu à la suite de votre requête."
 
 #: bridgedb/distributors/https/templates/base.html:42
 msgid "Language"
@@ -124,7 +124,7 @@ msgstr "Aucun pont n’est disponible actuellement…"
 msgid ""
 " Perhaps you should try %s going back %s and choosing a different bridge "
 "type!"
-msgstr "Vous devriez peut-être %s revenir en arrière %s et choisir un différent type de pont !"
+msgstr "Vous devriez peut-être %s revenir en arrière %s et choisir un différent type de pont "
 
 #: bridgedb/distributors/https/templates/index.html:11
 #, python-format
@@ -165,7 +165,7 @@ msgstr "Maintenant, %s ajoutez les ponts au Navigateur Tor %s"
 #: bridgedb/distributors/https/templates/options.html:42
 #, python-format
 msgid "%sJ%sust give me bridges!"
-msgstr "Donnez-moi %sj%suste des ponts !"
+msgstr "Donnez-moi %sj%suste des ponts"
 
 #: bridgedb/distributors/https/templates/options.html:55
 msgid "Advanced Options"
@@ -185,7 +185,7 @@ msgstr "aucun"
 #: bridgedb/distributors/https/templates/options.html:131
 #, python-format
 msgid "%sY%ses!"
-msgstr "%sO%sui !"
+msgstr "%sO%sui"
 
 #. TRANSLATORS: Please make sure the '%s' surrounding single letters at the
 #. beginning of words are present in your final translation. Thanks!
@@ -208,7 +208,7 @@ msgstr "Voici vos ponts :"
 msgid ""
 "You have exceeded the rate limit. Please slow down! The minimum time between\n"
 "emails is %s hours. All further emails during this time period will be ignored."
-msgstr "Vous avez dépassé la limite. Veuillez ralentir ! La durée minimum entre courriels est de %s heures. Tout autre courriel durant cette période sera ignoré."
+msgstr "Vous avez dépassé la limite. Veuillez ralentir. La durée minimum entre courriels est de %s heures. Tout autre courriel durant cette période sera ignoré."
 
 #: bridgedb/strings.py:40
 msgid ""
@@ -263,7 +263,7 @@ msgstr "%s Les ponts%s sont des relais Tor qui vous aident à contourner la cen
 
 #: bridgedb/strings.py:84
 msgid "I need an alternative way of getting bridges!"
-msgstr "Il me faut une autre façon d’obtenir des ponts !"
+msgstr "Il me faut une autre façon d’obtenir des ponts"
 
 #. TRANSLATORS: Please DO NOT translate "get transport obfs4".
 #: bridgedb/strings.py:86
@@ -277,7 +277,7 @@ msgstr "Une autre façon d’obtenir des ponts est d’envoyer un courriel à %s
 
 #: bridgedb/strings.py:94
 msgid "My bridges don't work! I need help!"
-msgstr "Mes ponts ne fonctionnent pas, j’ai besoin d’aide !"
+msgstr "Mes ponts ne fonctionnent pas, j’ai besoin d’aide"
 
 #. TRANSLATORS: Please DO NOT translate "Tor Browser".
 #. TRANSLATORS: The two '%s' are substituted with "Tor Browser Manual" and
@@ -294,7 +294,7 @@ msgstr "Voici vos lignes de ponts :"
 
 #: bridgedb/strings.py:103
 msgid "Get Bridges!"
-msgstr "Obtenez des ponts !"
+msgstr "Obtenez des ponts"
 
 #: bridgedb/strings.py:107
 msgid "Bridge distribution mechanisms"

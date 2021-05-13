@@ -11,15 +11,18 @@
 # タカハシ <indexial@outlook.jp>, 2013
 # タカハシ <indexial@outlook.jp>, 2014
 # h345u37g3 h345u37g3, 2019
+# Ito Takeshi, 2020
+# Jon Doe <cfltwt@mailsy.top>, 2020
 # Masaki Saito <rezoolab@gmail.com>, 2013
+# Tokumei Nanashi, 2020
 # 藤前　甲 <m1440809437@hiru-dea.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Tor Project\n"
 "Report-Msgid-Bugs-To: 'https://trac.torproject.org/projects/tor/newticket?component=BridgeDB&keywords=bridgedb-reported,msgid&cc=isis,sysrqb&owner=isis'\n"
 "POT-Creation-Date: 2020-05-14 14:21-0700\n"
-"PO-Revision-Date: 2020-05-15 08:24+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"PO-Revision-Date: 2020-09-15 14:01+0000\n"
+"Last-Translator: Tokumei Nanashi\n"
 "Language-Team: Japanese (http://www.transifex.com/otf/torproject/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,11 +61,11 @@ msgstr ""
 #. "Tor Browser"
 #: bridgedb/distributors/https/server.py:154
 msgid "Sorry! Something went wrong with your request."
-msgstr "申し訳ありません！リクエストに問題がありました。"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/base.html:42
 msgid "Language"
-msgstr "言語"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/base.html:94
 msgid "Report a Bug"
@@ -78,25 +81,25 @@ msgstr "変更履歴"
 
 #: bridgedb/distributors/https/templates/bridges.html:35
 msgid "Select All"
-msgstr "すべて選択"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/bridges.html:40
 msgid "Show QRCode"
-msgstr "QRコードを表示"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/bridges.html:52
 msgid "QRCode for your bridge lines"
-msgstr "ブリッジのQRコード"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/bridges.html:63
 msgid "It seems there was an error getting your QRCode."
-msgstr "QR コードを作成する際にエラーが発生しました。"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/bridges.html:68
 msgid ""
 "This QRCode contains your bridge lines. Scan it with a QRCode reader to copy"
 " your bridge lines onto mobile and other devices."
-msgstr "このブリッジのQRコードを携帯端末などのデバイスで読み込むことよって、ブリッジをコピーすることができます。"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/bridges.html:110
 msgid "BridgeDB encountered an error."
@@ -104,7 +107,7 @@ msgstr ""
 
 #: bridgedb/distributors/https/templates/bridges.html:116
 msgid "There currently aren't any bridges available..."
-msgstr "今の時点では利用できるブリッジがありません..."
+msgstr ""
 
 #: bridgedb/distributors/https/templates/bridges.html:118
 #: bridgedb/distributors/https/templates/bridges.html:122
@@ -112,7 +115,7 @@ msgstr "今の時点では利用できるブリッジがありません..."
 msgid ""
 " Perhaps you should try %s going back %s and choosing a different bridge "
 "type!"
-msgstr "おそらく 、 %s 戻って %s 異なるブリッジタイプを選択してみるべきでしょう。"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/index.html:11
 #, python-format
@@ -153,11 +156,11 @@ msgstr "%s Tor Browser にブリッジを追加します %s"
 #: bridgedb/distributors/https/templates/options.html:42
 #, python-format
 msgid "%sJ%sust give me bridges!"
-msgstr "%s設%s定なしのブリッジを入手する"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/options.html:55
 msgid "Advanced Options"
-msgstr "高度な設定"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/options.html:93
 msgid "No"
@@ -165,7 +168,7 @@ msgstr "いいえ"
 
 #: bridgedb/distributors/https/templates/options.html:94
 msgid "none"
-msgstr "なし"
+msgstr ""
 
 #. TRANSLATORS: Please make sure the '%s' surrounding single letters at the
 #. beginning of words are present in your final translation. Thanks!
@@ -181,7 +184,7 @@ msgstr "%sは%sい！"
 #: bridgedb/distributors/https/templates/options.html:154
 #, python-format
 msgid "%sG%set Bridges"
-msgstr "%sブ%sリッジを入手する"
+msgstr ""
 
 #: bridgedb/strings.py:33
 msgid "[This is an automated email.]"
@@ -189,14 +192,14 @@ msgstr ""
 
 #: bridgedb/strings.py:35
 msgid "Here are your bridges:"
-msgstr "あなたのブリッジ："
+msgstr ""
 
 #: bridgedb/strings.py:37
 #, python-format
 msgid ""
 "You have exceeded the rate limit. Please slow down! The minimum time between\n"
 "emails is %s hours. All further emails during this time period will be ignored."
-msgstr "レート制限を超過しました。メール間の最小時間は %s 時間です。この期間中にさらに送信したメールは全て無視されます。"
+msgstr ""
 
 #: bridgedb/strings.py:40
 msgid ""
@@ -216,7 +219,7 @@ msgid ""
 "difficult for anyone watching your internet traffic to determine that you are\n"
 "using Tor.\n"
 "\n"
-msgstr "BridgeDB は、%sPluggable Transportsタイプ%s でブリッジを提供します。\nあなたのTor Networkへの接続の検問を回避し、\nあなたのインターネットトラフィックを監視している誰かがあなたが Tor を使用していることを判別することがさらに難しくします。\n\n"
+msgstr ""
 
 #. TRANSLATORS: Please DO NOT translate "Pluggable Transports".
 #: bridgedb/strings.py:57
@@ -224,7 +227,7 @@ msgid ""
 "Some bridges with IPv6 addresses are also available, though some Pluggable\n"
 "Transports aren't IPv6 compatible.\n"
 "\n"
-msgstr "IPv6 のアドレスのブリッジも利用できるものがありますが、 Pluggable Transports には IPv6 に互換性がないものもあります。\n\n"
+msgstr ""
 
 #. TRANSLATORS: Please DO NOT translate "BridgeDB".
 #. TRANSLATORS: The phrase "plain-ol'-vanilla" means "plain, boring,
@@ -238,7 +241,7 @@ msgid ""
 "Pluggable Transports %s which maybe doesn't sound as cool, but they can still\n"
 "help to circumvent internet censorship in many cases.\n"
 "\n"
-msgstr "加えて、  BridgeDB は、 %sPluggable Transportのない%s バニラアイスのように「プレーン」な\nブリッジを持ち、それはあまり実用性がなさそうですが、実際は多くの場合インターネット検閲を回避するのになお有効です。\n"
+msgstr ""
 
 #: bridgedb/strings.py:78 bridgedb/test/test_https.py:356
 msgid "What are bridges?"
@@ -251,7 +254,7 @@ msgstr "%s ブリッジ %s は、 インターネット検閲を回避する助�
 
 #: bridgedb/strings.py:84
 msgid "I need an alternative way of getting bridges!"
-msgstr "ブリッジを入手する別の方法が必要な場合"
+msgstr ""
 
 #. TRANSLATORS: Please DO NOT translate "get transport obfs4".
 #: bridgedb/strings.py:86
@@ -265,7 +268,7 @@ msgstr ""
 
 #: bridgedb/strings.py:94
 msgid "My bridges don't work! I need help!"
-msgstr "私のブリッジが動きません! 助けてください!"
+msgstr ""
 
 #. TRANSLATORS: Please DO NOT translate "Tor Browser".
 #. TRANSLATORS: The two '%s' are substituted with "Tor Browser Manual" and
@@ -274,11 +277,11 @@ msgstr "私のブリッジが動きません! 助けてください!"
 #, python-format
 msgid ""
 "If your Tor Browser cannot connect, please take a look at the %s and our %s."
-msgstr "もしあなたの Tor Browser が接続できない場合は、%sや私達の%sをご覧ください。"
+msgstr ""
 
 #: bridgedb/strings.py:102
 msgid "Here are your bridge lines:"
-msgstr "あなたのブリッジ："
+msgstr ""
 
 #: bridgedb/strings.py:103
 msgid "Get Bridges!"
@@ -342,7 +345,7 @@ msgstr ""
 
 #: bridgedb/strings.py:137
 msgid "None"
-msgstr "なし"
+msgstr ""
 
 #: bridgedb/strings.py:138
 msgid ""
@@ -355,16 +358,16 @@ msgstr ""
 
 #: bridgedb/strings.py:148
 msgid "Please select options for bridge type:"
-msgstr "ブリッジタイプのオプションを選択してください:"
+msgstr ""
 
 #: bridgedb/strings.py:149
 msgid "Do you need IPv6 addresses?"
-msgstr "IPv6 アドレスが必要ですか？"
+msgstr ""
 
 #: bridgedb/strings.py:150
 #, python-format
 msgid "Do you need a %s?"
-msgstr "%s が必要ですか？"
+msgstr ""
 
 #: bridgedb/strings.py:154
 msgid "Your browser is not displaying images properly."
@@ -372,11 +375,11 @@ msgstr "ご利用のブラウザは適切に画像を表示していません。
 
 #: bridgedb/strings.py:155
 msgid "Enter the characters from the image above..."
-msgstr "上記の画像から文字を入力してください..."
+msgstr ""
 
 #: bridgedb/strings.py:159
 msgid "How to start using your bridges"
-msgstr "ブリッジ使用の始め方"
+msgstr ""
 
 #. TRANSLATORS: Please DO NOT translate "Tor Browser".
 #: bridgedb/strings.py:161
