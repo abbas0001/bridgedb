@@ -72,7 +72,7 @@ msgstr "Wir bitten um Entschuldigung. Bei Ihrer Anfrage lief etwas schief."
 
 #: bridgedb/distributors/https/templates/base.html:42
 msgid "Language"
-msgstr ""
+msgstr "Sprache"
 
 #: bridgedb/distributors/https/templates/base.html:94
 msgid "Report a Bug"
@@ -110,7 +110,7 @@ msgstr "Dieser QR-Code beinhaltet Ihre Brückenverbindungen. Scannen Sie ihn mit
 
 #: bridgedb/distributors/https/templates/bridges.html:110
 msgid "BridgeDB encountered an error."
-msgstr ""
+msgstr "BridgeDB ist auf einen Fehler gestoßen."
 
 #: bridgedb/distributors/https/templates/bridges.html:116
 msgid "There currently aren't any bridges available..."
@@ -195,7 +195,7 @@ msgstr "%sB%srücken erhalten"
 
 #: bridgedb/strings.py:33
 msgid "[This is an automated email.]"
-msgstr ""
+msgstr "[Dies ist eine automatisierte E-Mail.]"
 
 #: bridgedb/strings.py:35
 msgid "Here are your bridges:"
@@ -212,7 +212,7 @@ msgstr "Sie haben den Grenzwert überschritten. Bitte verlangsamen! Der kleinste
 msgid ""
 "If these bridges are not what you need, reply to this email with one of\n"
 "the following commands in the message body:"
-msgstr ""
+msgstr "Wenn diese Brücken nicht das sind, was du brauchst, dann antworte auf diese E-Mail mit einem\nder folgenden Befehle im Textkörper:"
 
 #. TRANSLATORS: Please DO NOT translate "BridgeDB".
 #. TRANSLATORS: Please DO NOT translate "Pluggable Transports".
@@ -271,7 +271,7 @@ msgid ""
 "empty and write \"get transport obfs4\" in the email's message body. Please note\n"
 "that you must send the email using an address from one of the following email\n"
 "providers: %s or %s."
-msgstr ""
+msgstr "Eine weitere Möglichkeit, Brücken zu erhalten, ist das Senden einer E-Mail an %s.\nLass den E-Mail Betreff leer und schreibe \"get transport obfs4\" in den\nTextkörper des E-Mail. Bitte beachte, dass du die E-Mail mit einer Adresse\naus einer der folgenden E-Mail-Anbieter senden musst:\n%s oder %s."
 
 #: bridgedb/strings.py:94
 msgid "My bridges don't work! I need help!"
@@ -284,7 +284,7 @@ msgstr "Meine Brücken-Server funktionieren nicht! Ich brauche Hilfe!"
 #, python-format
 msgid ""
 "If your Tor Browser cannot connect, please take a look at the %s and our %s."
-msgstr ""
+msgstr "Falls Tor keine Verbindung herstellen kann, lesen Sie bitte %s und unsere%s."
 
 #: bridgedb/strings.py:102
 msgid "Here are your bridge lines:"
@@ -296,7 +296,7 @@ msgstr "Erhalten Sie Adressen von Brücken-Servern!"
 
 #: bridgedb/strings.py:107
 msgid "Bridge distribution mechanisms"
-msgstr ""
+msgstr "Brücken-Verteilungsmechanismen"
 
 #. TRANSLATORS: Please DO NOT translate "BridgeDB", "HTTPS", and "Moat".
 #: bridgedb/strings.py:109
@@ -307,7 +307,7 @@ msgid ""
 "the pseudo-mechanism \"None\".  The following list briefly explains how these\n"
 "mechanisms work and our %sBridgeDB metrics%s visualize how popular each of the\n"
 "mechanisms is."
-msgstr ""
+msgstr "BridgeDB implementiert vier Mechanismen, um Brücken zu verteilen: \"HTTPS\", \"Moat\",\n\"E-Mail\", und \"Reserviert\".  Brücken, die nicht über BridgeDB verteilt werden, verwenden\nden Pseudo-Mechanismus \"None\".  Die folgende Liste erklärt kurz, wie diese\nMechanismen funktionieren und unsere  %sBridgeDB-Metriken%s veranschaulichen, wie beliebt jedes der\nMechanismen ist."
 
 #: bridgedb/strings.py:115
 #, python-format
@@ -315,7 +315,7 @@ msgid ""
 "The \"HTTPS\" distribution mechanism hands out bridges over this website.  To get\n"
 "bridges, go to %sbridges.torproject.org%s, select your preferred options, and\n"
 "solve the subsequent CAPTCHA."
-msgstr ""
+msgstr "Der \"HTTPS\"-Verteilungsmechanismus verteilt Brücken über diese Website. Um Brücken\nzu erhalten, gehe zu %sbridges.torproject.org%swähle deine bevorzugten Optionen und\nlöse das anschließende CAPTCHA ."
 
 #: bridgedb/strings.py:119
 #, python-format
@@ -325,7 +325,7 @@ msgid ""
 "your Tor Browser's %sTor settings%s, click on \"request a new bridge\", solve the\n"
 "subsequent CAPTCHA, and Tor Browser will automatically add your new\n"
 "bridges."
-msgstr ""
+msgstr "Der \"Moat\"-Verteilungsmechanismus ist Teil des Tor Browser, der es den Nutzern erlaubt\nBrücken aus ihren Tor Browser-Einstellungen heraus anzufordern. Um Brücken anzufordern, gehe zu\nden %sTor-Einstellungen%sdeines Tor Browser, klicke auf \"neue Brücke anfordern\", löse das \nnachfolgende CAPTCHA, und der Tor Browser fügt automatisch deine neuen\nBrücken hinzu."
 
 #: bridgedb/strings.py:125
 #, python-format
@@ -333,11 +333,11 @@ msgid ""
 "Users can request bridges from the \"Email\" distribution mechanism by sending an\n"
 "email to %sbridges@torproject.org%s and writing \"get transport obfs4\" in the\n"
 "email body."
-msgstr ""
+msgstr "Benutzer können Brücken aus dem \"E-Mail\"-Verteilungsmechanismus anfordern, indem sie ein\nE-Mail an %sbridges@torproject.org%s senden und \"get transport obfs4\" in den\nE-Mail-Text schreiben ."
 
 #: bridgedb/strings.py:129
 msgid "Reserved"
-msgstr ""
+msgstr "Reserviert"
 
 #: bridgedb/strings.py:130
 #, python-format
@@ -348,11 +348,11 @@ msgid ""
 "bridges.  Bridges that are distributed over the \"Reserved\" mechanism may not\n"
 "see users for a long time.  Note that the \"Reserved\" distribution mechanism is\n"
 "called \"Unallocated\" in %sbridge pool assignment%s files."
-msgstr ""
+msgstr "BridgeDB unterhält eine kleine Anzahl von Brücken, die nicht automatisch verteilt werden.\nStattdessen reservieren wir diese Brücken für die manuelle Verteilung und\ngeben sie an NGOs und andere Organisationen und Einzelpersonen heraus, die\nBrücken benötigen. Brücken, die über den \"Reserviert\"-Mechanismus verteilt sind, dürfen\ndie Benutzer nicht lange sehen. Beachte, dass in %sBrücken-Pool-Zuweisungsdateien%s der \"reservierte\" Verteilungsmechanismus \"Nicht zugewiesen\" genannt wird."
 
 #: bridgedb/strings.py:137
 msgid "None"
-msgstr ""
+msgstr "Nichts"
 
 #: bridgedb/strings.py:138
 msgid ""
@@ -361,7 +361,7 @@ msgid ""
 "users.  Note that on Relay Search, a freshly set up bridge's distribution\n"
 "mechanism says \"None\" for up to approximately one day.  Be a bit patient, and\n"
 "it will then change to the bridge's actual distribution mechanism.\n"
-msgstr ""
+msgstr "Brücken, deren Verteilungsmechanismus \"None\" ist, werden von BridgeDB nicht verteilt.\nEs liegt in der Verantwortung der betreibenden Person der Brücke, seine Brücken an Benutzer zu verteilen.\nBeachte, dass bei der Relay-Suche der Verteilungs-Mechanismus  einer frisch eingerichteten Brücke\nfür bis zu etwa einem Tag \"None\" sagt. Sei ein wenig geduldig, dann\nwird es zum eigentlichen Verteilungsmechanismus der Brücke wechseln.\n"
 
 #: bridgedb/strings.py:148
 msgid "Please select options for bridge type:"
@@ -396,23 +396,23 @@ msgid ""
 " Manual explains how you can add your bridges to Tor Browser. If you are\n"
 " using Windows, Linux, or OS X, %sclick here%s to learn more. If you\n"
 " are using Android, %sclick here%s."
-msgstr ""
+msgstr "Als Erstes musst du %sTor Browser herunterladen%s. Unser Tor Browser Benutzer-\nHandbuch erklärt, wie du deine Brücken zum Tor Browser hinzufügen kannst. Wenn du \nWindows, Linux, or OS X verwendest, %sklick hier%s um mehr zu erfahren. Wenn du \nAndroid verwendest, %sklick hier%s."
 
 #: bridgedb/strings.py:166
 msgid ""
 "Add these bridges to your Tor Browser by opening your browser\n"
 "preferences, clicking on \"Tor\", and then adding them to the \"Provide a\n"
 "bridge\" field."
-msgstr ""
+msgstr "Füge diese Brücken zu deinem Tor Browser hinzu, indem du die Einstellungen deines Browsers öffnest,\nauf \"Tor\" klickst und sie dann dem Feld \"Eine\nBrücke zur Verfügung stellen\" hinzufügst."
 
 #: bridgedb/strings.py:173
 msgid "(Request unobfuscated Tor bridges.)"
-msgstr ""
+msgstr "(Uneingeschränkte Tor-Brücken anfordern.)"
 
 #: bridgedb/strings.py:174
 msgid "(Request IPv6 bridges.)"
-msgstr ""
+msgstr "(IPv6-Brücken anfordern.)"
 
 #: bridgedb/strings.py:175
 msgid "(Request obfs4 obfuscated bridges.)"
-msgstr ""
+msgstr "(Uneingeschränkte obfs4-Brücken anfordern.)"

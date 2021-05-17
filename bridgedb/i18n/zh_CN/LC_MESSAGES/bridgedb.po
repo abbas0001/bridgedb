@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the bridgedb project.
 # 
 # Translators:
-# Zhui Shen <12231252@bjtu.edu.cn>, 2020
 # khi, 2013
 # khi, 2013
 # khi, 2013
 # Christopher M <i@cicku.me>, 2012
-# Cloud P <heige.pcloud@outlook.com>, 2019-2020
+# Cloud P <heige.pcloud@outlook.com>, 2019
 # ff98sha, 2019-2020
 # hanl <iamh4n@gmail.com>, 2011
 # Meng San, 2014,2016
@@ -24,8 +23,8 @@ msgstr ""
 "Project-Id-Version: Tor Project\n"
 "Report-Msgid-Bugs-To: 'https://trac.torproject.org/projects/tor/newticket?component=BridgeDB&keywords=bridgedb-reported,msgid&cc=isis,sysrqb&owner=isis'\n"
 "POT-Creation-Date: 2020-05-14 14:21-0700\n"
-"PO-Revision-Date: 2020-09-20 04:33+0000\n"
-"Last-Translator: ff98sha\n"
+"PO-Revision-Date: 2020-05-15 08:24+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/otf/torproject/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,7 +105,7 @@ msgstr "二维码包含网桥信息。利用二维码扫描程序，可将相应
 
 #: bridgedb/distributors/https/templates/bridges.html:110
 msgid "BridgeDB encountered an error."
-msgstr "BridgeDB 遇到了一个错误。"
+msgstr ""
 
 #: bridgedb/distributors/https/templates/bridges.html:116
 msgid "There currently aren't any bridges available..."
@@ -303,7 +302,7 @@ msgid ""
 "the pseudo-mechanism \"None\".  The following list briefly explains how these\n"
 "mechanisms work and our %sBridgeDB metrics%s visualize how popular each of the\n"
 "mechanisms is."
-msgstr "BridgeDB实施四种机制来分发网桥：“HTTPS”，“Moat”，\n“Email”，“Reserved”。而那些不通过 BridgeDB 分发的网桥则使用\n一种伪机制“None”。下面的列表简单地解释了每种\n机制怎么起作用的，以及我们的 %sBridgeDB 数据%s展示了\n每种机制有多受欢迎。"
+msgstr ""
 
 #: bridgedb/strings.py:115
 #, python-format
@@ -311,7 +310,7 @@ msgid ""
 "The \"HTTPS\" distribution mechanism hands out bridges over this website.  To get\n"
 "bridges, go to %sbridges.torproject.org%s, select your preferred options, and\n"
 "solve the subsequent CAPTCHA."
-msgstr "“HTTP”分发机制在网页上给出网桥。为了获取\n网桥，去 %sbridges.torproject.org%s，选择你想要的选项，并\n完成后续的验证码。"
+msgstr ""
 
 #: bridgedb/strings.py:119
 #, python-format
@@ -321,7 +320,7 @@ msgid ""
 "your Tor Browser's %sTor settings%s, click on \"request a new bridge\", solve the\n"
 "subsequent CAPTCHA, and Tor Browser will automatically add your new\n"
 "bridges."
-msgstr "“Moat”分发机制是 Tor 浏览器的一部分，允许用户\n在 Tor 浏览器的设置里面请求网桥。为了获得网桥，去\n Tor 浏览器的 %sTor 设置%s，点击“请求新网桥”，解决后续验证码，那么 Tor 浏览器就会自动为您添加一个新的网桥。"
+msgstr ""
 
 #: bridgedb/strings.py:125
 #, python-format
@@ -329,11 +328,11 @@ msgid ""
 "Users can request bridges from the \"Email\" distribution mechanism by sending an\n"
 "email to %sbridges@torproject.org%s and writing \"get transport obfs4\" in the\n"
 "email body."
-msgstr "用户可以通过发送一封邮件至%sbridges@torproject.org%s，并在邮件正文中写“get transport obfs4”，以通过“邮件”方式申请网桥。"
+msgstr ""
 
 #: bridgedb/strings.py:129
 msgid "Reserved"
-msgstr "已预留"
+msgstr ""
 
 #: bridgedb/strings.py:130
 #, python-format
@@ -344,7 +343,7 @@ msgid ""
 "bridges.  Bridges that are distributed over the \"Reserved\" mechanism may not\n"
 "see users for a long time.  Note that the \"Reserved\" distribution mechanism is\n"
 "called \"Unallocated\" in %sbridge pool assignment%s files."
-msgstr "BridgeDB 维护少量未被自动发布的网桥。\n相反，我们保留这些网桥以进行手动分发，\n将它们分发给非政府组织和其他需要网桥的组织和个人。\n通过“保留”机制分发的网桥可能很久不会被用户使用\n请注意，“保留的”发行版机制\n在%s网桥池分配%s文件中被称为“未分配”。"
+msgstr ""
 
 #: bridgedb/strings.py:137
 msgid "None"
@@ -357,7 +356,7 @@ msgid ""
 "users.  Note that on Relay Search, a freshly set up bridge's distribution\n"
 "mechanism says \"None\" for up to approximately one day.  Be a bit patient, and\n"
 "it will then change to the bridge's actual distribution mechanism.\n"
-msgstr "分发机制是“None”的网桥，并不由 BridgeDB 分发。\n这种网桥，由网桥运作者负责分发给\n用户。注意，在中继搜索里，一个新建立的网桥的分发\n机制会在一天左右的时间内显示为“None”。请耐心等候一段时间，\n它将会转变为网桥的实际分发机制。\n"
+msgstr ""
 
 #: bridgedb/strings.py:148
 msgid "Please select options for bridge type:"
@@ -403,12 +402,12 @@ msgstr "打开你的浏览器偏好以添加这些网桥到你的Tor 浏览器�
 
 #: bridgedb/strings.py:173
 msgid "(Request unobfuscated Tor bridges.)"
-msgstr "（申请非混淆 Tor 网桥。）"
+msgstr "（请求非混淆 Tor 网桥。）"
 
 #: bridgedb/strings.py:174
 msgid "(Request IPv6 bridges.)"
-msgstr "（申请IPv6网桥。）"
+msgstr "(请求IPv6网桥。)"
 
 #: bridgedb/strings.py:175
 msgid "(Request obfs4 obfuscated bridges.)"
-msgstr "（申请obfs4混淆网桥。）"
+msgstr "（请求obfs4混淆网桥。）"

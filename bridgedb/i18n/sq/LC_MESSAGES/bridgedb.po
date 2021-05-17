@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the bridgedb project.
 # 
 # Translators:
-# Besnik Bleta <besnik@programeshqip.org>, 2020
 # Bujar Tafili, 2015
 # Mirela Pacani <milela00@gmail.com>, 2016
 # obial <oltionb@gmail.com>, 2019
@@ -13,8 +12,8 @@ msgstr ""
 "Project-Id-Version: Tor Project\n"
 "Report-Msgid-Bugs-To: 'https://trac.torproject.org/projects/tor/newticket?component=BridgeDB&keywords=bridgedb-reported,msgid&cc=isis,sysrqb&owner=isis'\n"
 "POT-Creation-Date: 2020-05-14 14:21-0700\n"
-"PO-Revision-Date: 2020-11-11 15:20+0000\n"
-"Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
+"PO-Revision-Date: 2020-05-15 08:24+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Albanian (http://www.transifex.com/otf/torproject/language/sq/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,45 +52,45 @@ msgstr ""
 #. "Tor Browser"
 #: bridgedb/distributors/https/server.py:154
 msgid "Sorry! Something went wrong with your request."
-msgstr ""
+msgstr "Kërkojmë ndjesë! Diçka shkoi keq me kërkesën tuaj."
 
 #: bridgedb/distributors/https/templates/base.html:42
 msgid "Language"
-msgstr ""
+msgstr "Gjuhë"
 
 #: bridgedb/distributors/https/templates/base.html:94
 msgid "Report a Bug"
-msgstr ""
+msgstr "Raportoni një gabim"
 
 #: bridgedb/distributors/https/templates/base.html:97
 msgid "Source Code"
-msgstr ""
+msgstr "Kodi Bazë"
 
 #: bridgedb/distributors/https/templates/base.html:100
 msgid "Changelog"
-msgstr ""
+msgstr "Regjistri i ndryshimeve"
 
 #: bridgedb/distributors/https/templates/bridges.html:35
 msgid "Select All"
-msgstr ""
+msgstr "Zgjidhi të Gjitha"
 
 #: bridgedb/distributors/https/templates/bridges.html:40
 msgid "Show QRCode"
-msgstr ""
+msgstr "Tregoni Kodin QR"
 
 #: bridgedb/distributors/https/templates/bridges.html:52
 msgid "QRCode for your bridge lines"
-msgstr ""
+msgstr "Kodi QR për linjat e urave tuaja"
 
 #: bridgedb/distributors/https/templates/bridges.html:63
 msgid "It seems there was an error getting your QRCode."
-msgstr ""
+msgstr "Ndodhi një gabim në marrjen e Kodit tuaj QR."
 
 #: bridgedb/distributors/https/templates/bridges.html:68
 msgid ""
 "This QRCode contains your bridge lines. Scan it with a QRCode reader to copy"
 " your bridge lines onto mobile and other devices."
-msgstr ""
+msgstr "Ky Kod QR përmban linjat e urave tuaja. Skanojeni me një lexues Kodi QR, që të kopjoni linjat e urave tuaja në celular, apo pajisje të tjera."
 
 #: bridgedb/distributors/https/templates/bridges.html:110
 msgid "BridgeDB encountered an error."
@@ -99,7 +98,7 @@ msgstr ""
 
 #: bridgedb/distributors/https/templates/bridges.html:116
 msgid "There currently aren't any bridges available..."
-msgstr ""
+msgstr "Për momentin nuk ka ura të disponueshme..."
 
 #: bridgedb/distributors/https/templates/bridges.html:118
 #: bridgedb/distributors/https/templates/bridges.html:122
@@ -107,39 +106,39 @@ msgstr ""
 msgid ""
 " Perhaps you should try %s going back %s and choosing a different bridge "
 "type!"
-msgstr ""
+msgstr " Ndoshta duhet të provoni të %s shkoni prapa %s dhe të zgjidhni një lloj të ndryshëm ure!"
 
 #: bridgedb/distributors/https/templates/index.html:11
 #, python-format
 msgid "Step %s1%s"
-msgstr ""
+msgstr "Hapi %s1%s"
 
 #: bridgedb/distributors/https/templates/index.html:13
 #, python-format
 msgid "Download %s Tor Browser %s"
-msgstr ""
+msgstr "Shkarkoni %s Tor Browser %s"
 
 #: bridgedb/distributors/https/templates/index.html:25
 #, python-format
 msgid "Step %s2%s"
-msgstr ""
+msgstr "Hapi %s2%s"
 
 #: bridgedb/distributors/https/templates/index.html:28
 #: bridgedb/distributors/https/templates/index.html:30
 #, python-format
 msgid "Get %s bridges %s"
-msgstr ""
+msgstr "Merrni %s ura %s"
 
 #: bridgedb/distributors/https/templates/index.html:40
 #, python-format
 msgid "Step %s3%s"
-msgstr ""
+msgstr "Hapi %s3%s"
 
 #: bridgedb/distributors/https/templates/index.html:43
 #: bridgedb/distributors/https/templates/index.html:47
 #, python-format
 msgid "Now %s add the bridges to Tor Browser %s"
-msgstr ""
+msgstr "Tani %s shtojini urat tek Tor Browser %s"
 
 #. TRANSLATORS: Please make sure the '%s' surrounding single letters at the
 #. beginning of words are present in your final translation. Thanks!
@@ -148,19 +147,19 @@ msgstr ""
 #: bridgedb/distributors/https/templates/options.html:42
 #, python-format
 msgid "%sJ%sust give me bridges!"
-msgstr ""
+msgstr "%sM%së jepni urat!"
 
 #: bridgedb/distributors/https/templates/options.html:55
 msgid "Advanced Options"
-msgstr ""
+msgstr "Opsionet e Përparuara"
 
 #: bridgedb/distributors/https/templates/options.html:93
 msgid "No"
-msgstr ""
+msgstr "Jo"
 
 #: bridgedb/distributors/https/templates/options.html:94
 msgid "none"
-msgstr ""
+msgstr "asnjë"
 
 #. TRANSLATORS: Please make sure the '%s' surrounding single letters at the
 #. beginning of words are present in your final translation. Thanks!
@@ -168,7 +167,7 @@ msgstr ""
 #: bridgedb/distributors/https/templates/options.html:131
 #, python-format
 msgid "%sY%ses!"
-msgstr ""
+msgstr "%sP%so!"
 
 #. TRANSLATORS: Please make sure the '%s' surrounding single letters at the
 #. beginning of words are present in your final translation. Thanks!
@@ -176,7 +175,7 @@ msgstr ""
 #: bridgedb/distributors/https/templates/options.html:154
 #, python-format
 msgid "%sG%set Bridges"
-msgstr ""
+msgstr "%sM%serr Urat"
 
 #: bridgedb/strings.py:33
 msgid "[This is an automated email.]"
@@ -184,14 +183,14 @@ msgstr ""
 
 #: bridgedb/strings.py:35
 msgid "Here are your bridges:"
-msgstr ""
+msgstr "Ja ku janë urat tuaja:"
 
 #: bridgedb/strings.py:37
 #, python-format
 msgid ""
 "You have exceeded the rate limit. Please slow down! The minimum time between\n"
 "emails is %s hours. All further emails during this time period will be ignored."
-msgstr ""
+msgstr "Ju e keni kapërcyer kufirin e shpejtësisë. Ju lutemi, më ngadalë! Koha minimum midis \nmesazheve elektronike është %s orë. Të gjitha mesazhet elektronike gjatë kësaj periudhe kohe do të injorohen."
 
 #: bridgedb/strings.py:40
 msgid ""
@@ -211,7 +210,7 @@ msgid ""
 "difficult for anyone watching your internet traffic to determine that you are\n"
 "using Tor.\n"
 "\n"
-msgstr ""
+msgstr "BridgeDB mund të ofrojë ura me shumë %slloje të Pluggable Transports%s,\nqë mund të ndihmojë fshehjen e lidhjeve tuaja për Tor Network, duke e bërë atë më \ntë vështirë për këdo që vëzhgon trafikun tuaj të internetit, për të përcaktuar nëse ju jeni\nduke përdorur Tor.\n\n"
 
 #. TRANSLATORS: Please DO NOT translate "Pluggable Transports".
 #: bridgedb/strings.py:57
@@ -219,7 +218,7 @@ msgid ""
 "Some bridges with IPv6 addresses are also available, though some Pluggable\n"
 "Transports aren't IPv6 compatible.\n"
 "\n"
-msgstr ""
+msgstr "Disa ura me adresa IPv6 janë po ashtu të mundshme, ndonëse disa Pluggable\nTransports s'janë të përputhshëm me IPv6.\n\n"
 
 #. TRANSLATORS: Please DO NOT translate "BridgeDB".
 #. TRANSLATORS: The phrase "plain-ol'-vanilla" means "plain, boring,
@@ -233,20 +232,20 @@ msgid ""
 "Pluggable Transports %s which maybe doesn't sound as cool, but they can still\n"
 "help to circumvent internet censorship in many cases.\n"
 "\n"
-msgstr ""
+msgstr "Përveç kësaj, BridgeDB ka shumë ura %s të bezdisshme, pa ndonjë\nPluggable Transports %s, çka ndoshta nuk do të tingëllojë mirë, por ata ende\nmund të ndihmojnë që ta anashkaloni censurën e internetit në shumë raste.\n\n"
 
 #: bridgedb/strings.py:78 bridgedb/test/test_https.py:356
 msgid "What are bridges?"
-msgstr ""
+msgstr "Ç'janë urat?"
 
 #: bridgedb/strings.py:79
 #, python-format
 msgid "%s Bridges %s are Tor relays that help you circumvent censorship."
-msgstr ""
+msgstr "%s Urat %s janë rele Tor, që ju ndihmojnë të anashkaloni censurën."
 
 #: bridgedb/strings.py:84
 msgid "I need an alternative way of getting bridges!"
-msgstr ""
+msgstr "Më nevojitet një mënyrë alternative për përftimin e urave!"
 
 #. TRANSLATORS: Please DO NOT translate "get transport obfs4".
 #: bridgedb/strings.py:86
@@ -260,7 +259,7 @@ msgstr ""
 
 #: bridgedb/strings.py:94
 msgid "My bridges don't work! I need help!"
-msgstr ""
+msgstr "Urat e mia nuk punojnë! Më duhet ndihmë!"
 
 #. TRANSLATORS: Please DO NOT translate "Tor Browser".
 #. TRANSLATORS: The two '%s' are substituted with "Tor Browser Manual" and
@@ -273,11 +272,11 @@ msgstr ""
 
 #: bridgedb/strings.py:102
 msgid "Here are your bridge lines:"
-msgstr ""
+msgstr "Këtu janë linjat e urave tuaja:"
 
 #: bridgedb/strings.py:103
 msgid "Get Bridges!"
-msgstr ""
+msgstr "Merrni Ura!"
 
 #: bridgedb/strings.py:107
 msgid "Bridge distribution mechanisms"
@@ -337,7 +336,7 @@ msgstr ""
 
 #: bridgedb/strings.py:137
 msgid "None"
-msgstr ""
+msgstr "Asnjë"
 
 #: bridgedb/strings.py:138
 msgid ""
@@ -350,28 +349,28 @@ msgstr ""
 
 #: bridgedb/strings.py:148
 msgid "Please select options for bridge type:"
-msgstr ""
+msgstr "Ju lutemi përzgjidhni mundësitë për llojin e urës:"
 
 #: bridgedb/strings.py:149
 msgid "Do you need IPv6 addresses?"
-msgstr ""
+msgstr "A ju nevojiten adresat IPv6?"
 
 #: bridgedb/strings.py:150
 #, python-format
 msgid "Do you need a %s?"
-msgstr ""
+msgstr "A ju nevojitet një %s?"
 
 #: bridgedb/strings.py:154
 msgid "Your browser is not displaying images properly."
-msgstr ""
+msgstr "Shfletuesi juaj nuk po i shfaq si duhet imazhet."
 
 #: bridgedb/strings.py:155
 msgid "Enter the characters from the image above..."
-msgstr ""
+msgstr "Futini karakteret nga imazhi më sipër..."
 
 #: bridgedb/strings.py:159
 msgid "How to start using your bridges"
-msgstr ""
+msgstr "Si të nisni t'i përdorni urat tuaja"
 
 #. TRANSLATORS: Please DO NOT translate "Tor Browser".
 #: bridgedb/strings.py:161
