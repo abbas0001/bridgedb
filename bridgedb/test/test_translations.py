@@ -26,6 +26,9 @@ REALISH_HEADERS = {
 ACCEPT_LANGUAGE_HEADER = {
     b'Accept-Language': [b'de-de,en-gb;q=0.8,en;q=0.5,en-us;q=0.3'],
 }
+BAD_ACCEPT_LANGUAGE_HEADER = {
+    b'Accept-Language': [b'hackityhackhack'],
+}
 
 
 class TranslationsMiscTests(unittest.TestCase):
@@ -52,7 +55,7 @@ class TranslationsMiscTests(unittest.TestCase):
         self.assertEqual(parsed[2], 'en_US')
 
     def test_getLocaleFromHTTPRequest_withLangParam_AcceptLanguage(self):
-        """This request uses a '?lang=ar' param, with an 'Accept-Language'
+        """This request uses a '?lang=fa' param, with an 'Accept-Language'
         header which includes: ['de-de', 'en-gb', 'en', 'en-us'].
 
         The request result should be: ['fa', 'de-de', 'en-gb', 'en', 'en-us'].
@@ -68,6 +71,42 @@ class TranslationsMiscTests(unittest.TestCase):
         self.assertEqual(parsed[1], 'en')
         self.assertEqual(parsed[2], 'en_US')
         #self.assertEqual(parsed[3], 'en-gb')
+
+    def test_getLocaleFromHTTPRequest_withBadLangParam(self):
+        """This request uses a '?lang=shouldfail' param, without an 'Accept-Language'
+        header.
+
+        The request result should be: ['en', 'en-US'].
+        """
+        request = DummyRequest([b"bridges"])
+        request.headers.update(REALISH_HEADERS)
+        request.args.update({
+            'transport': ['obfs3',],
+            'lang': ['shouldfail',],
+        })
+
+        parsed = translations.getLocaleFromHTTPRequest(request)
+
+        self.assertEqual(len(parsed), 2)
+        self.assertEqual(parsed[0], 'en')
+        self.assertEqual(parsed[1], 'en_US')
+
+    def test_getLocaleFromHTTPRequest_withLangParam_BadAcceptLanguage(self):
+        """This request uses a '?lang=fa' param, with an 'Accept-Language'
+        header which includes: ['hackityhackhack'].
+
+        The request result should be: ['fa', 'en', 'en-us'].
+        """
+        request = DummyRequest([b"options"])
+        request.headers.update(BAD_ACCEPT_LANGUAGE_HEADER)
+        request.args.update({'lang': ['fa']})
+
+        parsed = translations.getLocaleFromHTTPRequest(request)
+
+        self.assertEqual(len(parsed), 3)
+        self.assertEqual(parsed[0], 'fa')
+        self.assertEqual(parsed[1], 'en')
+        self.assertEqual(parsed[2], 'en_US')
 
     def test_getLocaleFromPlusAddr(self):
         emailAddr = 'bridges@torproject.org'
