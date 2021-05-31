@@ -94,6 +94,7 @@ def getLocaleFromHTTPRequest(request):
 
     langs = list(map(lambda l: l if isinstance(l, str) else l.decode('utf-8'), langs))
 
+    langs = filterRequestedLangs(langs)
     installTranslations(langs)
     return langs
 
@@ -110,6 +111,22 @@ def getLocaleFromPlusAddr(address):
 
     return replyLocale
 
+def filterRequestedLangs(langs):
+    """
+    Filters user-requested languages to only include those supported
+    by BridgeDB.
+    :type list
+    :param langs: A list of user-requested languages for translation
+    :rtype: list
+    :returns: All requested languages that are supported by BridgeDB
+    """
+    supported_langs = getSupportedLangs()
+    valid_langs = list()
+    for l in langs:
+        if l in supported_langs:
+            valid_langs.append(l)
+    return valid_langs
+
 def installTranslations(langs):
     """Create a ``gettext.translation`` chain for all **langs**.
 
@@ -125,11 +142,11 @@ def installTranslations(langs):
     """
     try:
         language = gettext.translation("bridgedb", localedir=TRANSLATIONS_DIR,
-                                       languages=langs, fallback=True)
-        for lang in langs:
+                                       languages=[langs[0]], fallback=True)
+        for lang in langs[1:]:
             language.add_fallback(
                 gettext.translation("bridgedb", localedir=TRANSLATIONS_DIR,
-                                    languages=langs, fallback=True))
+                                    languages=[lang], fallback=True))
     except IOError as error:
         logging.error(str(error))
 

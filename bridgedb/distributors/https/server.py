@@ -405,11 +405,16 @@ class TranslatedTemplateResource(CustomErrorHandlingResource, CSPResource):
             langs = translations.getLocaleFromHTTPRequest(request)
             rtl = translations.usingRTLLang(langs)
             template = lookup.get_template(self.template)
-            rendered = template.render(strings,
+            if langs:
+                rendered = template.render(strings,
                                        getSortedLangList(),
                                        rtl=rtl,
                                        lang=langs[0],
                                        langOverride=translations.isLangOverridden(request),
+                                       showFaq=self.showFaq)
+            else:
+                rendered = template.render(strings,
+                                       getSortedLangList(),
                                        showFaq=self.showFaq)
         except Exception as err:  # pragma: no cover
             rendered = replaceErrorPage(request, err)
@@ -539,11 +544,17 @@ class CaptchaProtectedResource(CustomErrorHandlingResource, CSPResource):
             # TODO: this does not work for versions of IE < 8.0
             imgstr = b'data:image/jpeg;base64,%s' % base64.b64encode(image)
             template = lookup.get_template('captcha.html')
-            rendered = template.render(strings,
+            if langs:
+                rendered = template.render(strings,
                                        getSortedLangList(),
                                        rtl=rtl,
                                        lang=langs[0],
                                        langOverride=translations.isLangOverridden(request),
+                                       imgstr=imgstr.decode("utf-8"),
+                                       challenge_field=challenge)
+            else:
+                rendered = template.render(strings,
+                                       getSortedLangList(),
                                        imgstr=imgstr.decode("utf-8"),
                                        challenge_field=challenge)
         except Exception as err:
@@ -1084,11 +1095,17 @@ class BridgesResource(CustomErrorHandlingResource, CSPResource):
                 langs = translations.getLocaleFromHTTPRequest(request)
                 rtl = translations.usingRTLLang(langs)
                 template = lookup.get_template('bridges.html')
-                rendered = template.render(strings,
+                if langs:
+                    rendered = template.render(strings,
                                            getSortedLangList(),
                                            rtl=rtl,
                                            lang=langs[0],
                                            langOverride=translations.isLangOverridden(request),
+                                           answer=bridgeLines,
+                                           qrcode=qrcode)
+                else:
+                    rendered = template.render(strings,
+                                           getSortedLangList(),
                                            answer=bridgeLines,
                                            qrcode=qrcode)
             except Exception as err:
