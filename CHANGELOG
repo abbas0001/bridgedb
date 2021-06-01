@@ -1,3 +1,8 @@
+Changes in version 0.12.2 - 2021-06-01
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40014
+    HTML injection vulnerability with lang parameter
+
 Changes in version 0.12.1 - 2021-05-17
 
     * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40013
