@@ -1,7 +1,7 @@
 ## -*- coding: utf-8 -*-
 
 <%inherit file="base.html"/>
-<%page args="strings, langs, rtl=False, lang='en', langOverride=False, **kwargs"/>
+<%page args="strings, langs, rtl=False, lang='en', langOverride=False, addAccessKeys=None, **kwargs"/>
 
 <div class="container-fluid container-fluid-outer-96">
   <!--<div class="container-fluid step-semi-transparent">-->
@@ -35,11 +35,14 @@
                       id="just-give-me-bridges-btn"
                       type="button"
                       accesskey="j">
-## TRANSLATORS: Please make sure the '%s' surrounding single letters at the
-##              beginning of words are present in your final translation. Thanks!
-##              (These are used to insert HTML5 underlining tags, to mark accesskeys
-##              for disabled users.)
-                ${_("""%sJ%sust give me bridges!""") % ("""<u>""", """</u>""")}
+## TRANSLATORS: '_' is used to insert HTML5 underlining tags, to mark accesskeys for disabled users.
+##              Make sure the character preceded by '_' is unique in this file, the other strings that
+##              contain accesskeys in this file are: "Do you need a Pluggable _Transport?", "_Yes!",
+##              "_Get Bridges".
+##              You can change the character preceded by '_' to pick any of the existing ones that will
+##              fit better for your language, or if none you can keep the English accesskey by
+##              adding a '(_J)' at the end of the string.
+                ${addAccessKeys(_("""_Just give me bridges!"""))}
               </button>
             </a>
           </p>
@@ -125,10 +128,15 @@
                                type="checkbox"
                                value="yes"
                                accesskey="y" />
-## TRANSLATORS: Please make sure the '%s' surrounding single letters at the
-##              beginning of words are present in your final translation. Thanks!
+## TRANSLATORS: '_' is used to insert HTML5 underlining tags, to mark accesskeys for disabled users.
+##              Make sure the character preceded by '_' is unique in this file, the other strings that
+##              contain accesskeys in this file are: "Do you need a Pluggable _Transport?",
+##              "_Just give me bridges!", "_Get Bridges".
+##              You can change the character preceded by '_' to pick any of the existing ones that will
+##              fit better for your language, or if none you can keep the English accesskey by
+##              adding a '(_Y)' at the end of the string.
 ## TRANSLATORS: Translate "Yes!" as in "Yes! I do need IPv6 addresses."
-                          ${_("""%sY%ses!""") % ("<u>", "</u>")}
+                          ${addAccessKeys(_("""_Yes!"""))}
                       </div>
                     </div>
                   </div>
@@ -148,10 +156,15 @@
           <button class="btn btn-primary btn-lg btn-block"
                   id="get-bridges-btn"
                   accesskey="g">
-## TRANSLATORS: Please make sure the '%s' surrounding single letters at the
-##              beginning of words are present in your final translation. Thanks!
+## TRANSLATORS: '_' is used to insert HTML5 underlining tags, to mark accesskeys for disabled users.
+##              Make sure the character preceded by '_' is unique in this file, the other strings that
+##              contain accesskeys in this file are: "Do you need a Pluggable _Transport?", "_Yes!",
+##              "_Just give me bridges!".
+##              You can change the character preceded by '_' to pick any of the existing ones that will
+##              fit better for your language, or if none you can keep the English accesskey by
+##              adding a '(_G)' at the end of the string.
 ## TRANSLATORS: Please do NOT translate the word "bridge"!
-            ${_("""%sG%set Bridges""") % ("<u>", "</u>")}
+            ${addAccessKeys(_("""_Get Bridges"""))}
           </button>
         </div>
       </div>

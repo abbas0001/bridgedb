@@ -411,15 +411,21 @@ class TranslatedTemplateResource(CustomErrorHandlingResource, CSPResource):
                                        rtl=rtl,
                                        lang=langs[0],
                                        langOverride=translations.isLangOverridden(request),
-                                       showFaq=self.showFaq)
+                                       showFaq=self.showFaq,
+                                       addAccessKeys=self._add_access_keys)
             else:
                 rendered = template.render(strings,
                                        getSortedLangList(),
-                                       showFaq=self.showFaq)
+                                       showFaq=self.showFaq,
+                                       addAccessKeys=self._add_access_keys)
         except Exception as err:  # pragma: no cover
             rendered = replaceErrorPage(request, err)
         request.setHeader("Content-Type", "text/html; charset=utf-8")
         return rendered
+
+    def _add_access_keys(self, string):
+        i = string.find("_")
+        return string[:i] + "<u>" + string[i + 1] + "</u>" + string[i + 2 :]
 
     render_POST = render_GET
 

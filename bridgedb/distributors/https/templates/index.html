@@ -1,14 +1,20 @@
 ## -*- coding: utf-8 -*-
 
 <%inherit file="base.html"/>
-<%page args="strings, langs, rtl=False, lang='en', langOverride=False, **kwargs"/>
+<%page args="strings, langs, rtl=False, lang='en', langOverride=False, addAccessKeys=None, **kwargs"/>
 
 <div class="main-steps">
 <div class="step row" id="step-1">
   <div class="bdb_span7 step-text">
     <span class="lead">
       <span class="step-title">
-        ${_("Step %s1%s") % ("""<u>""", """</u>""")}</span>
+## TRANSLATORS: '_' is used to insert HTML5 underlining tags, to mark accesskeys for disabled users.
+##              Make sure the character preceded by '_' is unique in this file, the other strings that
+##              contain accesskeys in this file are: "Step _2", "Step _3".
+##              You can change the character preceded by '_' to pick any of the existing ones that will
+##              fit better for your language, or if none you can keep the English accesskey by
+##              adding a '(_1)' at the end of the string.
+        ${addAccessKeys(_("Step _1"))}</span>
       <span class="step-text">
         ${_("Download %s Tor Browser %s") % \
            ("""<a href="https://www.torproject.org/projects/torbrowser.html"
@@ -22,7 +28,13 @@
   <div class="bdb_span7 step-text">
     <span class="lead">
       <span class="step-title">
-        ${_("Step %s2%s") % ("""<u>""", """</u>""")}</span>
+## TRANSLATORS: '_' is used to insert HTML5 underlining tags, to mark accesskeys for disabled users.
+##              Make sure the character preceded by '_' is unique in this file, the other strings that
+##              contain accesskeys in this file are: "Step _1", "Step _3".
+##              You can change the character preceded by '_' to pick any of the existing ones that will
+##              fit better for your language, or if none you can keep the English accesskey by
+##              adding a '(_2)' at the end of the string.
+        ${addAccessKeys(_("Step _2"))}</span>
       <span class="step-text">
       % if langOverride:
         ${_("Get %s bridges %s") % ("""<a href="/options?lang="""+lang+"""" accesskey="2">""", "</a>")}</span>
@@ -37,7 +49,13 @@
   <div class="bdb_span7 step-text">
     <span class="lead">
       <span class="step-title">
-        ${_("Step %s3%s") % ("""<u>""", """</u>""")}</span>
+## TRANSLATORS: '_' is used to insert HTML5 underlining tags, to mark accesskeys for disabled users.
+##              Make sure the character preceded by '_' is unique in this file, the other strings that
+##              contain accesskeys in this file are: "Step _1", "Step _2".
+##              You can change the character preceded by '_' to pick any of the existing ones that will
+##              fit better for your language, or if none you can keep the English accesskey by
+##              adding a '(_3)' at the end of the string.
+        ${addAccessKeys(_("Step _3"))}</span>
       <span class="step-text">
       % if langOverride:
         ${_("""Now %s add the bridges to Tor Browser %s""") % \
