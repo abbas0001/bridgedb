@@ -470,7 +470,7 @@ class HTTPSMetrics(Metrics):
         # two-letter country code.
         ipAddr = getClientIP(request,
                              useForwardedHeader=True,
-                             skipLoopback=False)
+                             skipInvalid=True)
         self.updateSubnetCounter(ipAddr)
         countryCode = resolveCountryCode(ipAddr)
 
@@ -578,7 +578,7 @@ class MoatMetrics(Metrics):
 
         ipAddr = getClientIP(request,
                              useForwardedHeader=True,
-                             skipLoopback=False)
+                             skipInvalid=True)
         countryCode = resolveCountryCode(ipAddr)
 
         try:

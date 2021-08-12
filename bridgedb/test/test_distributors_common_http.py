@@ -88,26 +88,26 @@ class GetClientIPTests(unittest.TestCase):
         """
         request = self.createRequestWithIPs()
         request.headers.update({'x-forwarded-for': 'pineapple'})
-        clientIP = server.getClientIP(request, useForwardedHeader=True)
+        clientIP = server.getClientIP(request, useForwardedHeader=True, skipInvalid=True)
         self.assertEqual(clientIP, None)
 
-    def test_getClientIP_XForwardedFor_skip_loopback(self):
+    def test_getClientIP_XForwardedFor_skip_invalid(self):
         request = self.createRequestWithIPs()
         request.headers.update({'x-forwarded-for': '3.3.3.3, 127.0.0.1'})
-        clientIP = server.getClientIP(request, useForwardedHeader=True, skipLoopback=True)
+        clientIP = server.getClientIP(request, useForwardedHeader=True, skipInvalid=True)
         self.assertEqual(clientIP, '3.3.3.3')
 
-    def test_getClientIP_XForwardedFor_skip_loopback_multiple(self):
+    def test_getClientIP_XForwardedFor_skip_invalid_multiple(self):
         request = self.createRequestWithIPs()
-        request.headers.update({'x-forwarded-for': '3.3.3.3, 127.0.0.6, 127.0.0.1'})
-        clientIP = server.getClientIP(request, useForwardedHeader=True, skipLoopback=True)
+        request.headers.update({'x-forwarded-for': '127.0.0.1, 192.168.3.1, 3.3.3.3, 127.0.0.6'})
+        clientIP = server.getClientIP(request, useForwardedHeader=True, skipInvalid=True)
         self.assertEqual(clientIP, '3.3.3.3')
 
-    def test_getClientIP_XForwardedFor_no_skip_loopback(self):
+    def test_getClientIP_XForwardedFor_no_skip_invalid(self):
         request = self.createRequestWithIPs()
-        request.headers.update({'x-forwarded-for': '3.3.3.3, 127.0.0.1'})
-        clientIP = server.getClientIP(request, useForwardedHeader=True, skipLoopback=False)
-        self.assertEqual(clientIP, '127.0.0.1')
+        request.headers.update({'x-forwarded-for': '192.168.0.1, 3.3.3.3, 127.0.0.1'})
+        clientIP = server.getClientIP(request, useForwardedHeader=True, skipInvalid=False)
+        self.assertEqual(clientIP, '192.168.0.1')
 
     def test_getClientIP_fromRequest(self):
         """getClientIP() should return the IP address from the request instance
