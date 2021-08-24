@@ -170,9 +170,10 @@ bridge" field."""),
 }
 
 EMAIL_COMMANDS = {
-    "get bridges":          _("(Request unobfuscated Tor bridges.)"),
-    "get ipv6":             _("(Request IPv6 bridges.)"),
-    "get transport obfs4":  _("(Request obfs4 obfuscated bridges.)"),
+    "get bridges": _("(Request default Tor bridges.)"),
+    "get ipv6": _("(Request IPv6 bridges.)"),
+    "get transport obfs4": _("(Request obfs4 obfuscated bridges.)"),
+    "get vanilla": _("(Request unobfuscated Tor bridges.)"),
     # TRANSLATORS: Please DO NOT translate "BridgeDB".
 }
 

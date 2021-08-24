@@ -64,6 +64,8 @@ GET_LINE       = re.compile("([^>].*)?get")
 IPV6_LINE      = re.compile("([^>].*)?ipv6")
 TRANSPORT_LINE = re.compile("([^>].*)?transport")
 UNBLOCKED_LINE = re.compile("([^>].*)?unblocked")
+VANILLA_LINE = re.compile("([^>].*)?vanilla")
+
 
 def determineBridgeRequestOptions(lines):
     """Figure out which :mod:`~bridgedb.filters` to apply.
@@ -80,6 +82,7 @@ def determineBridgeRequestOptions(lines):
     """
     request = EmailBridgeRequest()
     skippedHeaders = False
+    requested_transport = False
 
     for line in lines:
         line = line.strip().lower()
@@ -93,20 +96,24 @@ def determineBridgeRequestOptions(lines):
         if IPV6_LINE.match(line) is not None:
             request.withIPv6()
         if TRANSPORT_LINE.match(line) is not None:
+            requested_transport = True
             request.withPluggableTransportType(line)
         if UNBLOCKED_LINE.match(line) is not None:
             request.withoutBlockInCountry(line)
+        if VANILLA_LINE.match(line) is not None:
+            requested_transport = True
+
+    # If not transport requested we will respond with our default transport protocol.
+    if not requested_transport:
+        # Note that this variable must satisfy TRANSPORT_PATTERN.
+        default_transport = "transport %s" % strings._getDefaultTransport()
+        request.withPluggableTransportType(default_transport)
 
     # We cannot expect all users to understand BridgeDB's commands, so we will
     # return bridges even if the request was invalid.
     if not request.isValid():
         logging.debug("Email request was invalid.")
         request.isValid(True)
-        # We will respond with our default transport protocol.
-        if not len(request.transports):
-            # Note that this variable must satisfy TRANSPORT_PATTERN.
-            default_transport = "transport %s" % strings._getDefaultTransport()
-            request.withPluggableTransportType(default_transport)
 
     logging.debug("Generating hashring filters for request.")
     request.generateFilters()
