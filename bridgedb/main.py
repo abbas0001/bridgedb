@@ -27,6 +27,7 @@ from bridgedb import runner
 from bridgedb import util
 from bridgedb import metrics
 from bridgedb import antibot
+from bridgedb import rdsys
 from bridgedb.bridges import MalformedBridgeInfo
 from bridgedb.bridges import MissingServerDescriptorDigest
 from bridgedb.bridges import ServerDescriptorDigestMismatch
@@ -57,24 +58,6 @@ def expandBridgeAuthDir(authdir, filename):
 
     return path
 
-def writeAssignments(hashring, filename):
-    """Dump bridge distributor assignments to disk.
-
-    :type hashring: A :class:`~bridgedb.bridgerings.BridgeSplitter`
-    :ivar hashring: A class which takes an HMAC key and splits bridges
-        into their hashring assignments.
-    :param str filename: The filename to write the assignments to.
-    """
-    logging.debug("Dumping pool assignments to file: '%s'" % filename)
-
-    try:
-        with open(filename, 'a') as fh:
-            fh.write("bridge-pool-assignment %s\n" %
-                     time.strftime("%Y-%m-%d %H:%M:%S"))
-            hashring.dumpAssignments(fh)
-    except IOError:
-        logging.info("I/O error while writing assignments to: '%s'" % filename)
-
 def writeMetrics(filename, measurementInterval):
     """Dump usage metrics to disk.
 
@@ -91,178 +74,18 @@ def writeMetrics(filename, measurementInterval):
     except IOError as err:
         logging.error("Failed to write metrics to '%s': %s" % (filename, err))
 
-def load(state, hashring, clear=False):
-    """Read and parse all descriptors, and load into a bridge hashring.
+def load(cfg, proxyList, key):
+    """Load the configured distributors and their connections to rdsys
 
-    Read all the appropriate bridge files from the saved
-    :class:`~bridgedb.persistent.State`, parse and validate them, and then
-    store them into our ``state.hashring`` instance. The ``state`` will be
-    saved again at the end of this function.
-
-    :type hashring: :class:`~bridgedb.bridgerings.BridgeSplitter`
-    :param hashring: A class which provides a mechanism for HMACing
-        Bridges in order to assign them to hashrings.
-    :param boolean clear: If True, clear all previous bridges from the
-        hashring before parsing for new ones.
-    """
-    if not state:
-        logging.fatal("bridgedb.main.load() could not retrieve state!")
-        sys.exit(2)
-
-    if clear:
-        logging.info("Clearing old bridges...")
-        hashring.clear()
-
-    logging.info("Loading bridges...")
-
-    ignoreNetworkstatus = state.IGNORE_NETWORKSTATUS
-    if ignoreNetworkstatus:
-        logging.info("Ignoring BridgeAuthority networkstatus documents.")
-
-    for auth in state.BRIDGE_AUTHORITY_DIRECTORIES:
-        logging.info("Processing descriptors in %s directory..." % auth)
-
-        bridges = {}
-        timestamps = {}
-
-        fn = expandBridgeAuthDir(auth, state.STATUS_FILE)
-        logging.info("Opening networkstatus file: %s" % fn)
-        networkstatuses = descriptors.parseNetworkStatusFile(fn)
-        logging.debug("Closing networkstatus file: %s" % fn)
-
-        logging.info("Processing networkstatus descriptors...")
-        for router in networkstatuses:
-            bridge = Bridge()
-            bridge.updateFromNetworkStatus(router, ignoreNetworkstatus)
-            try:
-                bridge.assertOK()
-            except MalformedBridgeInfo as error:
-                logging.warn(str(error))
-            else:
-                bridges[bridge.fingerprint] = bridge
-
-        for filename in state.BRIDGE_FILES:
-            fn = expandBridgeAuthDir(auth, filename)
-            logging.info("Opening bridge-server-descriptor file: '%s'" % fn)
-            serverdescriptors = descriptors.parseServerDescriptorsFile(fn)
-            logging.debug("Closing bridge-server-descriptor file: '%s'" % fn)
-
-            for router in serverdescriptors:
-                try:
-                    bridge = bridges[router.fingerprint]
-                except KeyError:
-                    logging.warn(
-                        ("Received server descriptor for bridge '%s' which wasn't "
-                         "in the networkstatus!") % router.fingerprint)
-                    if ignoreNetworkstatus:
-                        bridge = Bridge()
-                    else:
-                        continue
-
-                try:
-                    bridge.updateFromServerDescriptor(router, ignoreNetworkstatus)
-                except (ServerDescriptorWithoutNetworkstatus,
-                        MissingServerDescriptorDigest,
-                        ServerDescriptorDigestMismatch) as error:
-                    logging.warn(str(error))
-                    # Reject any routers whose server descriptors didn't pass
-                    # :meth:`~bridges.Bridge._checkServerDescriptor`, i.e. those
-                    # bridges who don't have corresponding networkstatus
-                    # documents, or whose server descriptor digests don't check
-                    # out:
-                    bridges.pop(router.fingerprint)
-                    continue
-
-                if state.COLLECT_TIMESTAMPS:
-                    # Update timestamps from server descriptors, not from network
-                    # status descriptors (because networkstatus documents and
-                    # descriptors aren't authenticated in any way):
-                    if bridge.fingerprint in timestamps.keys():
-                        timestamps[bridge.fingerprint].append(router.published)
-                    else:
-                        timestamps[bridge.fingerprint] = [router.published]
-
-        eifiles = [expandBridgeAuthDir(auth, fn) for fn in state.EXTRA_INFO_FILES]
-        extrainfos = descriptors.parseExtraInfoFiles(*eifiles)
-        for fingerprint, router in extrainfos.items():
-            try:
-                bridges[fingerprint].updateFromExtraInfoDescriptor(router)
-            except MalformedBridgeInfo as error:
-                logging.warn(str(error))
-            except KeyError as error:
-                logging.warn(("Received extrainfo descriptor for bridge '%s', "
-                              "but could not find bridge with that fingerprint.")
-                             % router.fingerprint)
-
-        blacklist = parseBridgeBlacklistFile(state.NO_DISTRIBUTION_FILE)
-
-        inserted = 0
-        logging.info("Trying to insert %d bridges into hashring, %d of which "
-                     "have the 'Running' flag..." % (len(bridges),
-                     len(list(filter(lambda b: b.flags.running, bridges.values())))))
-
-        for fingerprint, bridge in bridges.items():
-            # Skip insertion of bridges which are geolocated to be in one of the
-            # NO_DISTRIBUTION_COUNTRIES, a.k.a. the countries we don't distribute
-            # bridges from:
-            if bridge.country in state.NO_DISTRIBUTION_COUNTRIES:
-                logging.warn("Not distributing Bridge %s %s:%s in country %s!" %
-                             (bridge, bridge.address, bridge.orPort, bridge.country))
-            # Skip insertion of blacklisted bridges.
-            elif bridge in blacklist.keys():
-                logging.warn("Not distributing blacklisted Bridge %s %s:%s: %s" %
-                             (bridge, bridge.address, bridge.orPort, blacklist[bridge]))
-            # Skip bridges that are running a blacklisted version of Tor.
-            elif bridge.runsVersion(state.BLACKLISTED_TOR_VERSIONS):
-                logging.warn("Not distributing bridge %s because it runs blacklisted "
-                             "Tor version %s." % (router.fingerprint, bridge.software))
-            else:
-                # If the bridge is not running, then it is skipped during the
-                # insertion process.
-                hashring.insert(bridge)
-                inserted += 1
-        logging.info("Tried to insert %d bridges into hashring.  Resulting "
-                     "hashring is of length %d." % (inserted, len(hashring)))
-
-        if state.COLLECT_TIMESTAMPS:
-            reactor.callInThread(updateBridgeHistory, bridges, timestamps)
-
-        state.save()
-
-def _reloadFn(*args):
-    """Placeholder callback function for :func:`_handleSIGHUP`."""
-    return True
-
-def _handleSIGHUP(*args):
-    """Called when we receive a SIGHUP; invokes _reloadFn."""
-    reactor.callInThread(_reloadFn)
-
-def replaceBridgeRings(current, replacement):
-    """Replace the current thing with the new one"""
-    current.hashring = replacement.hashring
-
-def createBridgeRings(cfg, proxyList, key):
-    """Create the bridge distributors defined by the config file
-
-    :type cfg:  :class:`Conf`
-    :param cfg: The current configuration, including any in-memory settings
-        (i.e. settings whose values were not obtained from the config file,
-        but were set via a function somewhere)
+    :type cfg: :class:`Conf`
+    :ivar cfg: The current configuration, including any in-memory
+        settings (i.e. settings whose values were not obtained from the
+        config file, but were set via a function somewhere)
     :type proxyList: :class:`~bridgedb.proxy.ProxySet`
     :param proxyList: The container for the IP addresses of any currently
         known open proxies.
     :param bytes key: Hashring master key
-    :rtype: tuple
-    :returns: A :class:`~bridgedb.bridgerings.BridgeSplitter` hashring, an
-        :class:`~bridgedb.distributors.https.distributor.HTTPSDistributor` or None, and an
-        :class:`~bridgedb.distributors.email.distributor.EmailDistributor` or None, and an
-        :class:`~bridgedb.distributors.moat.distributor.MoatDistributor` or None.
     """
-    # Create a BridgeSplitter to assign the bridges to the different
-    # distributors.
-    hashring = bridgerings.BridgeSplitter(crypto.getHMAC(key, "Hashring-Key"))
-    logging.debug("Created hashring: %r" % hashring)
-
     # Create ring parameters.
     ringParams = bridgerings.BridgeRingParameters(needPorts=cfg.FORCE_PORTS,
                                                   needFlags=cfg.FORCE_FLAGS)
@@ -277,7 +100,8 @@ def createBridgeRings(cfg, proxyList, key):
             crypto.getHMAC(key, "Moat-Dist-Key"),
             proxyList,
             answerParameters=ringParams)
-        hashring.addRing(moatDistributor.hashring, "moat", cfg.MOAT_SHARE)
+        moatDistributor.prepopulateRings()
+        rdsys.start_stream("moat", cfg.RDSYS_TOKEN, cfg.RDSYS_ADDRESS, moatDistributor.hashring)
 
     # As appropriate, create an IP-based distributor.
     if cfg.HTTPS_DIST and cfg.HTTPS_SHARE:
@@ -287,7 +111,8 @@ def createBridgeRings(cfg, proxyList, key):
             crypto.getHMAC(key, "HTTPS-IP-Dist-Key"),
             proxyList,
             answerParameters=ringParams)
-        hashring.addRing(ipDistributor.hashring, "https", cfg.HTTPS_SHARE)
+        ipDistributor.prepopulateRings()
+        rdsys.start_stream("https", cfg.RDSYS_TOKEN, cfg.RDSYS_ADDRESS, ipDistributor.hashring)
 
     # As appropriate, create an email-based distributor.
     if cfg.EMAIL_DIST and cfg.EMAIL_SHARE:
@@ -298,40 +123,18 @@ def createBridgeRings(cfg, proxyList, key):
             cfg.EMAIL_DOMAIN_RULES.copy(),
             answerParameters=ringParams,
             whitelist=cfg.EMAIL_WHITELIST.copy())
-        hashring.addRing(emailDistributor.hashring, "email", cfg.EMAIL_SHARE)
+        emailDistributor.prepopulateRings()
+        rdsys.start_stream("email", cfg.RDSYS_TOKEN, cfg.RDSYS_ADDRESS, emailDistributor.hashring)
 
-    # As appropriate, tell the hashring to leave some bridges unallocated.
-    if cfg.RESERVED_SHARE:
-        hashring.addRing(bridgerings.UnallocatedHolder(),
-                         "unallocated",
-                         cfg.RESERVED_SHARE)
+    return emailDistributor, ipDistributor, moatDistributor
 
-    return hashring, emailDistributor, ipDistributor, moatDistributor
+def _reloadFn(*args):
+    """Placeholder callback function for :func:`_handleSIGHUP`."""
+    return True
 
-def loadBlockedBridges(hashring):
-    """Load bridge blocking info from our SQL database and add it to bridge
-    objects."""
-
-    blockedBridges = {}
-    with bridgedb.Storage.getDB() as db:
-        blockedBridges = db.getBlockedBridges()
-
-    num_blocked = 0
-    for name, ring in hashring.ringsByName.items():
-        if name == "unallocated":
-            continue
-        for _, bridge in ring.bridges.items():
-            l = []
-            try:
-                l = blockedBridges[bridge.fingerprint]
-            except KeyError:
-                continue
-            for blocking_country, address, port in l:
-                bridge.setBlockedIn(blocking_country, address, port)
-            num_blocked += 1
-
-    logging.info("Loaded blocking info for %d bridges.".format(num_blocked))
-
+def _handleSIGHUP(*args):
+    """Called when we receive a SIGHUP; invokes _reloadFn."""
+    reactor.callInThread(_reloadFn)
 
 def run(options, reactor=reactor):
     """This is BridgeDB's main entry point and main runtime loop.
@@ -416,7 +219,7 @@ def run(options, reactor=reactor):
         State should be saved before calling this method, and will be saved
         again at the end of it.
 
-        The internal variables ``cfg`` and ``hashring`` are taken from a
+        The internal variables ``cfg`` is taken from a
         :class:`~bridgedb.persistent.State` instance, which has been saved to a
         statefile with :meth:`bridgedb.persistent.State.save`.
 
@@ -424,9 +227,6 @@ def run(options, reactor=reactor):
         :ivar cfg: The current configuration, including any in-memory
             settings (i.e. settings whose values were not obtained from the
             config file, but were set via a function somewhere)
-        :type hashring: A :class:`~bridgedb.bridgerings.BridgeSplitter`
-        :ivar hashring: A class which takes an HMAC key and splits bridges
-            into their hashring assignments.
         """
         logging.debug("Caught SIGHUP")
         logging.info("Reloading...")
@@ -455,71 +255,20 @@ def run(options, reactor=reactor):
         logging.info("Reloading decoy bridges...")
         antibot.loadDecoyBridges(config.DECOY_BRIDGES_FILE)
 
-        (hashring,
-         emailDistributorTmp,
-         ipDistributorTmp,
-         moatDistributorTmp) = createBridgeRings(cfg, proxies, key)
-
         # Initialize our DB.
         bridgedb.Storage.initializeDBLock()
         bridgedb.Storage.setDBFilename(cfg.DB_FILE + ".sqlite")
-        logging.info("Reparsing bridge descriptors...")
-        load(state, hashring, clear=False)
-        logging.info("Bridges loaded: %d" % len(hashring))
-        loadBlockedBridges(hashring)
 
-        if emailDistributorTmp is not None:
-            emailDistributorTmp.prepopulateRings() # create default rings
-        else:
-            logging.warn("No email distributor created!")
-
-        if ipDistributorTmp is not None:
-            ipDistributorTmp.prepopulateRings() # create default rings
-        else:
-            logging.warn("No HTTP(S) distributor created!")
-
-        if moatDistributorTmp is not None:
-            moatDistributorTmp.prepopulateRings()
-        else:
-            logging.warn("No Moat distributor created!")
-
-        metrix = metrics.InternalMetrics()
-        logging.info("Logging bridge ring metrics for %d rings." %
-                     len(hashring.ringsByName))
-        for ringName, ring in hashring.ringsByName.items():
-            # Ring is of type FilteredBridgeSplitter or UnallocatedHolder.
-            # FilteredBridgeSplitter splits bridges into subhashrings based on
-            # filters.
-            if hasattr(ring, "filterRings"):
-                for (ringname, (filterFn, subring)) in ring.filterRings.items():
-                    subRingName = "-".join(ring.extractFilterNames(ringname))
-                    metrix.recordBridgesInHashring(ringName,
-                                                   subRingName,
-                                                   len(subring))
-            elif hasattr(ring, "fingerprints"):
-                metrix.recordBridgesInHashring(ringName, "unallocated",
-                                               len(ring.fingerprints))
-
-        # Dump bridge pool assignments to disk.
-        writeAssignments(hashring, state.ASSIGNMENTS_FILE)
         state.save()
 
         if inThread:
             # XXX shutdown the distributors if they were previously running
             # and should now be disabled
-            if moatDistributorTmp:
-                reactor.callFromThread(replaceBridgeRings,
-                                       moatDistributor, moatDistributorTmp)
-            if ipDistributorTmp:
-                reactor.callFromThread(replaceBridgeRings,
-                                       ipDistributor, ipDistributorTmp)
-            if emailDistributorTmp:
-                reactor.callFromThread(replaceBridgeRings,
-                                       emailDistributor, emailDistributorTmp)
+            pass
         else:
             # We're still starting up. Return these distributors so
             # they are configured in the outer-namespace
-            return emailDistributorTmp, ipDistributorTmp, moatDistributorTmp
+            return load(cfg, proxies, key)
 
     global _reloadFn
     _reloadFn = reload

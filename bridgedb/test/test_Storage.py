@@ -155,61 +155,6 @@ class DatabaseTest(unittest.TestCase):
             # Measurements that are "young enough" should be returned.
             self.assertEquals(len(rows), 1)
 
-    def test_main_loadBlockedBridges(self):
-        Storage.initializeDBLock()
-
-        # Mock configuration object that we use to initialize our bridge rings.
-        class Cfg(object):
-            def __init__(self):
-                self.FORCE_PORTS = [(443, 1)]
-                self.FORCE_FLAGS = [("Stable", 1)]
-                self.MOAT_DIST = False
-                self.HTTPS_DIST = True
-                self.HTTPS_SHARE = 10
-                self.N_IP_CLUSTERS = 1
-                self.EMAIL_DIST = False
-                self.RESERVED_SHARE = 0
-
-        bridge = self.fakeBridges[0]
-        addr, port, _ = bridge.orAddresses[0]
-        cc= "de"
-
-        # Mock object that we use to simulate a database connection.
-        class DummyDB(object):
-            def __init__(self):
-                pass
-            def __enter__(self):
-                return self
-            def __exit__(self, type, value, traceback):
-                pass
-            def getBlockedBridges(self):
-                return {bridge.fingerprint: [(cc, addr, port)]}
-            def getBridgeDistributor(self, bridge, validRings):
-                return "https"
-            def insertBridgeAndGetRing(self, bridge, setRing, seenAt, validRings, defaultPool="unallocated"):
-                return "https"
-            def commit(self):
-                pass
-
-        oldObj = Storage.getDB
-        Storage.getDB = DummyDB
-
-        hashring, _, _, _ = main.createBridgeRings(Cfg(), None, b'key')
-        hashring.insert(bridge)
-
-        self.assertEqual(len(hashring), 1)
-        self.assertFalse(bridge.isBlockedIn(cc))
-        self.assertFalse(bridge.isBlockedIn("ab"))
-        self.assertFalse(bridge.addressIsBlockedIn(cc, addr, port))
-
-        main.loadBlockedBridges(hashring)
-
-        self.assertTrue(bridge.isBlockedIn(cc))
-        self.assertFalse(bridge.isBlockedIn("ab"))
-        self.assertTrue(bridge.addressIsBlockedIn(cc, addr, port))
-
-        Storage.getDB = oldObj
-
     def test_getBlockedBridgesFromSql(self):
 
         elems = [(0, "0000000000000000000000000000000000000000", "obfs4",

@@ -132,11 +132,6 @@ class BridgedbTests(unittest.TestCase):
 
         return updatedPaths
 
-    def _cbAssertFingerprints(self, d):
-        """Assert that there are some bridges in the hashring."""
-        self.assertGreater(len(self.hashring), 0)
-        return d
-
     def _cbCallUpdateBridgeHistory(self, d, hashring):
         """Fake some timestamps for the bridges in the hashring, and then call
         main.updateBridgeHistory().
@@ -220,73 +215,6 @@ class BridgedbTests(unittest.TestCase):
         for d in self._directories_created:
             shutil.rmtree(d)
 
-    def test_main_updateBridgeHistory(self):
-        """main.updateBridgeHistory should update some timestamps for some
-        bridges.
-        """
-        # Mock the updateBridgeHistory() function so that we don't try to
-        # access the database:
-        main.updateBridgeHistory = mockUpdateBridgeHistory
-
-        # Get the bridges into the mocked hashring
-        d = deferToThread(main.load, self.state, self.hashring)
-        d.addCallback(self._cbAssertFingerprints)
-        d.addErrback(self._eb_Failure)
-        d.addCallback(self._cbCallUpdateBridgeHistory, self.hashring)
-        d.addErrback(self._eb_Failure)
-        return d
-
-    def test_main_load(self):
-        """main.load() should run without error."""
-        d = deferToThread(main.load, self.state, self.hashring)
-        d.addCallback(self._cbAssertFingerprints)
-        d.addErrback(self._eb_Failure)
-        return d
-
-    def test_main_load_then_reload(self):
-        """main.load() should run without error."""
-        d = deferToThread(main.load, self.state, self.hashring)
-        d.addCallback(self._cbAssertFingerprints)
-        d.addErrback(self._eb_Failure)
-        d.addCallback(main._reloadFn)
-        d.addErrback(self._eb_Failure)
-        return d
-
-    def test_main_load_no_state(self):
-        """main.load() should raise SystemExit without a state object."""
-        self.assertRaises(SystemExit, main.load, None, self.hashring)
-
-    def test_main_load_clear(self):
-        """When called with clear=True, load() should run and clear the
-        hashrings.
-        """
-        d = deferToThread(main.load, self.state, self.hashring, clear=True)
-        d.addCallback(self._cbAssertFingerprints)
-        d.addErrback(self._eb_Failure)
-        return d
-
-    def test_main_load_collect_timestamps(self):
-        """When COLLECT_TIMESTAMPS=True, main.load() should call
-        main.updateBridgeHistory().
-        """
-        # Mock the addOrUpdateBridgeHistory() function so that we don't try to
-        # access the database:
-        main.updateBridgeHistory = mockUpdateBridgeHistory
-        state = self.state
-        state.COLLECT_TIMESTAMPS = True
-
-        # The reactor is deferring this to a thread, so the test execution
-        # here isn't actually covering the Storage.updateBridgeHistory()
-        # function:
-        main.load(state, self.hashring)
-
-    def test_main_load_malformed_networkstatus(self):
-        """When called with a networkstatus file with an invalid descriptor,
-        main.load() should raise a ValueError.
-        """
-        self._appendToFile(self.state.STATUS_FILE, NETWORKSTATUS_MALFORMED)
-        self.assertRaises(ValueError, main.load, self.state, self.hashring)
-
     def test_main_reloadFn(self):
         """main._reloadFn() should return True."""
         self.assertTrue(main._reloadFn())
@@ -297,80 +225,39 @@ class BridgedbTests(unittest.TestCase):
 
         self.assertTrue(main._handleSIGHUP())
 
-    def test_main_createBridgeRings(self):
-        """main.createBridgeRings() should add three hashrings to the
-        hashring.
-        """
-        proxyList = None
-        (hashring, emailDist, httpsDist, moatDist) = main.createBridgeRings(
-            self.config, proxyList, self.key)
-
-        # Should have an HTTPSDistributor ring, an EmailDistributor ring,
-        # a MoatDistributor right, and an UnallocatedHolder ring:
-        self.assertEqual(len(hashring.ringsByName.keys()), 4)
-
-    def test_main_createBridgeRings_with_proxyList(self):
-        """main.createBridgeRings() should add three hashrings to the
-        hashring and add the proxyList to the IPBasedDistibutor.
+    def test_main_load_with_proxyList(self):
+        """main.load() should add the proxyList to the IPBasedDistibutor.
         """
         exitRelays = ['1.1.1.1', '2.2.2.2', '3.3.3.3']
         proxyList = main.proxy.ProxySet()
         proxyList.addExitRelays(exitRelays)
-        (hashring, emailDist, httpsDist, moatDist) = main.createBridgeRings(
+        (emailDist, httpsDist, moatDist) = main.load(
             self.config, proxyList, self.key)
 
-        # Should have an HTTPSDistributor ring, an EmailDistributor ring,
-        # a MoatDistributor ring, and an UnallocatedHolder ring:
-        self.assertEqual(len(hashring.ringsByName.keys()), 4)
         self.assertGreater(len(httpsDist.proxies), 0)
         self.assertCountEqual(exitRelays, httpsDist.proxies)
 
-    def test_main_createBridgeRings_no_https_dist(self):
-        """When HTTPS_DIST=False, main.createBridgeRings() should add only
-        two hashrings to the hashring.
+    def test_main_load_no_https_dist(self):
+        """When HTTPS_DIST=False, main.load() should not create an http distributor.
         """
         proxyList = main.proxy.ProxySet()
         config = self.config
         config.HTTPS_DIST = False
-        (hashring, emailDist, httpsDist, moatDist) = main.createBridgeRings(
-            config, proxyList, self.key)
+        (emailDist, httpsDist, moatDist) = main.load(
+            self.config, proxyList, self.key)
 
-        # Should have an EmailDistributor ring, a MoatDistributor ring, and an
-        # UnallocatedHolder ring:
-        self.assertEqual(len(hashring.ringsByName.keys()), 3)
-        self.assertNotIn('https', hashring.rings)
-        self.assertNotIn(httpsDist, hashring.ringsByName.values())
+        self.assertEqual(httpsDist, None)
 
-    def test_main_createBridgeRings_no_email_dist(self):
-        """When EMAIL_DIST=False, main.createBridgeRings() should add only
-        two hashrings to the hashring.
+    def test_main_load_no_email_dist(self):
+        """When EMAIL_DIST=False, main.load() should not create an email distributor.
         """
         proxyList = main.proxy.ProxySet()
         config = self.config
         config.EMAIL_DIST = False
-        (hashring, emailDist, httpsDist, moatDist) = main.createBridgeRings(
-            config, proxyList, self.key)
+        (emailDist, httpsDist, moatDist) = main.load(
+            self.config, proxyList, self.key)
 
-        # Should have an HTTPSDistributor ring, a MoatDistributor ring, and an
-        # UnallocatedHolder ring:
-        self.assertEqual(len(hashring.ringsByName.keys()), 3)
-        self.assertNotIn('email', hashring.rings)
-        self.assertNotIn(emailDist, hashring.ringsByName.values())
-
-    def test_main_createBridgeRings_no_reserved_share(self):
-        """When RESERVED_SHARE=0, main.createBridgeRings() should add only
-        two hashrings to the hashring.
-        """
-        proxyList = main.proxy.ProxySet()
-        config = self.config
-        config.RESERVED_SHARE = 0
-        (hashring, emailDist, httpsDist, moatDist) = main.createBridgeRings(
-            config, proxyList, self.key)
-
-        # Should have an HTTPSDistributor ring, an EmailDistributor ring, and a
-        # MoatDistributor ring:
-        self.assertEqual(len(hashring.ringsByName.keys()), 3)
-        self.assertNotIn('unallocated', hashring.rings)
+        self.assertEqual(emailDist, None)
 
     def test_main_run(self):
         """main.run() should run and then finally raise SystemExit."""

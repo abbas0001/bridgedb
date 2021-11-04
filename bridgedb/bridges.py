@@ -34,7 +34,6 @@ import codecs
 import hashlib
 import ipaddr
 import logging
-import os
 import warnings
 
 from Crypto.Util import asn1
@@ -52,14 +51,12 @@ from bridgedb import safelog
 from bridgedb import bridgerequest
 from bridgedb.crypto import removePKCS1Padding
 from bridgedb.parse.addr import isIPAddress
-from bridgedb.parse.addr import isIPv4
 from bridgedb.parse.addr import isIPv6
 from bridgedb.parse.addr import isValidIP
 from bridgedb.parse.addr import PortList
 from bridgedb.parse.fingerprint import isValidFingerprint
 from bridgedb.parse.fingerprint import toHex
 from bridgedb.parse.fingerprint import fromHex
-from bridgedb.parse.nickname import isValidRouterNickname
 from bridgedb.util import isascii_noncontrol
 
 
@@ -1548,6 +1545,36 @@ class Bridge(BridgeBackwardsCompatibility):
         which this bridge supports.
         """
         return list(set([pt.methodname for pt in self.transports]))
+
+    def updateFromResource(self, resource):
+        """Update this bridge's attributes from an rdsys resource
+
+        :type resource: dict
+        :param resource: The rdsys resource dict
+        """
+        self.fingerprint = resource["fingerprint"]
+        self.address = resource["address"]
+        self.orPort = resource["port"]
+
+        self.flags.running = resource["flags"]["running"]
+        self.flags.stable = resource["flags"]["stable"]
+        self.flags.valid = resource["flags"]["valid"]
+        self.flags.fast = resource["flags"]["fast"]
+
+        if resource["or-addresses"]:
+            for oa in resource["or-addresses"]:
+                validatedAddress = isIPAddress(oa["address"], compressed=False)
+                if validatedAddress:
+                    self.orAddresses.append( (validatedAddress, oa["port"], oa["ip-version"],) )
+
+        transport = PluggableTransport(
+                fingerprint=self.fingerprint,
+                methodname=resource["type"],
+                address=self.address,
+                port=self.port,
+                arguments=resource.get("params", {})
+                )
+        self.transports = [transport]
 
     def updateFromNetworkStatus(self, descriptor, ignoreNetworkstatus=False):
         """Update this bridge's attributes from a parsed networkstatus
