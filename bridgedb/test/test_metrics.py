@@ -269,19 +269,6 @@ class StateTest(unittest.TestCase):
         self.assertIn("internal.moat.empty-response 20", lines)
         self.assertIn("internal.https.empty-response 10", lines)
 
-    def test_rings(self):
-
-        metrix = metrics.InternalMetrics()
-
-        # Empty parameters must not be recorded.
-        metrix.recordBridgesInHashring("", "", 20)
-        self.assertEqual(len(metrix.hotMetrics), 0)
-
-        metrix.recordBridgesInHashring("https", "byIPv6-bySubring1of4", 20)
-        self.assertEqual(len(metrix.hotMetrics), 1)
-        self.assertEqual(list(metrix.hotMetrics.keys()),
-                         ["internal.https.byipv6-bysubring1of4"])
-
     def test_ipv4_ipv6_requests(self):
 
         metrix = metrics.InternalMetrics()
