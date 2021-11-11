@@ -189,6 +189,8 @@ class HTTPTests(unittest.TestCase):
         self.assertRaises(mechanize.HTTPError, self.br.open, page)
 
     def test_get_vanilla_ipv4(self):
+        raise SkipTest("We can't get bridges as rdsys is not running")
+
         self.openBrowser()
         self.goToOptionsPage()
 
@@ -202,6 +204,8 @@ class HTTPTests(unittest.TestCase):
             self.assertIsInstance(ipaddress.ip_address(addr), ipaddress.IPv4Address)
 
     def test_get_vanilla_ipv6(self):
+        raise SkipTest("We can't get bridges as rdsys is not running")
+
         self.openBrowser()
         self.goToOptionsPage()
 
@@ -221,6 +225,8 @@ class HTTPTests(unittest.TestCase):
         This is a regression test for #12932, see
         https://bugs.torproject.org/12932.
         """
+        raise SkipTest("We can't get bridges as rdsys is not running")
+
         self.openBrowser()
         self.goToOptionsPage()
 
@@ -246,6 +252,8 @@ class HTTPTests(unittest.TestCase):
         """Ask for obfs4 bridges and check that there is an 'iat-mode' PT
         argument in the bridge lines.
         """
+        raise SkipTest("We can't get bridges as rdsys is not running")
+
         self.openBrowser()
         self.goToOptionsPage()
 
@@ -273,6 +281,8 @@ class HTTPTests(unittest.TestCase):
         """Ask for obfs4 bridges and check that there is an 'public-key' PT
         argument in the bridge lines.
         """
+        raise SkipTest("We can't get bridges as rdsys is not running")
+
         self.openBrowser()
         self.goToOptionsPage()
 
@@ -300,6 +310,8 @@ class HTTPTests(unittest.TestCase):
         """Ask for obfs4 bridges and check that there is an 'node-id' PT
         argument in the bridge lines.
         """
+        raise SkipTest("We can't get bridges as rdsys is not running")
+
         self.openBrowser()
         self.goToOptionsPage()
 

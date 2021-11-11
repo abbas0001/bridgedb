@@ -60,6 +60,8 @@ class BridgeDBCliTest(unittest.TestCase):
         This test ensures that an ``assignments.log`` file is created after a
         BridgeDB process was started.
         """
+        raise SkipTest("We can't get bridges as rdsys is not running")
+
         if os.environ.get("CI"):
             if not self.pid or not processExists(self.pid):
                 raise FailTest("Could not start BridgeDB process on CI server!")
@@ -73,6 +75,8 @@ class BridgeDBCliTest(unittest.TestCase):
         """Test that BridgeDB creates a new ``assignments.log`` file after
         receiving a SIGHUP.
         """
+        raise SkipTest("We can't get bridges as rdsys is not running")
+
         if os.environ.get("CI"):
             if not self.pid or not processExists(self.pid):
                 raise FailTest("Could not start BridgeDB process on CI server!")
