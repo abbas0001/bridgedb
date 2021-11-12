@@ -9,8 +9,7 @@
 """
 Boilerplate setup for GeoIP. GeoIP allows us to look up the country code
 associated with an IP address. This is a "pure" python version which interacts
-with the Maxmind GeoIP API (version 1). It requires, in Debian, the libgeoip-dev
-and geoip-database packages.
+with Tor GeoIP DB. It requires, in Debian, the tor-geoipdb package.
 """
 
 import logging
@@ -19,24 +18,103 @@ from os.path import isfile
 from ipaddr import IPv4Address, IPv6Address
 
 # IPv4 database
-GEOIP_DBFILE = '/usr/share/GeoIP/GeoIP.dat'
+GEOIP_DBFILE = '/usr/share/tor/geoip'
 # IPv6 database
-GEOIPv6_DBFILE = '/usr/share/GeoIP/GeoIPv6.dat'
+GEOIPv6_DBFILE = '/usr/share/tor/geoip6'
+
+
+def loadFromGeoIPDB(filepath):
+    """Load entries from IPV4 or IPV6 Tor Geo IP DB Files.
+
+    :param str filepath: Path to Tor GeoIP DB file.
+    :rtype: ``None`` or list
+
+    :returns: Returns a table containing all entries from Tor Geo IP DB file.
+    """
+    parsedTable = []
+    with open(filepath) as fd:
+        rawData = fd.read()
+
+    splitLines = rawData.split('\n')
+    for line in splitLines[:-1]:
+        if line.startswith('#'):
+            continue
+        singleRecord = line.split(',')
+        singleRecord[0] = int(singleRecord[0])
+        singleRecord[1] = int(singleRecord[1])
+        parsedTable.append(singleRecord)
+
+    return parsedTable
+
+
+def loadFromGeoIPDB6(filepath):
+    """Load entries from IPV4 or IPV6 Tor Geo IP DB Files.
+
+    :param str filepath: Path to Tor GeoIP DB file.
+    :rtype: ``None`` or list
+
+    :returns: Returns a table containing all entries from Tor Geo IP DB file.
+    """
+    parsedTable = []
+    with open(filepath) as fd:
+        rawData = fd.read()
+
+    splitLines = rawData.split('\n')
+    for line in splitLines[:-1]:
+        if line.startswith('#'):
+            continue
+        singleRecord = line.split(',')
+        singleRecord[0] = int(IPv6Address(singleRecord[0]))
+        singleRecord[1] = int(IPv6Address(singleRecord[1]))
+        parsedTable.append(singleRecord)
+
+    return parsedTable
+
+
 try:
     # Make sure we have the database before trying to import the module:
-    if not (isfile(GEOIP_DBFILE) and isfile(GEOIPv6_DBFILE)):  # pragma: no cover
+    if not (isfile(GEOIP_DBFILE) and isfile(GEOIPv6_DBFILE)):
+        # pragma: no cover
         raise EnvironmentError("Could not find %r. On Debian-based systems, "
-                               "please install the geoip-database package."
+                               "please install the tor-geoipdb package."
                                % GEOIP_DBFILE)
 
-    import pygeoip
-    geoip = pygeoip.GeoIP(GEOIP_DBFILE, flags=pygeoip.MEMORY_CACHE)
-    geoipv6 = pygeoip.GeoIP(GEOIPv6_DBFILE, flags=pygeoip.MEMORY_CACHE)
+    geoip = loadFromGeoIPDB(GEOIP_DBFILE)
+    geoipv6 = loadFromGeoIPDB6(GEOIPv6_DBFILE)
     logging.info("GeoIP databases loaded")
 except Exception as err:  # pragma: no cover
-    logging.warn("Error while loading geoip module: %r" % err)
+    logging.warn("Error while loading data from GeoIP Database: %r" % err)
     geoip = None
     geoipv6 = None
+
+
+def countryCodeByAddress(table, addr):
+    """Lookup Country Code in Geo IP tables.
+
+    :param list table: Contains list of IP Address ranges and mapped countries
+    :type addr: :class:`ipaddr.IPAddress`
+    :param addr: An IPv4 OR IPv6 address.
+    :rtype: ``None`` or str
+
+    :returns: If the GeoIP databases are loaded, and the **ip** lookup is
+        successful, then this returns a two-letter country code.  Otherwise,
+        this returns ``None``.
+    """
+    if addr.is_loopback:
+        return None
+
+    addrLong = int(addr)
+
+    # First find the range_end which is greater than input.
+    # Then if input lies in that range we return the country.
+    for item in table:
+        if item[1] >= addrLong:
+            if item[0] <= addrLong:
+                return item[2]
+            else:
+                return None
+
+    return None
 
 
 def getCountryCode(ip):
@@ -64,7 +142,7 @@ def getCountryCode(ip):
     db = None
     # First, make sure we loaded GeoIP properly.
     if None in (geoip, geoipv6):
-        logging.warn("GeoIP databases aren't loaded; can't look up country code")
+        logging.warn("GeoIP databases not loaded; can't look up country code")
         return None
     else:
         if version == 4:
@@ -73,7 +151,7 @@ def getCountryCode(ip):
             db = geoipv6
 
     # Look up the country code of the address.
-    countryCode = db.country_code_by_addr(addr)
+    countryCode = countryCodeByAddress(db, ip)
     if countryCode:
         logging.debug("Looked up country code: %s" % countryCode)
         return countryCode
