@@ -60,7 +60,7 @@ class CreateResponseBodyTests(unittest.TestCase):
         lines = self._getIncomingLines("testing@localhost")
         lines[4] = "transport obfs3"
         ret, qrcode = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
-        self.assertSubstring("Here are your bridges:", ret)
+        self.assertSubstring("Here is your bridge:", ret)
         self.assertIsNotNone(qrcode)
 
     def test_createResponseBody_bridges_obfs3(self):
@@ -68,7 +68,7 @@ class CreateResponseBodyTests(unittest.TestCase):
         lines = self._getIncomingLines("testing@localhost")
         lines[4] = "get transport obfs3"
         ret, qrcode = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
-        self.assertSubstring("Here are your bridges", ret)
+        self.assertSubstring("Here is your bridge", ret)
         self.assertSubstring("obfs3", ret)
         self.assertIsInstance(qrcode, bytes)
 
@@ -79,7 +79,7 @@ class CreateResponseBodyTests(unittest.TestCase):
         lines.append("get transport obfs2")
         lines.append("get transport obfs3")
         ret, qrcode = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
-        self.assertSubstring("Here are your bridges", ret)
+        self.assertSubstring("Here is your bridge", ret)
         self.assertSubstring("obfs3", ret)
         self.assertIsInstance(qrcode, bytes)
 
@@ -91,7 +91,7 @@ class CreateResponseBodyTests(unittest.TestCase):
         lines.append("get ipv6")
         lines.append("get transport obfs2")
         ret, qrcode = autoresponder.createResponseBody(lines, self.ctx, self.toAddress)
-        self.assertSubstring("Here are your bridges", ret)
+        self.assertSubstring("Here is your bridge", ret)
         self.assertSubstring("obfs2", ret)
         self.assertIsInstance(qrcode, bytes)
 
@@ -105,7 +105,7 @@ class CreateResponseBodyTests(unittest.TestCase):
 
         lines = self._getIncomingLines("testing@localhost")
         first, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
-        self.assertSubstring("Here are your bridges", first)
+        self.assertSubstring("Here is your bridge", first)
         self.assertIsInstance(qrcode, bytes)
         second, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
         self.assertSubstring("Please slow down", second)
@@ -123,13 +123,13 @@ class CreateResponseBodyTests(unittest.TestCase):
         aliceLines = self._getIncomingLines("alice@localhost")
         aliceFirst, qrcode = autoresponder.createResponseBody(aliceLines, ctx,
                                                               self.toAddress)
-        self.assertSubstring("Here are your bridges", aliceFirst)
+        self.assertSubstring("Here is your bridge", aliceFirst)
         self.assertIsInstance(qrcode, bytes)
 
         bobLines = self._getIncomingLines("bob@localhost")
         bobFirst, qrcode = autoresponder.createResponseBody(bobLines, ctx,
                                                             self.toAddress)
-        self.assertSubstring("Here are your bridges", bobFirst)
+        self.assertSubstring("Here is your bridge", bobFirst)
         self.assertIsInstance(qrcode, bytes)
 
         aliceSecond, qrcode  = autoresponder.createResponseBody(aliceLines, ctx,
@@ -148,7 +148,7 @@ class CreateResponseBodyTests(unittest.TestCase):
 
         lines = self._getIncomingLines("testing@localhost")
         first, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
-        self.assertSubstring("Here are your bridges", first)
+        self.assertSubstring("Here is your bridge", first)
         self.assertIsInstance(qrcode, bytes)
         second, qrcode = autoresponder.createResponseBody(lines, ctx, self.toAddress)
         self.assertSubstring("Please slow down", second)

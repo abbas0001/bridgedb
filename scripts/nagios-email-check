@@ -32,7 +32,7 @@ SMTP_SERVER = "imap.gmail.com"
 SMTP_PORT = 993
 
 MESSAGE_FROM = TO_EMAIL
-MESSAGE_BODY = "Here are your bridges:"
+MESSAGE_BODY = "Here is your bridge:"
 
 STATUS_FILE = "/srv/bridges.torproject.org/check/status"
 

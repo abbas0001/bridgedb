@@ -29,7 +29,7 @@ class EmailTemplatesTests(unittest.TestCase):
     def setUp(self):
         self.t = NullTranslations(StringIO('test'))
         self.client = Address('blackhole@torproject.org')
-        self.answer = 'obfs3 1.1.1.1:1111\nobfs3 2.2.2.2:2222'
+        self.bridgeLines = ['obfs3 1.1.1.1:1111', 'obfs3 2.2.2.2:2222']
 
     def shouldIncludeCommands(self, text):
         self.assertSubstring('commands', text)
@@ -38,8 +38,9 @@ class EmailTemplatesTests(unittest.TestCase):
         self.assertSubstring('Tor Browser', text)
 
     def shouldIncludeBridges(self, text):
-        self.assertSubstring(self.answer, text)
-        self.assertSubstring('Here are your bridges:', text)
+        for line in self.bridgeLines:
+            self.assertSubstring(line, text)
+        self.assertSubstring('Here is your bridge:', text)
 
     def shouldIncludeGreeting(self, text):
         self.assertSubstring('This is an automated email', text)
@@ -60,12 +61,12 @@ class EmailTemplatesTests(unittest.TestCase):
         self.shouldIncludeInstructions(text)
 
     def test_templates_addBridgeAnswer(self):
-        text = templates.addBridgeAnswer(self.t, self.answer)
+        text = templates.addBridgeAnswer(self.t, self.bridgeLines)
         self.shouldIncludeBridges(text)
 
     def test_templates_buildAnswerMessage(self):
-        text = templates.buildAnswerMessage(self.t, self.client, self.answer)
-        self.assertSubstring(self.answer, text)
+        text = templates.buildAnswerMessage(self.t, self.client, self.bridgeLines)
+        self.shouldIncludeBridges(text)
         self.shouldIncludeAutomationNotice(text)
         self.shouldIncludeCommands(text)
 

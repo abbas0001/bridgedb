@@ -67,14 +67,20 @@ def addGreeting(template):
 
     return greeting
 
-def addBridgeAnswer(template, answer):
+def addBridgeAnswer(template, bridgeLines):
     # Give the user their bridges, i.e. the `answer`:
-    bridgeLines = u""
-    bridgeLines += template.gettext(strings.EMAIL_MISC_TEXT[1])
-    bridgeLines += u"\n\n"
-    bridgeLines += u"%s\n" % answer
+    bridgeText = u""
+    bridgeText += template.gettext(strings.EMAIL_MISC_TEXT[1])
+    bridgeText += u"\n\n"
+    bridgeText += "%s\r\n" % bridgeLines[0]
+    bridgeText += u"\n"
+    for line in bridgeLines[1:]:
+        bridgeText += template.gettext(strings.EMAIL_MISC_TEXT[4])
+        bridgeText += u"\n\n"
+        bridgeText += "%s\r\n" % line
+        bridgeText += u"\n"
 
-    return bridgeLines
+    return bridgeText
 
 def addHowto(template):
     """Add help text on how to add bridges to Tor Browser.
@@ -85,11 +91,14 @@ def addHowto(template):
     """
     return template.gettext(strings.HOWTO_TBB[2])
 
-def buildAnswerMessage(template, clientAddress=None, answer=None):
+def buildAnswerMessage(template, clientAddress=None, bridgeLines=None):
     try:
         message  = addGreeting(template)
-        message += addBridgeAnswer(template, answer)
-        message += addHowto(template)
+        if bridgeLines:
+            message += addBridgeAnswer(template, bridgeLines)
+            message += addHowto(template)
+        else:
+            message += template.gettext(strings.EMAIL_MISC_TEXT[5])
         message += u'\n\n'
         message += addCommands(template)
     except Exception as error:  # pragma: no cover

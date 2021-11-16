@@ -33,13 +33,18 @@ EMAIL_MISC_TEXT = {
     0: _("""\
 [This is an automated email.]"""),
     1: _("""\
-Here are your bridges:"""),
+Here is your bridge:"""),
     2: _("""\
 You have exceeded the rate limit. Please slow down! The minimum time between
 emails is %s hours. All further emails during this time period will be ignored."""),
     3: _("""\
 If these bridges are not what you need, reply to this email with one of
 the following commands in the message body:"""),
+    # TRANSLATORS: "it" here is a bridge, this sentence comes after giving a first bridge to provide a second one
+    4: _("""\
+If it doesn't work, you can try this other bridge:"""),
+    5: _("""\
+There are no bridges currently available, sorry."""),
 }
 
 WELCOME = {
@@ -163,10 +168,15 @@ HOWTO_TBB = {
  Manual explains how you can add your bridges to Tor Browser. If you are
  using Windows, Linux, or OS X, %sclick here%s to learn more. If you
  are using Android, %sclick here%s."""),
+    # TRANSLATORS: Please DO NOT translate "Tor Browser" neither "Tails".
     2: _("""\
-Add these bridges to your Tor Browser by opening your browser
-preferences, clicking on "Tor", and then adding them to the "Provide a
-bridge" field."""),
+If you are using Tor Browser:
+
+1. Choose "☰ ▸ Settings ▸ Tor" to open your Tor settings.
+
+2. In the "Bridges" section, enter your bridge in the "Provide a bridge" field.
+
+If you are using Tails, enter your bridge in the Tor Connection assistant."""),
 }
 
 EMAIL_COMMANDS = {

@@ -111,17 +111,16 @@ def createResponseBody(lines, context, client, lang='en'):
         # invalid, or if we've already warned them about rate-limiting:
         return None, None
     else:
-        answer = "(no bridges currently available)\r\n"
+        bridgeLines = []
         qrcode = None
         if bridges:
             transport = bridgeRequest.justOnePTType()
             bridgeLines = [b.getBridgeLine(bridgeRequest, context.includeFingerprints) for b in bridges]
-            answer = "".join("  %s\r\n" % line for line in bridgeLines)
             qrcode = generateQR(bridgeLines)
             internalMetrix.recordHandoutsPerBridge(bridgeRequest, bridges)
         else:
             internalMetrix.recordEmptyEmailResponse()
-        return templates.buildAnswerMessage(translator, client, answer), qrcode
+        return templates.buildAnswerMessage(translator, client, bridgeLines), qrcode
 
 def generateResponse(fromAddress, client, body, subject=None,
                      messageID=None, qrcode=None):
