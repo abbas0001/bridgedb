@@ -151,8 +151,7 @@ class SMTPTests(unittest.TestCase):
                  % random.randint(MIN_FROM_ADDRESS, MAX_FROM_ADDRESS))
 
         # then check that our local SMTP server received a response
-        # and that response contained some bridges
-        self.server.getAndCheckMessageContains(b"Here is your bridge")
+        self.server.getAndCheckMessageContains(b"[This is an automated email.]")
 
     def test_getBridges_rateLimitExceeded(self):
         if os.environ.get("CI"):
@@ -167,8 +166,7 @@ class SMTPTests(unittest.TestCase):
         sendMail(FROM_ADDRESS)
 
         # then check that our local SMTP server received a response
-        # and that response contained some bridges
-        self.server.getAndCheckMessageContains(b"Here is your bridge")
+        self.server.getAndCheckMessageContains(b"[This is an automated email.]")
 
         # send another request from the same email address
         sendMail(FROM_ADDRESS)
@@ -203,4 +201,4 @@ class SMTPTests(unittest.TestCase):
                      % random.randint(MIN_FROM_ADDRESS, MAX_FROM_ADDRESS))
 
         for i in range(NUM_MAILS):
-            self.server.getAndCheckMessageContains(b"Here is your bridge")
+            self.server.getAndCheckMessageContains(b"[This is an automated email.]")
