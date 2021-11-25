@@ -107,9 +107,15 @@ def stringifyRequestArgs(args):
     # Convert all key/value pairs from bytes to str.
     str_args = {}
     for arg, values in args.items():
-        arg = arg if isinstance(arg, str) else arg.decode("utf-8")
-        values = [value.decode("utf-8") if isinstance(value, bytes)
-                  else value for value in values]
+        codecs = ["utf-8", "latin-1"]
+        for c in codecs:
+            try:
+                arg = arg if isinstance(arg, str) else arg.decode(c)
+                values = [value.decode(c) if isinstance(value, bytes) else value for value in values]
+            except UnicodeDecodeError:
+                continue
+            else:
+                break
         str_args[arg] = values
 
     return str_args
