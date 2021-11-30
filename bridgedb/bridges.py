@@ -1554,7 +1554,6 @@ class Bridge(BridgeBackwardsCompatibility):
         """
         self.fingerprint = resource["fingerprint"]
         self.address = resource["address"]
-        self.orPort = resource["port"]
 
         self.flags.running = resource["flags"]["running"]
         self.flags.stable = resource["flags"]["stable"]
@@ -1567,14 +1566,17 @@ class Bridge(BridgeBackwardsCompatibility):
                 if validatedAddress:
                     self.orAddresses.append( (validatedAddress, oa["port"], oa["ip-version"],) )
 
-        transport = PluggableTransport(
-                fingerprint=self.fingerprint,
-                methodname=resource["type"],
-                address=self.address,
-                port=self.port,
-                arguments=resource.get("params", {})
-                )
-        self.transports = [transport]
+        if resource["type"] == "vanilla":
+            self.orPort = resource["port"]
+        else:
+            transport = PluggableTransport(
+                    fingerprint=self.fingerprint,
+                    methodname=resource["type"],
+                    address=self.address,
+                    port=resource["port"],
+                    arguments=resource.get("params", {})
+                    )
+            self.transports = [transport]
 
     def updateFromNetworkStatus(self, descriptor, ignoreNetworkstatus=False):
         """Update this bridge's attributes from a parsed networkstatus
