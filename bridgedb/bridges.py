@@ -1554,6 +1554,8 @@ class Bridge(BridgeBackwardsCompatibility):
         """
         self.fingerprint = resource["fingerprint"]
         self.address = resource["address"]
+        if not self.address:
+            raise MalformedBridgeInfo("Invalid address for a bridge (%s): %s" % (resource["fingerprint"], resource["address"]))
 
         self.flags.running = resource["flags"]["running"]
         self.flags.stable = resource["flags"]["stable"]
@@ -1572,7 +1574,7 @@ class Bridge(BridgeBackwardsCompatibility):
             transport = PluggableTransport(
                     fingerprint=self.fingerprint,
                     methodname=resource["type"],
-                    address=self.address,
+                    address=resource["address"],
                     port=resource["port"],
                     arguments=resource.get("params", {})
                     )

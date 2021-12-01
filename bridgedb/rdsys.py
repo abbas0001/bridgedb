@@ -8,7 +8,7 @@ from twisted.internet.protocol import Protocol
 from twisted.web.client import Agent, FileBodyProducer
 from twisted.web.http_headers import Headers
 
-from bridgedb.bridges import Bridge
+from bridgedb.bridges import Bridge, MalformedBridgeInfo
 
 
 inter_message_delimiter = b"\r"
@@ -58,11 +58,14 @@ class RdsysProtocol(Protocol):
 
                 for resource in jb[action][rtype]:
                     bridge = Bridge()
-                    bridge.updateFromResource(resource)
+                    try:
+                        bridge.updateFromResource(resource)
+                    except MalformedBridgeInfo as e:
+                        logging.warning("Got a malformed bridge: %s" % e)
                     fn(bridge)
 
     def connectionLost(self, reason):
-        logging.info("Connection lost with rdsys backend:", reason.getErrorMessage())
+        logging.info("Connection lost with rdsys backend: %s" % reason)
         self.finished.callback(None)
 
 
