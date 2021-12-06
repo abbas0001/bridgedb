@@ -58,40 +58,6 @@ class ParseOptionsTests(unittest.TestCase):
         sys.argv = fakeSysArgv
         self.assertRaises(SystemExit, options.parseOptions)
 
-    def test_parse_options_parseOptions_with_valid_options(self):
-        """:func:`options.parseOptions` should return a
-        :class:`options.MainOptions` when given valid commandline arguments.
-        """
-        fakeSysArgv = ['bridgedb', 'mock', '-n', '-1']
-        sys.argv = fakeSysArgv
-        opts = options.parseOptions()
-        self.assertIsInstance(opts, options.MainOptions)
-
-    def test_parse_options_parseOptions_verbosity_quiet_quiet(self):
-        """If we use `-q` twice on the commandline, ``opts['verbosity']``
-        should equal ``10``.
-        """
-        fakeSysArgv = ['bridgedb', '-q', '-q', 'mock', '-n', '-1']
-        sys.argv = fakeSysArgv
-        opts = options.parseOptions()
-        self.assertEqual(opts['verbosity'], 10)
-
-    def test_parse_options_parseOptions_verbosity_verbose(self):
-        """If we use `-v` once on the commandline, ``opts['verbosity']``
-        should equal ``50``.
-        """
-        fakeSysArgv = ['bridgedb', '-v', '-v', 'mock', '-n', '-1']
-        sys.argv = fakeSysArgv
-        opts = options.parseOptions()
-        self.assertEqual(opts['verbosity'], 50)
-
-    def test_parse_options_parseOptions_rundir(self):
-        """The automatic rundir should be our current directory."""
-        fakeSysArgv = ['bridgedb', 'mock', '-n', '-1']
-        sys.argv = fakeSysArgv
-        opts = options.parseOptions()
-        self.assertEqual(opts['rundir'], os.getcwd())
-
     def test_parse_options_parseOptions_version(self):
         """:func:`options.parseOptions` when given a `--version` argument on
         the commandline, should raise SystemExit (after printing some stuff,

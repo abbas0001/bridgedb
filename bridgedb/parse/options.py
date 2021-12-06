@@ -34,8 +34,6 @@ bridgedb.parse.options
        |__ SIGHUPOptions - Menu to explain SIGHUP signal handling and usage.
        |__ SIGUSR1Options - Menu to explain SIGUSR1 handling and usage.
        |
-       |__ MockOptions - Suboptions for creating fake bridge descriptors for
-       |                 testing purposes.
        \__ MainOptions - Main commandline options parser for BridgeDB.
 ..
 """
@@ -256,15 +254,6 @@ class BaseOptions(usage.Options):
             print("  self['rundir']=%s" % self['rundir'])
 
 
-class MockOptions(BaseOptions):
-    """Suboptions for creating necessary conditions for testing purposes."""
-
-    optParameters = [
-        ['descriptors', 'n', 1000,
-         '''Generate <n> mock bridge descriptor sets
-          (types: netstatus, extrainfo, server)''']]
-
-
 class SIGHUPOptions(BaseOptions):
     """Options menu to explain usage and handling of SIGHUP signals."""
 
@@ -291,6 +280,5 @@ class MainOptions(BaseOptions):
     """Main commandline options parser for BridgeDB."""
 
     subCommands = [
-        ['mock', None, MockOptions, "Generate a testing environment"],
         ['SIGHUP', None, SIGHUPOptions,
          "Reload bridge descriptors into running servers"]]
