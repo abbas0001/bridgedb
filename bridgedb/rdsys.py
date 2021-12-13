@@ -1,5 +1,4 @@
 import json
-import secrets
 import logging
 from io import BytesIO
 from twisted.internet import reactor
@@ -8,6 +7,7 @@ from twisted.internet.protocol import Protocol
 from twisted.web.client import Agent, FileBodyProducer
 from twisted.web.http_headers import Headers
 
+from bridgedb import metrics
 from bridgedb.bridges import Bridge, MalformedBridgeInfo
 
 
@@ -15,13 +15,15 @@ inter_message_delimiter = b"\r"
 
 
 class RdsysProtocol(Protocol):
-    def __init__(self, finished, hashring):
+    def __init__(self, finished, hashring, distributor):
         """
         :type hashring: :class:`bridgedb.bridgerings.FilteredBridgeSplitter`
         """
         self.finished = finished
         self.hashring = hashring
+        self.distributor = distributor
         self.buff = b""
+        self.metrix = metrics.InternalMetrics()
 
     def dataReceived(self, data):
         """
@@ -40,6 +42,7 @@ class RdsysProtocol(Protocol):
         self.buff += parts[0]
         for part in parts[1:]:
             self._updateResources()
+            self._updateMetrics()
             self.buff = part
 
     def _updateResources(self):
@@ -64,6 +67,14 @@ class RdsysProtocol(Protocol):
                         logging.warning("Got a malformed bridge: %s" % e)
                     fn(bridge)
 
+    def _updateMetrics(self):
+        filterRings = self.hashring.filterRings
+        for (ringName, (_, subring)) in filterRings.items():
+            subRingName = "-".join(self.hashring.extractFilterNames(ringName))
+            self.metrix.recordBridgesInHashring(self.distributor,
+                                                subRingName,
+                                                len(subring))
+
     def connectionLost(self, reason):
         logging.info("Connection lost with rdsys backend: %s" % reason)
         self.finished.callback(None)
@@ -86,7 +97,7 @@ def start_stream(distributor, token, rdsys_address, hashring):
 
     def cbResponse(r):
         finished = Deferred()
-        r.deliverBody(RdsysProtocol(finished, hashring))
+        r.deliverBody(RdsysProtocol(finished, hashring, distributor))
         return finished
 
     def connect():

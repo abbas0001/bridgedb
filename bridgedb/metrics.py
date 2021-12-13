@@ -422,6 +422,27 @@ class InternalMetrics(Metrics):
         self.set("{}.lower-whisker".format(handoutsPrefix), lowerWhisker)
         self.set("{}.upper-whisker".format(handoutsPrefix), upperWhisker)
 
+    def recordBridgesInHashring(self, ringName, subRingName, numBridges):
+        """
+        Record the number of bridges per hashring.
+
+        :param str ringName: The name of the ring, e.g., "https".
+        :param str subRingName: The name of the subring, e.g.,
+            "byIPv6-bySubring1of4".
+        :param int numBridges: The number of bridges in the given subring.
+        """
+
+        if not ringName or not subRingName:
+            logging.warning("Ring name ({}) and subring name ({}) cannot be "
+                            "empty.".format(ringName, subRingName))
+            return
+
+        logging.info("Recording metrics for bridge (sub)rings: %s/%s/%d." %
+                     (ringName, subRingName, numBridges))
+        # E.g, concatenate "https" with "byipv6-bysubring1of4".
+        key = "{}.{}.{}".format(self.keyPrefix, ringName, subRingName.lower())
+        self.set(key, numBridges)
+
 
 class HTTPSMetrics(Metrics):
 
