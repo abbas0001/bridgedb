@@ -42,9 +42,9 @@ function displayOrHide(element) {
 }
 
 window.onload = function() {
-  var selectBtn = document.getElementById('selectbtn');
+  var selectBtn = document.getElementById('bridgedb-selectbtn');
   if (selectBtn) {
-    document.getElementById('selectbtn').addEventListener('click',
+    selectBtn.addEventListener('click',
       function() {
         selectText('bridgelines');
       }, false);
@@ -62,15 +62,15 @@ window.onload = function() {
       }, false);
   }
 
-  var qrcodeBtn = document.getElementById('qrcodebtn');
+  var qrcodeBtn = document.getElementById('bridgedb-qrcodebtn');
   if (qrcodeBtn) {
-    document.getElementById('qrcodebtn').addEventListener('click',
+    qrcodeBtn.addEventListener('click',
       function() {
         displayOrHide('qrcode');
       }, false);
     // Remove the href attribute that opens the QRCode image as a data: URL if
     // JS is disabled:
-    document.getElementById('qrcodebtn').removeAttribute('href');
+    qrcodeBtn.removeAttribute('href');
   }
 
   var qrModalBtn = document.getElementById('qrcode-modal-btn');
