@@ -1,0 +1,16 @@
+<div id="bridgedb-captcha-container">
+    <div id="bridgedb-captcha" class="pb-3">
+        {% if envvars('ENV') == 'dev' %}
+        <img src="{{ '/static/images/placeholder_captcha.jpg' | asseturl }}">
+        {% elif envvars('ENV') == 'prod' %}
+        {% raw %}<img alt="${_(strings.CAPTCHA[0])}" src="${imgstr}">{% endraw %}
+        {% else %}
+        {# if you got here, it means you didn't set the LEKTOR_ENV variable to a correct value. set it to prod/dev and try again #}
+        {{ 0/0 }}
+        {% endif %}
+    </div>
+    <form action="" method="POST">
+        <input type="text" id="bridgedb-captcha-input" class="form-control" placeholder="Enter the characters from the image above...">
+        <button type="submit" class="btn btn-primary" id="bridgedb-captcha-submit"><span class="fa fa-level-down fa-rotate-90"></span></button>
+    </form>
+</div>

@@ -1,0 +1,81 @@
+{% if envvars('ENV') == 'dev' %}
+<script src="{{ '/static/js/bridges.js' | asseturl }}"></script>
+{% elif envvars('ENV') == 'prod' %}
+<script src="/static/js/bridges.js"></script>
+{% else %}
+{# if you got here, it means you didn't set the LEKTOR_ENV variable to a correct value. set it to prod/dev and try again #}
+{{ 0/0 }}
+{% endif %}
+
+<div id="container-bridges">
+    <!-- this element exists so bridges.js runs. it checks for a `container-bridges` element but never uses it -->
+</div>
+<div id="container">
+    <h1>Here are your bridge lines:</h1>
+    <div id="bridgelines" class="p-4 mb-3">
+        {% if envvars('ENV') == 'dev' %}
+        obfs4 000.000.000.000:0000 testlinetestlinetestlinetestlinetestline cert=testlinetestlinetestlinetestlinetestlinetestlinetestlinetestlinetestli iat-mode=0
+        <br>
+        obfs4 000.000.000.000:0000 testlinetestlinetestlinetestlinetestline cert=testlinetestlinetestlinetestlinetestlinetestlinetestlinetestlinetestli iat-mode=0
+        <br>
+        obfs4 000.000.000.000:0000 testlinetestlinetestlinetestlinetestline cert=testlinetestlinetestlinetestlinetestlinetestlinetestlinetestlinetestli iat-mode=0
+        {% elif envvars('ENV') == 'prod' %}
+        {{ '''% for bridgeline in answer:
+        ${bridgeline | h,trim}<br />
+        % endfor''' | safe }}
+        {% else %}
+        {# if you got here, it means you didn't set the LEKTOR_ENV variable to a correct value. set it to prod/dev and try again #}
+        {{ 0/0 }}
+        {% endif %}
+    </div>
+    <button class="btn btn-primary disabled" id="bridgedb-selectbtn" aria-disabled="true"><span class="fa fa-copy pr-3"></span>Select All</button>
+    {% if envvars('ENV') == 'dev' %}
+    <a id="bridgedb-qrcodebtn" class="btn btn-primary" type="button" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAADwCAYAAAA+VemSAAAABmJLR0QA/wD/AP+gvaeTAAADUklEQVR4nO3dQU4DQRAEQUD8/8vwBaAtN+mOuCOvB6fmVNq3NwAAAAAAAAAAAAAAAADgxb0P//7rIU9xw+Sst865+MxFfz7nj0c+BfBcAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCPtc/OzplHFDcSJXPOfiM6/8NtzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoawzTnhxGS6VZyqTVw7q1Pf1w0MYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAirzglzs6+hyfctvlFx4tRvww0MYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAjbnBNem7lNXDura9/3z9zAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoawU29yC5vM6/yPX5gbGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQNp2abc3ctt5eV5zm+R89x8o5u4EhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGGb87hrM7ctJpDP+dwJc0K4SMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGHFqdlFxXld8beV+75uYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFD2HQCde1NfxNb87riFLHInBD4HQFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIR9Ln72tbfXbX3utbcTnjorNzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIWxzTjhRnLltOTWvG8o9sxsYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBBWnRNemwRObJ2VKeLPeTshXCRgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoawzTnhZH51zdY075rcjNENDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAAAAAAAAAAAAAAAAAAAPi/vgGVxSux3BL/mgAAAABJRU5ErkJggg=="><span class="fa fa-qrcode pr-3"></span>Show QRCode</a>
+    {% elif envvars('ENV') == 'prod' %}
+    {{ '''% if qrcode:
+    <p id="qrcode-para">
+        <img title="QRCode for your bridge lines from BridgeDB"
+             src="${qrcode}"
+             alt="" />
+    </p>
+    % else:
+    <p class="text-danger">
+        ${_("""It seems there was an error getting your QRCode.""")}
+        <i class="icon icon-frown"></i>
+    </p>
+    % endif''' | safe }}
+    {% else %}
+    {# if you got here, it means you didn't set the LEKTOR_ENV variable to a correct value. set it to prod/dev and try again #}
+    {{ 0/0 }}
+    {% endif %}
+    <div class="mt-4">
+    {# XXXX: don't indent the string below, it'll render as a code block #}
+    {{ md(_('''### How to start using your bridges
+
+First, you need to [download Tor Browser](https://www.torproject.org/projects/torbrowser.html). Our Tor Browser User Manual explains how you can add your bridges to Tor Browser. If you are using Windows, Linux, or OS X, [click here](https://tb-manual.torproject.org/bridges/#entering-bridge-addresses) to learn more. If you are using Android, [click here](https://tb-manual.torproject.org/mobile-tor/#circumvention).''')) }}
+    </div>
+
+<div id="qrcode" class="modal hidden" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="qrcode-modal-btn" class="close" type="button">×</button>
+                <h4 class="modal-title">QRCode for your bridge lines</h4>
+            </div>
+            <div class="modal-body">
+                <p id="qrcode-para">
+                    {% if envvars('ENV') == 'dev' %}
+                    <img title="QRCode for your bridge lines from BridgeDB" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAADwCAYAAAA+VemSAAAABmJLR0QA/wD/AP+gvaeTAAADUklEQVR4nO3dQU4DQRAEQUD8/8vwBaAtN+mOuCOvB6fmVNq3NwAAAAAAAAAAAAAAAADgxb0P//7rIU9xw+Sst865+MxFfz7nj0c+BfBcAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCPtc/OzplHFDcSJXPOfiM6/8NtzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoawzTnhxGS6VZyqTVw7q1Pf1w0MYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAirzglzs6+hyfctvlFx4tRvww0MYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAjbnBNem7lNXDura9/3z9zAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoawU29yC5vM6/yPX5gbGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQNp2abc3ctt5eV5zm+R89x8o5u4EhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGGb87hrM7ctJpDP+dwJc0K4SMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGHFqdlFxXld8beV+75uYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFD2HQCde1NfxNb87riFLHInBD4HQFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIR9Ln72tbfXbX3utbcTnjorNzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIWxzTjhRnLltOTWvG8o9sxsYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBBWnRNemwRObJ2VKeLPeTshXCRgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoawzTnhZH51zdY075rcjNENDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAAAAAAAAAAAAAAAAAAAPi/vgGVxSux3BL/mgAAAABJRU5ErkJggg==">
+                    {% elif envvars('ENV') == 'prod' %}
+                    <img title="QRCode for your bridge lines from BridgeDB" src="{{ '${qrcode}' | safe }}">
+                    {% else %}
+                    {# if you got here, it means you didn't set the LEKTOR_ENV variable to a correct value. set it to prod/dev and try again #}
+                    {{ 0/0 }}
+                    {% endif %}
+                </p>
+                <p>This QRCode contains your bridge lines. Scan it with a QRCode reader to copy your bridge lines onto mobile and other devices.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,27 @@
+section: home
+---
+section_id: home
+---
+color: primary
+---
+_template: options.html
+---
+title: BridgeDB
+---
+path_bar: Get Bridges!
+---
+html:
+---
+body:
+
+### What are bridges?
+
+[Bridges](https://tb-manual.torproject.org/bridges/) are Tor relays that help you circumvent censorship.
+
+### I need an alternative way of getting bridges!
+
+Another way to get bridges is to send an email to [bridges@torproject.org](mailto:bridges@torproject.org). Leave the email subject empty and write "get transport obfs4" in the email's message body. Please note that you must send the email using an address from one of the following email providers: [Riseup](https://riseup.net/) or [Gmail](https://mail.google.com/).
+
+###My bridges don't work! I need help!
+
+If your Tor Browser cannot connect, please take a look at the [Tor Browser Manual](https://tb-manual.torproject.org/circumvention/) and our [Support Portal](https://support.torproject.org/#censorship).

@@ -1,0 +1,25 @@
+{% macro render_step(number, text, link) %}
+<section>
+  <div class="">
+    <div class="card border-0">
+      <div class="">
+        <div>
+          <div class="mt-3 mx-3">
+            <p class="m-0">{{ _("Step " + number|string) }}</p>
+            <h4 class="card-text">{{ _(text) }}</h4>
+            <div class="text-center pt-3 mb-3">
+                <a class="btn btn-primary" href="{{ link }}">{{ _(text) }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+<div class="container pt-5 justify-content-center" id="bridgedb-steps-container">
+  {{ render_step(1, 'Download Tor Browser', 'https://www.torproject.org/projects/torbrowser.html') }}
+  {{ render_step(2, 'Get Bridges', '/options'|url) }}
+  {{ render_step(3, 'Add the Bridges', 'https://bridges.torproject.org/howto') }}
+</div>
