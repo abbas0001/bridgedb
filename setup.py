@@ -17,6 +17,7 @@ from __future__ import print_function
 import os
 import setuptools
 import sys
+from subprocess import Popen
 
 from glob import glob
 
@@ -157,6 +158,39 @@ def get_supported_langs():
 
     return lang_dirs, lang_files
 
+def build_lektor_frontend() -> None:
+    """Build the lektor project, and copy the files to the template directory.
+
+    :rtype: None
+    """
+
+    # the lektor frontend was already built, we don't need to waste cycles
+    if sys.argv[1] == 'install':
+        return
+
+    frontend_build = Popen(
+        ['/usr/bin/env', 'bash', 'frontend/build.sh', 'prod'],
+    )
+    frontend_build.wait()
+    template_path = os.path.join(
+        'bridgedb',
+        'distributors',
+        'https',
+        'templates',
+    )
+
+    public_path_prefix = os.path.join('frontend', 'public')
+
+    for root, dirs, files in os.walk(public_path_prefix):
+        stripped_root = root.lstrip(public_path_prefix)
+        os.makedirs(os.path.join(template_path, stripped_root), exist_ok=True)
+        for file_name in files:
+            file_path = os.path.join(root, file_name)
+            os.replace(
+                file_path,
+                os.path.join(template_path, stripped_root, file_name),
+            )
+
 def get_template_files():
     """Return the paths to any web resource files to include in the package.
 
@@ -164,20 +198,15 @@ def get_template_files():
     :returns: Any files in :attr:`repo_templates` which match one of the glob
         patterns in :ivar:`include_patterns`.
     """
+    build_lektor_frontend()
+
     include_patterns = ['*.html',
                         '*.txt',
-                        '*.asc',
-                        'assets/*.png',
-                        'assets/*.svg',
-                        'assets/css/*.css',
-                        'assets/font/*.woff',
-                        'assets/font/*.ttf',
-                        'assets/font/*.svg',
-                        'assets/font/*.eot',
-                        'assets/js/*.js',
-                        'assets/images/*.svg',
-                        'assets/images/*.ico']
+                        '*.asc']
     template_files = []
+
+    for root, _, files in os.walk(os.path.join(repo_templates, 'assets')):
+        template_files.extend(os.path.join(root, filename) for filename in files)
 
     for include_pattern in include_patterns:
         pattern = os.path.join(repo_templates, include_pattern)

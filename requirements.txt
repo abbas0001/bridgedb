@@ -13,3 +13,4 @@ service_identity==21.1.0
 stem==1.8.0
 zope.interface==5.4.0
 numpy==1.20.3
+Lektor==3.3.1
