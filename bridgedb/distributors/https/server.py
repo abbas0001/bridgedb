@@ -1184,7 +1184,7 @@ def addWebServer(config, distributor):
     root = CustomErrorHandlingResource()
     root.putChild(b'', index)
     root.putChild(b'robots.txt', robots)
-    root.putChild(b'assets', assets)
+    root.putChild(b'static', assets)
     root.putChild(b'options', options)
     root.putChild(b'howto', howto)
     root.putChild(b'info', info)
