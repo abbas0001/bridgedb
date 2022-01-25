@@ -1580,6 +1580,9 @@ class Bridge(BridgeBackwardsCompatibility):
                     )
             self.transports = [transport]
 
+        for country in resource["blocked_in"]:
+            self.setBlockedIn(country)
+
     def updateFromNetworkStatus(self, descriptor, ignoreNetworkstatus=False):
         """Update this bridge's attributes from a parsed networkstatus
         document.
