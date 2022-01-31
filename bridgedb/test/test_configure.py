@@ -26,6 +26,8 @@ class ConfigureTests(unittest.TestCase):
         here = os.getcwd()
         topdir = here.rstrip('_trial_temp')
         self.configFilename = os.path.join(topdir, 'bridgedb.conf')
+        with open("rdsys-token", 'w') as f:
+            f.write('ApiTokenPlaceholder')
 
     def test_loadConfig_with_file(self):
         """We should be able to load and parse the standard ``bridgedb.conf``

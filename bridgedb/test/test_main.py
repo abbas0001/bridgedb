@@ -179,6 +179,8 @@ class BridgedbTests(unittest.TestCase):
 
         # Get the bridgedb.conf file in the top-level directory of this repo:
         self.configFile = os.path.join(TOPDIR, 'bridgedb.conf')
+        with open("rdsys-token", 'w') as f:
+            f.write('ApiTokenPlaceholder')
         self.config = main.loadConfig(self.configFile)
         self.config.BRIDGE_AUTHORITY_DIRECTORIES = ["from-bifroest"]
 
@@ -333,7 +335,9 @@ EMAIL_N_BRIDGES_PER_ANSWER = 3
 EMAIL_INCLUDE_FINGERPRINTS = True
 HTTPS_SHARE = 10
 EMAIL_SHARE = 5
-RESERVED_SHARE = 2"""
+RESERVED_SHARE = 2
+RDSYS_TOKEN_FILE = "rdsys-token"
+"""
         configFile = self._writeConfig(config)
         
         # Fake some options:
