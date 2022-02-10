@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-24 11:54+PST\n"
+"POT-Creation-Date: 2022-02-10 12:46+PST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -12,7 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: https://bridges.torproject.org/ (content/contents+en.lr:page.title)
-#: (content/contents.lr:page.title)
 msgid "Get Bridges for Tor"
 msgstr ""
 
@@ -25,11 +24,6 @@ msgstr ""
 #: (content/bridges/contents+en.lr:page.section)
 #: https://bridges.torproject.org/howto/
 #: (content/howto/contents+en.lr:page.section)
-#: (content/contents.lr:page.section)
-#: (content/options/contents.lr:page.section)
-#: (content/captcha/contents.lr:page.section)
-#: (content/bridges/contents.lr:page.section)
-#: (content/howto/contents.lr:page.section)
 msgid "home"
 msgstr ""
 
@@ -41,11 +35,7 @@ msgstr ""
 #: https://bridges.torproject.org/bridges/
 #: (content/bridges/contents+en.lr:page.body)
 #: https://bridges.torproject.org/howto/
-#: (content/howto/contents+en.lr:page.body) (content/contents.lr:page.body)
-#: (content/options/contents.lr:page.body)
-#: (content/captcha/contents.lr:page.body)
-#: (content/bridges/contents.lr:page.body)
-#: (content/howto/contents.lr:page.body)
+#: (content/howto/contents+en.lr:page.body)
 msgid "### What are bridges?"
 msgstr ""
 
@@ -57,11 +47,7 @@ msgstr ""
 #: https://bridges.torproject.org/bridges/
 #: (content/bridges/contents+en.lr:page.body)
 #: https://bridges.torproject.org/howto/
-#: (content/howto/contents+en.lr:page.body) (content/contents.lr:page.body)
-#: (content/options/contents.lr:page.body)
-#: (content/captcha/contents.lr:page.body)
-#: (content/bridges/contents.lr:page.body)
-#: (content/howto/contents.lr:page.body)
+#: (content/howto/contents+en.lr:page.body)
 msgid ""
 "[Bridges](https://tb-manual.torproject.org/bridges/) are Tor relays that "
 "help you circumvent censorship."
@@ -75,11 +61,7 @@ msgstr ""
 #: https://bridges.torproject.org/bridges/
 #: (content/bridges/contents+en.lr:page.body)
 #: https://bridges.torproject.org/howto/
-#: (content/howto/contents+en.lr:page.body) (content/contents.lr:page.body)
-#: (content/options/contents.lr:page.body)
-#: (content/captcha/contents.lr:page.body)
-#: (content/bridges/contents.lr:page.body)
-#: (content/howto/contents.lr:page.body)
+#: (content/howto/contents+en.lr:page.body)
 msgid "### I need an alternative way of getting bridges!"
 msgstr ""
 
@@ -91,11 +73,7 @@ msgstr ""
 #: https://bridges.torproject.org/bridges/
 #: (content/bridges/contents+en.lr:page.body)
 #: https://bridges.torproject.org/howto/
-#: (content/howto/contents+en.lr:page.body) (content/contents.lr:page.body)
-#: (content/options/contents.lr:page.body)
-#: (content/captcha/contents.lr:page.body)
-#: (content/bridges/contents.lr:page.body)
-#: (content/howto/contents.lr:page.body)
+#: (content/howto/contents+en.lr:page.body)
 msgid ""
 "Another way to get bridges is to send an email to [bridges@torproject.org]"
 "(mailto:bridges@torproject.org). Leave the email subject empty and write "
@@ -106,7 +84,14 @@ msgid ""
 msgstr ""
 
 #: https://bridges.torproject.org/ (content/contents+en.lr:page.body)
-#: (content/contents.lr:page.body)
+#: https://bridges.torproject.org/options/
+#: (content/options/contents+en.lr:page.body)
+#: https://bridges.torproject.org/captcha/
+#: (content/captcha/contents+en.lr:page.body)
+#: https://bridges.torproject.org/bridges/
+#: (content/bridges/contents+en.lr:page.body)
+#: https://bridges.torproject.org/howto/
+#: (content/howto/contents+en.lr:page.body)
 msgid "### My bridges don't work! I need help!"
 msgstr ""
 
@@ -118,11 +103,7 @@ msgstr ""
 #: https://bridges.torproject.org/bridges/
 #: (content/bridges/contents+en.lr:page.body)
 #: https://bridges.torproject.org/howto/
-#: (content/howto/contents+en.lr:page.body) (content/contents.lr:page.body)
-#: (content/options/contents.lr:page.body)
-#: (content/captcha/contents.lr:page.body)
-#: (content/bridges/contents.lr:page.body)
-#: (content/howto/contents.lr:page.body)
+#: (content/howto/contents+en.lr:page.body)
 msgid ""
 "If your Tor Browser cannot connect, please take a look at the [Tor Browser "
 "Manual](https://tb-manual.torproject.org/circumvention/) and our [Support "
@@ -130,7 +111,6 @@ msgid ""
 msgstr ""
 
 #: https://bridges.torproject.org/ (content/contents+en.lr:page.intro)
-#: (content/contents.lr:page.intro)
 msgid ""
 "### BridgeDb can provide bridges with several types of Pluggable Transports, "
 "which can help obfuscate your connections to the Tor Network, making it more "
@@ -146,128 +126,26 @@ msgstr ""
 #: (content/bridges/contents+en.lr:page.title)
 #: https://bridges.torproject.org/howto/
 #: (content/howto/contents+en.lr:page.title)
-#: (content/options/contents.lr:page.title)
-#: (content/captcha/contents.lr:page.title)
-#: (content/bridges/contents.lr:page.title)
-#: (content/howto/contents.lr:page.title)
 msgid "BridgeDB"
 msgstr ""
 
-#: https://bridges.torproject.org/options/
-#: (content/options/contents+en.lr:page.body)
-#: https://bridges.torproject.org/captcha/
-#: (content/captcha/contents+en.lr:page.body)
-#: https://bridges.torproject.org/bridges/
-#: (content/bridges/contents+en.lr:page.body)
-#: https://bridges.torproject.org/howto/
-#: (content/howto/contents+en.lr:page.body)
-#: (content/options/contents.lr:page.body)
-#: (content/captcha/contents.lr:page.body)
-#: (content/bridges/contents.lr:page.body)
-#: (content/howto/contents.lr:page.body)
-msgid "###My bridges don't work! I need help!"
-msgstr ""
-
-#: (dynamic)
-msgid ""
-"Defend yourself against tracking and surveillance. Circumvent censorship."
-msgstr ""
-
-#: (dynamic)
-msgid "The Tor Project | Privacy & Freedom Online"
-msgstr ""
-
-#: (dynamic)
-msgid "Tor Project"
-msgstr ""
-
-#: (dynamic)
-msgid "Donate"
-msgstr ""
-
-#: (dynamic)
-msgid "Donate Now"
-msgstr ""
-
-#: (dynamic)
-msgid "Menu"
-msgstr ""
-
-#: (dynamic)
-msgid "About"
-msgstr ""
-
-#: (dynamic)
-msgid "Support"
-msgstr ""
-
-#: (dynamic)
-msgid "Community"
-msgstr ""
-
-#: (dynamic)
-msgid "Blog"
-msgstr ""
-
-#: (dynamic)
-msgid "Documentation"
-msgstr ""
-
-#: (dynamic)
-msgid "PrivChat"
-msgstr ""
-
-#: (dynamic)
-msgid "Jobs"
-msgstr ""
-
-#: (dynamic)
-msgid "Contact"
-msgstr ""
-
-#: (dynamic)
-msgid "Press"
-msgstr ""
-
-#: (dynamic)
+#: lego/templates/footer.html:13 lego/templates/footer.html:22
+#: lego/templates/navbar.html:97 templates/footer.html:13
+#: templates/footer.html:22 templates/navbar.html:97
 msgid "Download Tor Browser"
 msgstr ""
 
-#: (dynamic)
-msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-msgstr ""
-
-#: (dynamic)
-msgid "Step 1"
-msgstr ""
-
-#: (dynamic)
-msgid "Step 2"
-msgstr ""
-
-#: (dynamic)
-msgid "Get Bridges"
-msgstr ""
-
-#: (dynamic)
-msgid "Step 3"
-msgstr ""
-
-#: (dynamic)
-msgid "Add the Bridges"
-msgstr ""
-
-#: (dynamic)
+#: lego/templates/footer.html:14 templates/footer.html:14
 msgid ""
 "Download Tor Browser to experience real private browsing without tracking, "
 "surveillance, or censorship."
 msgstr ""
 
-#: (dynamic)
+#: lego/templates/footer.html:35 templates/footer.html:35
 msgid "Our mission:"
 msgstr ""
 
-#: (dynamic)
+#: lego/templates/footer.html:36 templates/footer.html:36
 msgid ""
 "To advance human rights and freedoms by creating and deploying free and open "
 "source anonymity and privacy technologies, supporting their unrestricted "
@@ -275,40 +153,78 @@ msgid ""
 "understanding."
 msgstr ""
 
-#: (dynamic)
+#: lego/templates/footer.html:64 lego/templates/footer.html:66
+#: lego/templates/navbar.html:19 lego/templates/navbar.html:21
+#: lego/templates/navbar.html:65 templates/footer.html:64
+#: templates/footer.html:66 templates/navbar.html:19 templates/navbar.html:21
+#: templates/navbar.html:65
+msgid "Donate"
+msgstr ""
+
+#: lego/templates/footer.html:64 lego/templates/footer.html:66
+#: lego/templates/navbar.html:19 lego/templates/navbar.html:21
+#: templates/footer.html:64 templates/footer.html:66 templates/navbar.html:19
+#: templates/navbar.html:21
+msgid "Donate Now"
+msgstr ""
+
+#: lego/templates/footer.html:75 templates/footer.html:75
 msgid "Subscribe to our Newsletter"
 msgstr ""
 
-#: (dynamic)
+#: lego/templates/footer.html:76 templates/footer.html:76
 msgid "Get monthly updates and opportunities from the Tor Project:"
 msgstr ""
 
-#: (dynamic)
+#: lego/templates/footer.html:77 templates/footer.html:77
 msgid "Sign up"
 msgstr ""
 
-#: (dynamic)
+#: lego/templates/footer.html:101 templates/footer.html:101
+#, python-format
 msgid ""
 "Trademark, copyright notices, and rules for use by third parties can be "
 "found in our %(link_to_faq)s"
 msgstr ""
 
-#: (dynamic)
-msgid ""
-"# Get Bridges!\n"
-"\n"
-"BridgeDB can provide bridges with several types of [Pluggable Transports]"
-"(https://support.torproject.org/glossary/#pluggable-transports), which can "
-"help obfuscate your connections to the Tor Network, making it more difficult "
-"for anyone watching your internet traffic to determine that you are using "
-"Tor.\n"
-"\n"
-"Some bridges with IPv6 addresses are also available, though some Pluggable "
-"Transports aren't IPv6 compatible.\n"
-"\n"
-"Additionally, BridgeDB has plenty of plain-ol'-vanilla bridges — without any "
-"Pluggable Transports — which maybe doesn't sound as cool, but they can still "
-"help to circumvent internet censorship in many cases."
+#: lego/templates/navbar.html:26 templates/navbar.html:26
+msgid "Menu"
+msgstr ""
+
+#: lego/templates/navbar.html:56 templates/navbar.html:56
+msgid "About"
+msgstr ""
+
+#: lego/templates/navbar.html:57 templates/navbar.html:57
+msgid "Documentation"
+msgstr ""
+
+#: lego/templates/navbar.html:58 templates/navbar.html:58
+msgid "Support"
+msgstr ""
+
+#: lego/templates/navbar.html:59 templates/navbar.html:59
+msgid "Community"
+msgstr ""
+
+#: lego/templates/navbar.html:60 templates/navbar.html:60
+msgid "Blog"
+msgstr ""
+
+#: lego/templates/navbar.html:61 templates/navbar.html:61
+msgid "PrivChat"
+msgstr ""
+
+#: lego/templates/navbar.html:62 templates/navbar.html:62
+msgid "Jobs"
+msgstr ""
+
+#: lego/templates/navbar.html:63 templates/navbar.html:63
+msgid "Contact"
+msgstr ""
+
+#: lego/templates/navbar.html:64 templates/navbar.html:64
+msgid "Press"
 msgstr ""
 
 #: lego/templates/search.html:5
@@ -406,4 +322,39 @@ msgid ""
 "[click here](https://tb-manual.torproject.org/bridges/#entering-bridge-"
 "addresses) to learn more. If you are using Android, [click here](https://tb-"
 "manual.torproject.org/mobile-tor/#circumvention)."
+msgstr ""
+
+#: templates/hero-home.html:5 templates/meta.html:6 templates/meta.html:13
+msgid ""
+"Defend yourself against tracking and surveillance. Circumvent censorship."
+msgstr ""
+
+#: templates/homepage.html:12
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+msgstr ""
+
+#: templates/meta.html:12
+msgid "The Tor Project | Privacy & Freedom Online"
+msgstr ""
+
+#: templates/meta.html:22
+msgid "Tor Project"
+msgstr ""
+
+#: templates/options.html:5
+msgid ""
+"# Get Bridges!\n"
+"\n"
+"BridgeDB can provide bridges with several types of [Pluggable Transports]"
+"(https://support.torproject.org/glossary/#pluggable-transports), which can "
+"help obfuscate your connections to the Tor Network, making it more difficult "
+"for anyone watching your internet traffic to determine that you are using "
+"Tor.\n"
+"\n"
+"Some bridges with IPv6 addresses are also available, though some Pluggable "
+"Transports aren't IPv6 compatible.\n"
+"\n"
+"Additionally, BridgeDB has plenty of plain-ol'-vanilla bridges — without any "
+"Pluggable Transports — which maybe doesn't sound as cool, but they can still "
+"help to circumvent internet censorship in many cases."
 msgstr ""
