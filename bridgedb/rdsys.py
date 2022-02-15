@@ -22,6 +22,7 @@ class RdsysProtocol(Protocol):
         self.finished = finished
         self.hashring = hashring
         self.distributor = distributor
+        self.first_update = True
         self.buff = b""
         self.metrix = metrics.InternalMetrics()
 
@@ -46,6 +47,10 @@ class RdsysProtocol(Protocol):
             self.buff = part
 
     def _updateResources(self):
+        if self.first_update:
+            self.hashring.bridges = {}
+            self.first_update = False
+
         jb = json.loads(self.buff)
         for action, fn in [
             ("gone", self.hashring.remove),
@@ -91,8 +96,6 @@ def start_stream(distributor, token, rdsys_address, hashring):
         "request_origin": distributor,
         "resource_types": ["obfs4", "vanilla"],
     }
-    buff = BytesIO(bytes(json.dumps(body), "utf-8"))
-    body_producer = FileBodyProducer(buff)
     agent = Agent(reactor)
 
     def cbResponse(r):
@@ -100,7 +103,15 @@ def start_stream(distributor, token, rdsys_address, hashring):
         r.deliverBody(RdsysProtocol(finished, hashring, distributor))
         return finished
 
-    def connect():
+    def connect(_=None):
+        """
+        Connect to the rdsys backend
+
+        The param _ is there so it can be used as callback on a deferred and
+        ignore the result of the previous callback.
+        """
+        buff = BytesIO(bytes(json.dumps(body), "utf-8"))
+        body_producer = FileBodyProducer(buff)
         d = agent.request(
             b"GET",
             b"http://%s/resource-stream" % (rdsys_address.encode(),),
