@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+import sys
+import os.path
+from twisted.web import server, resource
+from twisted.internet import reactor
+
+scripts_folder=os.path.dirname(sys.argv[0])
+RESOURCES_JSON=os.path.join(scripts_folder, "fake_rdsys_resources.json")
+LISTEN_PORT=7100
+inter_message_delimiter = b"\r"
+
+
+class ResourceStream(resource.Resource):
+    isLeaf = True
+
+    def __init__(self):
+        resource.Resource.__init__(self)
+        with open(RESOURCES_JSON) as f:
+            self.resources_json = bytes(f.read(), "utf-8")
+
+    def render_GET(self, request):
+        print("Got a bridgedb request")
+        request.write(self.resources_json)
+        request.write(inter_message_delimiter)
+        return server.NOT_DONE_YET
+
+
+root = ResourceStream()
+root.putChild(b'resource-stream', ResourceStream())
+site = server.Site(root)
+
+reactor.listenTCP(LISTEN_PORT, site)
+reactor.run()

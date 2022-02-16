@@ -284,7 +284,13 @@ To run the test suites, do::
 Running BridgeDB
 ================
 
-To run BridgeDB, simply make any necessary changes to bridgedb.conf, and do::
+To run BridgeDB you need rdsys running. There is a fake rdsys in bridgedb
+that you can run by doing::
+
+      ./scripts/fake_rdsys
+
+Once rdsys is running simply make any necessary changes to bridgedb.conf,
+and do::
 
       bridgedb
 

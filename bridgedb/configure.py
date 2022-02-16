@@ -157,8 +157,11 @@ def loadConfig(configFile=None, configCls=None):
     if conffile: # Store the pathname of the config file, if one was used
         config.CONFIG_FILE = os.path.abspath(os.path.expanduser(conffile))
 
-    with open(config.RDSYS_TOKEN_FILE) as f:
-        setattr(config, "RDSYS_TOKEN", f.read())
+    if os.path.isfile(config.RDSYS_TOKEN_FILE):
+        with open(config.RDSYS_TOKEN_FILE) as f:
+            setattr(config, "RDSYS_TOKEN", f.read())
+    else:
+        config.RDSYS_TOKEN = ""
 
     return config
 
