@@ -34,6 +34,11 @@ from __future__ import unicode_literals
 
 import logging
 
+headers = {
+    "X-DKIM-Authentication-Results": lambda s: s.startswith('pass'),
+    "Authentication-Results": lambda s: 'dkim=pass' in s
+}
+
 
 def checkDKIM(message, rules):
     """Check the DKIM verification results header.
@@ -50,7 +55,7 @@ def checkDKIM(message, rules):
 
     Otherwise, returns ``True``.
 
-    :type message: :api:`twisted.mail.smtp.rfc822.Message`
+    :type message: :api:`email.message.Message`
     :param message: The incoming client request email, including headers.
     :param dict rules: The list of configured ``EMAIL_DOMAIN_RULES`` for the
         canonical domain which the client's email request originated from.
@@ -60,13 +65,16 @@ def checkDKIM(message, rules):
     logging.info("Checking DKIM verification results...")
     logging.debug("Domain has rules: %s" % ', '.join(rules))
 
-    if 'dkim' in rules:
-        # getheader() returns the last of a given kind of header; we want
-        # to get the first, so we use getheaders() instead.
-        dkimHeaders = message.get("X-DKIM-Authentication-Results")
-        dkimHeader = dkimHeaders if dkimHeaders else "<no header>"
-        if not dkimHeader.startswith("pass"):
-            logging.info("Rejecting bad DKIM header on incoming email: %r "
-                         % dkimHeader)
-            return False
-    return True
+    if 'dkim' not in rules:
+        return True
+
+    foundHeader = False
+    for headerName, validHeader in headers.items():
+        for dkimHeader in message.get_all(headerName, []):
+            foundHeader = True
+            if not validHeader(dkimHeader):
+                logging.info("Rejecting bad DKIM header on incoming email: %r "
+                             % dkimHeader)
+                return False
+
+    return foundHeader
