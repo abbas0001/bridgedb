@@ -1,3 +1,17 @@
+Changes in version 0.13.0 - 2022-02-25
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40031
+    Use rdsys as backend for BridgeDB distributors
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40034
+    Add a mechanism to don't distribute certain bridges in some countries
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40028
+    Improve email instructions for small screens and non Tor Browser usage
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40019
+    Provide bridges of the configured transport by default on the email distributor
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40030
+    Use an up to date geoip db
+    * Validate openDKIM headers
+
 Changes in version 0.12.2 - 2021-06-01
 
     * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40014
