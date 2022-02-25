@@ -8,9 +8,9 @@
 # B. K., 2016
 # BL <tresemes3@gmail.com>, 2014
 # Edward Navarro, 2015
-# Emma Peel, 2017-2019
+# Emma Peel, 2017-2021
 # eulalio barbero espinosa <eulaliob@gmail.com>, 2016,2019-2020
-# Ignacio Rodríguez <inactive+i5o@transifex.com>, 2015
+# bc924fe90c926b8dcada96887d40a4a2_902251c <c6d7b347af3e36c88d0308bb5d051bc6_321112>, 2015
 # NinjaTuna <nort0ngh0st@hotmail.com>, 2011
 # Noel Torres <envite@rolamasao.org>, 2013
 # Paola Falcon <cacoepy@gmail.com>, 2014
@@ -18,15 +18,15 @@
 # Jonis <srvial@hotmail.com>, 2014
 # strel, 2013-2016
 # strel, 2012
-# Werwolf NS <inactive+WerwolfNS@transifex.com>, 2017
+# a2a88775cc892af6e2ec2f3b52cf1e3c_7cf0945 <bd053ebb816fdc422dcaa92aa8c07b67_544217>, 2017
 # 322ccc6cfb939d448f1137bdc72c015b, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Tor Project\n"
 "Report-Msgid-Bugs-To: 'https://trac.torproject.org/projects/tor/newticket?component=BridgeDB&keywords=bridgedb-reported,msgid&cc=isis,sysrqb&owner=isis'\n"
 "POT-Creation-Date: 2020-05-14 14:21-0700\n"
-"PO-Revision-Date: 2020-05-15 17:09+0000\n"
-"Last-Translator: eulalio barbero espinosa <eulaliob@gmail.com>\n"
+"PO-Revision-Date: 2021-05-20 07:27+0000\n"
+"Last-Translator: Emma Peel\n"
 "Language-Team: Spanish (http://www.transifex.com/otf/torproject/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -268,7 +268,7 @@ msgid ""
 "empty and write \"get transport obfs4\" in the email's message body. Please note\n"
 "that you must send the email using an address from one of the following email\n"
 "providers: %s or %s."
-msgstr "Otra forma de conseguir puentes es enviando un correo electrónico a%s. Deja el asunto del \ncorreo vacío y escribe \"get transport obfs4\"en el cuerpo del mensaje del correo. Ten en cuenta\nde que tienes que enviar el correo usando la dirección de uno de los siguientes proveedores\nde correo: %s o %s."
+msgstr "Otra forma de conseguir puentes es enviando un correo electrónico a %s. Deja el asunto del \ncorreo vacío y escribe \"get transport obfs4\"en el cuerpo del mensaje del correo. Ten en cuenta\nque tienes que enviar el correo usando la dirección de uno de los siguientes proveedores\nde correo: %s o %s."
 
 #: bridgedb/strings.py:94
 msgid "My bridges don't work! I need help!"
@@ -293,7 +293,7 @@ msgstr "¡Obtener puentes!"
 
 #: bridgedb/strings.py:107
 msgid "Bridge distribution mechanisms"
-msgstr "Mecanismos de distribución del puente"
+msgstr "Mecanismos de distribución de puentes"
 
 #. TRANSLATORS: Please DO NOT translate "BridgeDB", "HTTPS", and "Moat".
 #: bridgedb/strings.py:109
@@ -358,7 +358,7 @@ msgid ""
 "users.  Note that on Relay Search, a freshly set up bridge's distribution\n"
 "mechanism says \"None\" for up to approximately one day.  Be a bit patient, and\n"
 "it will then change to the bridge's actual distribution mechanism.\n"
-msgstr "Los puentes cuyo mecanismo de distribución es \"Ninguno\" no son distribuidos\npor BridgeDB. Es responsabilidad del operador del puente distribuir sus puentes\na los usuarios. Nótese que en la Búsqueda de Relay, el mecanismo de distribución\nde un puente recién instalado dice \"Ninguno\" durante aproximadamente un día. Ten\nun poco de paciencia, y luego se cambiará al mecanismo de distribución real del\npuente.\n"
+msgstr "Los puentes cuyo mecanismo de distribución es \"Ninguno\" no son distribuidos\npor BridgeDB. Es responsabilidad del operador del puente distribuir sus puentes\na los usuarios. En la Búsqueda de Relay, el mecanismo de distribución\nde un puente recién instalado dice \"Ninguno\" durante aproximadamente un día. Ten\nun poco de paciencia, y luego se cambiará al mecanismo de distribución real del\npuente.\n"
 
 #: bridgedb/strings.py:148
 msgid "Please select options for bridge type:"
@@ -393,7 +393,7 @@ msgid ""
 " Manual explains how you can add your bridges to Tor Browser. If you are\n"
 " using Windows, Linux, or OS X, %sclick here%s to learn more. If you\n"
 " are using Android, %sclick here%s."
-msgstr " Primero, necesitas %sbajarte el Navegador Tor%s. Nuestro Manual de Usuario\ndel Navegador Tor explica como puedes añadir tus puentes al navegador. Si estás\nusando Windows, Linux, u OS X, %sclick aquí%s para saber más. Si estás\nusando Android, %sclick aquí%s."
+msgstr " Primero, necesitas %sbajarte el Tor Browser%s. Nuestro Manual de Usuario\ndel Navegador Tor explica como puedes añadir tus puentes al navegador. Si estás\nusando Windows, Linux, u OS X, %sclick aquí%s para saber más. Si estás\nusando Android, %sclick aquí%s."
 
 #: bridgedb/strings.py:166
 msgid ""

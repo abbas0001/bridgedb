@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the bridgedb project.
 # 
 # Translators:
-# Kevin Scannell <kscanne@gmail.com>, 2017,2019
+# Kevin Scannell <kscanne@gmail.com>, 2017,2019-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Tor Project\n"
 "Report-Msgid-Bugs-To: 'https://trac.torproject.org/projects/tor/newticket?component=BridgeDB&keywords=bridgedb-reported,msgid&cc=isis,sysrqb&owner=isis'\n"
 "POT-Creation-Date: 2020-05-14 14:21-0700\n"
-"PO-Revision-Date: 2020-05-15 08:24+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"PO-Revision-Date: 2020-09-19 13:52+0000\n"
+"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish (http://www.transifex.com/otf/torproject/language/ga/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,7 +91,7 @@ msgstr "Tá do chuid línte droichid laistigh den chód QR seo. Is féidir é a 
 
 #: bridgedb/distributors/https/templates/bridges.html:110
 msgid "BridgeDB encountered an error."
-msgstr ""
+msgstr "Tharla earráid le BridgeDB."
 
 #: bridgedb/distributors/https/templates/bridges.html:116
 msgid "There currently aren't any bridges available..."
@@ -176,7 +176,7 @@ msgstr "%sF%saigh Droichid"
 
 #: bridgedb/strings.py:33
 msgid "[This is an automated email.]"
-msgstr ""
+msgstr "[Is teachtaireacht uathoibríoch é seo.]"
 
 #: bridgedb/strings.py:35
 msgid "Here are your bridges:"
@@ -193,7 +193,7 @@ msgstr "Sháraigh tú an teorainn ráta. Tóg go bog é! Is é %s uair an chloig
 msgid ""
 "If these bridges are not what you need, reply to this email with one of\n"
 "the following commands in the message body:"
-msgstr ""
+msgstr "Mura n-oirfeadh na droichid seo duit, tabhair freagra ar an r-phost seo le ceann\nde na horduithe seo i gcorp na teachtaireachta:"
 
 #. TRANSLATORS: Please DO NOT translate "BridgeDB".
 #. TRANSLATORS: Please DO NOT translate "Pluggable Transports".
@@ -252,7 +252,7 @@ msgid ""
 "empty and write \"get transport obfs4\" in the email's message body. Please note\n"
 "that you must send the email using an address from one of the following email\n"
 "providers: %s or %s."
-msgstr ""
+msgstr "Is féidir droichid a fháil trí ríomhphost a chur chuig %s freisin. Fág ábhar an r-phoist bán\nagus scríobh “get transport obfs4” i gcorp na teachtaireachta. Caithfidh tú an r-phost\na sheoladh ó cheann de na soláthraithe r-phoist seo a leanas: %s nó %s."
 
 #: bridgedb/strings.py:94
 msgid "My bridges don't work! I need help!"
@@ -265,7 +265,7 @@ msgstr "Níl mo chuid droichead ag obair! Tá cúnamh uaim!"
 #, python-format
 msgid ""
 "If your Tor Browser cannot connect, please take a look at the %s and our %s."
-msgstr ""
+msgstr "Mura bhfuil Brabhsálaí Tor in ann ceangal leis an Idirlíon, caith súil ar %s agus an %s."
 
 #: bridgedb/strings.py:102
 msgid "Here are your bridge lines:"
@@ -277,7 +277,7 @@ msgstr "Faigh Droichid!"
 
 #: bridgedb/strings.py:107
 msgid "Bridge distribution mechanisms"
-msgstr ""
+msgstr "Modhanna dáilte droichead"
 
 #. TRANSLATORS: Please DO NOT translate "BridgeDB", "HTTPS", and "Moat".
 #: bridgedb/strings.py:109
@@ -288,7 +288,7 @@ msgid ""
 "the pseudo-mechanism \"None\".  The following list briefly explains how these\n"
 "mechanisms work and our %sBridgeDB metrics%s visualize how popular each of the\n"
 "mechanisms is."
-msgstr ""
+msgstr "Tá ceithre bhealach ann le droichid a fháil mar chuid de BridgeDB: \"HTTPS\", \"Moat\",\n\"Ríomhphost\", agus \"In Áirithe\". Baineann droichid eile nach ndáiltear thar BridgeDB\núsáid as an mbréagbhealach \"Dada\". Anseo, déantar míniú i mbeagán focal ar conas a\noibríonn na bealaí seo, agus is féidir leat an t-éileamh orthu a fheiceáil trínár\n%sméadracht BridgeDB%s."
 
 #: bridgedb/strings.py:115
 #, python-format
@@ -296,7 +296,7 @@ msgid ""
 "The \"HTTPS\" distribution mechanism hands out bridges over this website.  To get\n"
 "bridges, go to %sbridges.torproject.org%s, select your preferred options, and\n"
 "solve the subsequent CAPTCHA."
-msgstr ""
+msgstr "Dáileann \"HTTPS\" droichid ar an suíomh Gréasáin seo. Chun droichid a fháil,\ntabhair cuairt ar %sbridges.torproject.org%s, tabhair na roghanna atá uait, agus\nansin réitigh an CAPTCHA."
 
 #: bridgedb/strings.py:119
 #, python-format
@@ -306,7 +306,7 @@ msgid ""
 "your Tor Browser's %sTor settings%s, click on \"request a new bridge\", solve the\n"
 "subsequent CAPTCHA, and Tor Browser will automatically add your new\n"
 "bridges."
-msgstr ""
+msgstr "Is cuid de Bhrabhsálaí Tor an modh dáilte \"Moat\", gné a ligeann d'úsáideoirí\ndroichid a iarraidh ó thaobh istigh de shocruithe Bhrabhsálaí Tor. Chun droichid a fháil,\noscail %sSocruithe Tor%s i mBrabhsálaí Tor, cliceáil “Iarr droichead nua”, réitigh an\nCAPTCHA, agus tabharfaidh Brabhsálaí Tor na droichid nua duit go huathoibríoch."
 
 #: bridgedb/strings.py:125
 #, python-format
@@ -314,11 +314,11 @@ msgid ""
 "Users can request bridges from the \"Email\" distribution mechanism by sending an\n"
 "email to %sbridges@torproject.org%s and writing \"get transport obfs4\" in the\n"
 "email body."
-msgstr ""
+msgstr "Is féidir leat droichid a iarraidh ón modh dáilte “Ríomhphost” trí theachtaireacht\nr-phoist a sheoladh chuig %sbridges@torproject.org%s agus “get transport obfs4” a chur\ni gcorp na teachtaireachta."
 
 #: bridgedb/strings.py:129
 msgid "Reserved"
-msgstr ""
+msgstr "In Áirithe"
 
 #: bridgedb/strings.py:130
 #, python-format
@@ -329,11 +329,11 @@ msgid ""
 "bridges.  Bridges that are distributed over the \"Reserved\" mechanism may not\n"
 "see users for a long time.  Note that the \"Reserved\" distribution mechanism is\n"
 "called \"Unallocated\" in %sbridge pool assignment%s files."
-msgstr ""
+msgstr "Coinníonn BridgeDB líon beag droichead nach ndáiltear go huathoibríoch iad.\nIna áit sin, tugaimid iad d'eagraíochtaí neamhrialtasacha agus do dhaoine aonair\na dteastaíonn droichid uathu. B'fhéidir nach mbeadh droichid a dháiltear tríd an modh\n“In Áirithe” in úsáid ar feadh tamaill fhada. Tabhair faoi deara go dtugtar “Unallocated”\nar an modh “In Áirithe” i gcomhaid %sbridge pool assignment%s."
 
 #: bridgedb/strings.py:137
 msgid "None"
-msgstr ""
+msgstr "Dada"
 
 #: bridgedb/strings.py:138
 msgid ""
@@ -342,7 +342,7 @@ msgid ""
 "users.  Note that on Relay Search, a freshly set up bridge's distribution\n"
 "mechanism says \"None\" for up to approximately one day.  Be a bit patient, and\n"
 "it will then change to the bridge's actual distribution mechanism.\n"
-msgstr ""
+msgstr "Ní hé BridgeDB a dháileann droichid a bhfuil modh dáilte “Dada” acu.\nIs é riarthóir an droichid atá freagrach as na droichid a dháileadh ar úsáideoirí.\nNuair a dhéantar Cuardach ar Athsheachadáin, is é “Dada” an modh dáilte ar\ndroichid úrnua ar feadh thart ar lá amháin. Bí foighneach, ansin athróidh sé go dtí\nan modh dáilte ceart.\n"
 
 #: bridgedb/strings.py:148
 msgid "Please select options for bridge type:"
@@ -377,23 +377,23 @@ msgid ""
 " Manual explains how you can add your bridges to Tor Browser. If you are\n"
 " using Windows, Linux, or OS X, %sclick here%s to learn more. If you\n"
 " are using Android, %sclick here%s."
-msgstr ""
+msgstr "Ar dtús, caithfidh tú %sBrabhsálaí Tor a íoslódáil%s. Míníonn\nLámhleabhar Brabhsálaí Tor conas is féidir leat droichid a chur le\nBrabhsálaí Tor. Má úsáideann tú Windows, Linux, nó OS X, %scliceáil anseo%s\nchun tuilleadh eolais a fháil. Má úsáideann tú Android, %scliceáil anseo%s."
 
 #: bridgedb/strings.py:166
 msgid ""
 "Add these bridges to your Tor Browser by opening your browser\n"
 "preferences, clicking on \"Tor\", and then adding them to the \"Provide a\n"
 "bridge\" field."
-msgstr ""
+msgstr "Is féidir leat na droichid seo a chur le Brabhsálaí Tor trí roghanna an bhrabhsálaí\na oscailt, “Tor” a chliceáil, ansin na droichid a chur isteach sa réimse\n“Soláthair droichead”."
 
 #: bridgedb/strings.py:173
 msgid "(Request unobfuscated Tor bridges.)"
-msgstr ""
+msgstr "(Iarr droichid Tor neamhdhoiléirithe.)"
 
 #: bridgedb/strings.py:174
 msgid "(Request IPv6 bridges.)"
-msgstr ""
+msgstr "(Iarr droichid IPv6.)"
 
 #: bridgedb/strings.py:175
 msgid "(Request obfs4 obfuscated bridges.)"
-msgstr ""
+msgstr "(Iarr droichid dhoiléirithe obfs4.)"

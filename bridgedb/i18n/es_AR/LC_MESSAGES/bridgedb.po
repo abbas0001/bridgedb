@@ -13,14 +13,14 @@
 # ezemelano <melanoeze@gmail.com>, 2014
 # Pablito Labarta <pablitolabarta@gmail.com>, 2019
 # Pablo Di Noto <pdinoto@gmail.com>, 2016
-# Zuhualime Akoochimoya, 2018-2019
+# Zuhualime Akoochimoya, 2018-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Tor Project\n"
 "Report-Msgid-Bugs-To: 'https://trac.torproject.org/projects/tor/newticket?component=BridgeDB&keywords=bridgedb-reported,msgid&cc=isis,sysrqb&owner=isis'\n"
 "POT-Creation-Date: 2020-05-14 14:21-0700\n"
-"PO-Revision-Date: 2020-05-17 22:05+0000\n"
-"Last-Translator: Burro Moro <burromoro@riseup.net>\n"
+"PO-Revision-Date: 2020-08-20 00:27+0000\n"
+"Last-Translator: Zuhualime Akoochimoya\n"
 "Language-Team: Spanish (Argentina) (http://www.transifex.com/otf/torproject/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -203,7 +203,7 @@ msgstr "Te has excedido el límite de tasa. ¡Por favor, andá más despacio! El
 msgid ""
 "If these bridges are not what you need, reply to this email with one of\n"
 "the following commands in the message body:"
-msgstr "Si estos bridges no son lo que necesitas, responda a este correo electrónico con uno de\nlos siguientes comandos en el cuerpo del mensaje:"
+msgstr "Si estos puentes no son lo que necesitás, respondé a este correo electrónico con uno de\nlos siguientes comandos en el cuerpo del mensaje:"
 
 #. TRANSLATORS: Please DO NOT translate "BridgeDB".
 #. TRANSLATORS: Please DO NOT translate "Pluggable Transports".
@@ -262,7 +262,7 @@ msgid ""
 "empty and write \"get transport obfs4\" in the email's message body. Please note\n"
 "that you must send the email using an address from one of the following email\n"
 "providers: %s or %s."
-msgstr "Otra forma de obtener bridges es enviar un correo electrónico a %s. Deja el asunto del correo electrónico\nvacío y escribe \"get transport obfs4\" en el cuerpo del mensaje del correo electrónico. Ten en cuenta\nque debes enviar el correo electrónico utilizando una dirección de uno de los siguientes correos electrónicos de los \nproveedores: %s or %s."
+msgstr "Otra forma de obtener puentes es enviar un correo electrónico a %s. Dejá el asunto del correo electrónico\nvacío y escribí \"get transport obfs4\" en el cuerpo del mensaje del correo electrónico. Tené en cuenta\nque debés enviar el correo electrónico utilizando una dirección de uno de los siguientes proveedores de\ncorreo electrónico: %s o %s."
 
 #: bridgedb/strings.py:94
 msgid "My bridges don't work! I need help!"
@@ -298,7 +298,7 @@ msgid ""
 "the pseudo-mechanism \"None\".  The following list briefly explains how these\n"
 "mechanisms work and our %sBridgeDB metrics%s visualize how popular each of the\n"
 "mechanisms is."
-msgstr "BridgeDB implementa cuatro mecanismos para distribuir bridges: \"HTTPS\", \"Moat\",\n\"Email\", y \"Reserved\". Los bridges que no se distribuyen a través de BridgeDB utilizan\nel pseudo-mecanismo \"None\".  La siguiente lista explica brevemente cómo \nestos mecanismos y nuestras %smétricas de BridgeDB%s visualizan que tan popular\nes el mecanismo."
+msgstr "BridgeDB implementa cuatro mecanismos para distribuir puentes: \"HTTPS\", \"Moat\",\n\"Correo Electrónico\", y \"Reservado\". Los puentes que no se distribuyen a través de BridgeDB utilizan\nel pseudo-mecanismo \"Ninguno\".  La siguiente lista explica brevemente cómo\nestos mecanismos y nuestras %smétricas de BridgeDB%s visualizan qué tan popular\nes cada uno de los mecanismos."
 
 #: bridgedb/strings.py:115
 #, python-format
@@ -306,7 +306,7 @@ msgid ""
 "The \"HTTPS\" distribution mechanism hands out bridges over this website.  To get\n"
 "bridges, go to %sbridges.torproject.org%s, select your preferred options, and\n"
 "solve the subsequent CAPTCHA."
-msgstr "El mecanismo de distribución \"HTTPS\" reparte bridges sobre este sitio web. Para obtener\nbridges, dirígete a %s bridges.torproject.org%s, selecciona tus opciones preferidas y\nresuelva el CAPTCHA subsiguiente."
+msgstr "El mecanismo de distribución \"HTTPS\" reparte puentes sobre este sitio web. Para obtener\npuentes, dirigite a %s bridges.torproject.org%s, seleccioná tus opciones preferidas y\nresolvé el CAPTCHA subsiguiente."
 
 #: bridgedb/strings.py:119
 #, python-format
@@ -316,7 +316,7 @@ msgid ""
 "your Tor Browser's %sTor settings%s, click on \"request a new bridge\", solve the\n"
 "subsequent CAPTCHA, and Tor Browser will automatically add your new\n"
 "bridges."
-msgstr "El mecanismo de distribución \"Moat\" es parte del navegador Tor, lo que permite a los usuarios\nsolicitar bridges desde la configuración de su navegador Tor. Para obtener bridges, dirígete a\ntu Navegador Tor %sen configuraciones de Tor%s, haz clic en \"solicitar un nuevo bridge\", resuelve el\nCAPTCHA subsiguiente y el Navegador Tor agregará automáticamente tus nuevos\npuentes."
+msgstr "El mecanismo de distribución \"Moat\" es parte del Navegador Tor, lo que permite a los usuarios\nsolicitar puentes desde la configuración de su Navegador Tor. Para obtener puentes, dirigite a\n%slas configuraciones Tor%s de tu Navegador Tor, hacé clic en \"solicitar un nuevo puentge\", resolvé el\nCAPTCHA subsiguiente, y el Navegador Tor agregará automáticamente tus nuevos\npuentes."
 
 #: bridgedb/strings.py:125
 #, python-format
@@ -324,7 +324,7 @@ msgid ""
 "Users can request bridges from the \"Email\" distribution mechanism by sending an\n"
 "email to %sbridges@torproject.org%s and writing \"get transport obfs4\" in the\n"
 "email body."
-msgstr "Los usuarios pueden solicitar bridges desde el mecanismo de distribución \"Email\" enviando un\ncorreo electrónico a %sbridges@torproject.org%s y escribiendo \"get transport obfs4\" en el \ncuerpo del correo electrónico."
+msgstr "Los usuarios pueden solicitar puentes desde el mecanismo de distribución \"Correo Electrónico\" enviando un\ncorreo electrónico a %sbridges@torproject.org%s y escribiendo \"get transport obfs4\" en el\ncuerpo del correo electrónico."
 
 #: bridgedb/strings.py:129
 msgid "Reserved"
@@ -339,11 +339,11 @@ msgid ""
 "bridges.  Bridges that are distributed over the \"Reserved\" mechanism may not\n"
 "see users for a long time.  Note that the \"Reserved\" distribution mechanism is\n"
 "called \"Unallocated\" in %sbridge pool assignment%s files."
-msgstr "BridgeDB mantiene una pequeña cantidad de bridges que no se distribuyen\nautomáticamente. En cambio, reservamos estos bridges para su distribución manual y\nlos entregamos a las ONG´s y otras organizaciones e individuos que necesitan\nbridges. Los bridges que se distribuyen a través del mecanismo \"Reserved\" pueden no\nver a los usuarios durante mucho tiempo. Ten en cuenta que el mecanismo de distribución \"Reserved\" se\ndenomina \"Unallocated\" en los archivos de %sasignación de agrupación de bridges.%s "
+msgstr "BridgeDB mantiene una pequeña cantidad de puentes que no se distribuyen\nautomáticamente. En cambio, los reservamos para su distribución manual y\nlos entregamos a las ONGs y otras organizaciones e individuos que necesitan\npuentes. Los puentes que se distribuyen a través del mecanismo \"Reservado\" puede que no\nvean usuarios durante mucho tiempo. Tené en cuenta que el mecanismo de distribución \"Reservado\" se\ndenomina \"No asignado\" en los archivos de %sasignación de agrupación de puentes.%s"
 
 #: bridgedb/strings.py:137
 msgid "None"
-msgstr "ninguno"
+msgstr "Ninguno"
 
 #: bridgedb/strings.py:138
 msgid ""
@@ -352,7 +352,7 @@ msgid ""
 "users.  Note that on Relay Search, a freshly set up bridge's distribution\n"
 "mechanism says \"None\" for up to approximately one day.  Be a bit patient, and\n"
 "it will then change to the bridge's actual distribution mechanism.\n"
-msgstr "BridgeDB no distribuye los bridges cuyo mecanismo de distribución es\"None\"\nEs responsabilidad del operador del bridge distribuir sus bridges a los\nusuarios. Ten en cuenta que en el Relay Search, el mecanismo de distribución de un bridge recién configurado\ndice \"None\" por hasta aproximadamente un día. Se un poco paciente, y\nluego cambiará al mecanismo de distribución real del bridge.\n"
+msgstr "BridgeDB no distribuye los puentes cuyo mecanismo de distribución es \"Ninguno\"\nEs responsabilidad del operador del puente distribuir sus puentes a los\nusuarios. Tené en cuenta que en la Búsqueda de Repetidores, el mecanismo de distribución de un puente recién configurado\ndice \"Ninguno\" hasta aproximadamente un día. Sé un poco paciente, y\nluego cambiará al mecanismo de distribución real del puente.\n"
 
 #: bridgedb/strings.py:148
 msgid "Please select options for bridge type:"
@@ -387,23 +387,23 @@ msgid ""
 " Manual explains how you can add your bridges to Tor Browser. If you are\n"
 " using Windows, Linux, or OS X, %sclick here%s to learn more. If you\n"
 " are using Android, %sclick here%s."
-msgstr "Primero, necesitas %sdescargar el Navegador Tor%s. Nuestro Manual de usuario del Navegador Tor\nexplica cómo puedes agregar tus puentes al Navegador Tor. Si estás\nutilizando Windows, Linux u OS X, %shaz clic aquí%s para obtener más información. Si estás\nutilizando Android, %shaz clic aquí%s."
+msgstr "Primero, necesitás %sdescargar el Navegador Tor%s. Nuestro Manual de usuario del Navegador Tor\nexplica cómo podés agregar tus puentes al Navegador Tor. Si estás\nutilizando Windows, Linux u OS X, %shacé clic acá%s para obtener más información. Si estás\nutilizando Android, %shacé clic acá%s."
 
 #: bridgedb/strings.py:166
 msgid ""
 "Add these bridges to your Tor Browser by opening your browser\n"
 "preferences, clicking on \"Tor\", and then adding them to the \"Provide a\n"
 "bridge\" field."
-msgstr "Agrega estos bridges a tu Navegador Tor abriendo las preferencias de tu navegador,\nhaciendo clic en \"Tor\" y luego agregándolos al campo \"Provide a\nbridge\"."
+msgstr "Agregá estos puentes a tu Navegador Tor abriendo las preferencias de tu navegador,\nhaciendo clic en \"Tor\", y agregándolos luego al campo \"Proveer un\npuente\"."
 
 #: bridgedb/strings.py:173
 msgid "(Request unobfuscated Tor bridges.)"
-msgstr "(Solicitar Tor bridges no ofuscados.)"
+msgstr "(Solicitar puentes Tor no ofuscados.)"
 
 #: bridgedb/strings.py:174
 msgid "(Request IPv6 bridges.)"
-msgstr "(Solicitar bridges IPv6 .)"
+msgstr "(Solicitar puentes IPv6 .)"
 
 #: bridgedb/strings.py:175
 msgid "(Request obfs4 obfuscated bridges.)"
-msgstr "(Solicita bridges obfs4 ofuscados)."
+msgstr "(Solicitar puentes ofuscados obfs4)."
