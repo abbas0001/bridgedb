@@ -27,13 +27,23 @@
            ("""<a href="mailto:bridges@torproject.org">""",
             """</a>""")}</p>
 
-        <h4><a name="reserved">${_(strings.BRIDGEDB_INFO[5])}</a></h4>
+        <h4><a name="settings">Settings</a></h4>
+        <p>${_(strings.BRIDGEDB_INFO[5]) % \
+           ("""<a href="https://gitlab.torproject.org/tpo/anti-censorship/rdsys-admin/-/blob/main/conf/circumvention.json">""",
+            """</a>""")}</p>
+
+        <h4><a name="telegram">Telegram</a></h4>
         <p>${_(strings.BRIDGEDB_INFO[6]) % \
+           ("""<a href="https://t.me/GetBridgesBot">""",
+            """</a>""")}</p>
+
+        <h4><a name="reserved">${_(strings.BRIDGEDB_INFO[7])}</a></h4>
+        <p>${_(strings.BRIDGEDB_INFO[8]) % \
            ("""<a href="https://collector.torproject.org/archive/bridge-pool-assignments/">""",
             """</a>""")}</p>
 
-        <h4><a name="none">${_(strings.BRIDGEDB_INFO[7])}</a></h4>
-        <p>${_(strings.BRIDGEDB_INFO[8])}</p>
+        <h4><a name="none">${_(strings.BRIDGEDB_INFO[9])}</a></h4>
+        <p>${_(strings.BRIDGEDB_INFO[10])}</p>
       </div>
     </p>
   </div>

@@ -131,16 +131,25 @@ bridges."""),
 Users can request bridges from the "Email" distribution mechanism by sending an
 email to %sbridges@torproject.org%s and writing "get transport obfs4" in the
 email body."""),
-    5: _("Reserved"),
+    5: _("""\
+The "Settings" distributor is used by Tor Browser and other clients to
+autoconfigure the circumvention settings depending on the location of the user.
+It uses a %smap of countries and what cicumvention mechanism works on each%s to
+to provide the right kind of bridge for each country."""),
     6: _("""\
+Users can request bridges from the "Telegram" distribution mechanism by sending
+the '\\bridges' command to %s@GetBridgesBot%s over the Telegram instant
+messaging network."""),
+    7: _("Reserved"),
+    8: _("""\
 BridgeDB maintains a small number of bridges that are not distributed
 automatically.  Instead, we reserve these bridges for manual distribution and
 hand them out to NGOs and other organizations and individuals that need
 bridges.  Bridges that are distributed over the "Reserved" mechanism may not
 see users for a long time.  Note that the "Reserved" distribution mechanism is
 called "Unallocated" in %sbridge pool assignment%s files."""),
-    7: _("None"),
-    8: _("""\
+    9: _("None"),
+    10: _("""\
 Bridges whose distribution mechanism is "None" are not distributed by BridgeDB.
 It is the bridge operator's responsibility to distribute their bridges to
 users.  Note that on Relay Search, a freshly set up bridge's distribution
