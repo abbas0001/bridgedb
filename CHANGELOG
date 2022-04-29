@@ -1,3 +1,7 @@
+Changes in version 0.13.1 - 2022-04-29
+
+    * Add description of the new distribution mechanisms in /info
+
 Changes in version 0.13.0 - 2022-02-25
 
     * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40031
