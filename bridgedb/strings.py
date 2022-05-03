@@ -112,11 +112,9 @@ BRIDGEDB_INFO = {
     0: _("Bridge distribution mechanisms"),
     # TRANSLATORS: Please DO NOT translate "BridgeDB", "HTTPS", and "Moat".
     1: _("""\
-BridgeDB implements four mechanisms to distribute bridges: "HTTPS", "Moat",
-"Email", and "Reserved".  Bridges that are not distributed over BridgeDB use
-the pseudo-mechanism "None".  The following list briefly explains how these
-mechanisms work and our %sBridgeDB metrics%s visualize how popular each of the
-mechanisms is."""),
+BridgeDB implements various mechanisms to distribute bridges. The
+following list briefly explains how these mechanisms work and our
+%sBridgeDB metrics%s visualize how popular each of the mechanisms is."""),
     2: _("""\
 The "HTTPS" distribution mechanism hands out bridges over this website.  To get
 bridges, go to %sbridges.torproject.org%s, select your preferred options, and
@@ -134,11 +132,11 @@ email body."""),
     5: _("""\
 The "Settings" distributor is used by Tor Browser and other clients to
 autoconfigure the circumvention settings depending on the location of the user.
-It uses a %smap of countries and what cicumvention mechanism works on each%s to
-to provide the right kind of bridge for each country."""),
+It uses a %smap of countries and what circumvention mechanism works in each%s to
+provide the right kind of bridge for each country."""),
     6: _("""\
 Users can request bridges from the "Telegram" distribution mechanism by sending
-the '\\bridges' command to %s@GetBridgesBot%s over the Telegram instant
+the '/bridges' command to %s@GetBridgesBot%s over the Telegram instant
 messaging network."""),
     7: _("Reserved"),
     8: _("""\
@@ -146,11 +144,11 @@ BridgeDB maintains a small number of bridges that are not distributed
 automatically.  Instead, we reserve these bridges for manual distribution and
 hand them out to NGOs and other organizations and individuals that need
 bridges.  Bridges that are distributed over the "Reserved" mechanism may not
-see users for a long time.  Note that the "Reserved" distribution mechanism is
-called "Unallocated" in %sbridge pool assignment%s files."""),
+see users for a long time.  Note that the "Reserved" distribution mechanism was
+previously called "Unallocated" in %sbridge pool assignment%s files."""),
     9: _("None"),
     10: _("""\
-Bridges whose distribution mechanism is "None" are not distributed by BridgeDB.
+Bridges that have a distribution mechanism of "None" are not distributed by BridgeDB.
 It is the bridge operator's responsibility to distribute their bridges to
 users.  Note that on Relay Search, a freshly set up bridge's distribution
 mechanism says "None" for up to approximately one day.  Be a bit patient, and
