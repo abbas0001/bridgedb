@@ -12,6 +12,7 @@ from bridgedb.bridges import Bridge, MalformedBridgeInfo
 
 
 inter_message_delimiter = b"\r"
+max_retry_delay = 60*60  # 1 hour
 
 
 class RdsysProtocol(Protocol):
@@ -98,7 +99,20 @@ def start_stream(distributor, token, rdsys_address, hashring):
     }
     agent = Agent(reactor)
 
+    delay = 1
+
+    def delayError(err):
+        nonlocal delay
+        d = Deferred()
+        reactor.callLater(delay, d.errback, err)
+        delay *= 2
+        if delay > max_retry_delay:
+            delay = max_retry_delay
+        return d
+
     def cbResponse(r):
+        nonlocal delay
+        delay = 1
         finished = Deferred()
         r.deliverBody(RdsysProtocol(finished, hashring, distributor))
         return finished
@@ -118,6 +132,7 @@ def start_stream(distributor, token, rdsys_address, hashring):
             headers=headers,
             bodyProducer=body_producer,
         )
+        d.addErrback(delayError)
         d.addCallback(cbResponse)
         d.addErrback(lambda err: logging.warning("Error on the connection with rdsys: " + str(err)))
         d.addCallback(connect)
