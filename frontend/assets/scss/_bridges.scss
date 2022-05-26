@@ -33,3 +33,19 @@
 .btn-purple:hover {
     background-color: $purple-dark !important;
 }
+
+#bridgedb-captcha-container {
+    width: max-content;
+    margin: 0 auto;
+}
+
+#bridgedb-captcha-input {
+    flex-grow: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#bridgedb-captcha-submit {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
