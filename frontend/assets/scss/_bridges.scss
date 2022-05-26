@@ -34,6 +34,12 @@
     background-color: $purple-dark !important;
 }
 
+#bridgelines {
+    white-space: nowrap;
+    overflow-x: auto;
+    font-family: monospace;
+}
+
 #bridgedb-captcha-container {
     width: max-content;
     margin: 0 auto;
