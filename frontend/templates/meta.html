@@ -20,12 +20,6 @@
   <!-- Recommended favicon format -->
   <link rel="icon" type="image/png" href="{{ 'static/images/favicon.png' | asseturl }}">
   <title>{{ _("Tor Project") }} | {% block title %}{{ this.title }}{% endblock %}</title>
-  <style>
-   /* the extremely specific selector is needed to override the `.container-fluid.bg-dark.footer` lego style */
-   .container-fluid.bg-dark.footer {
-       background-color: var(--purple) !important;
-   }
-  </style>
   {% block head_extra %}{% endblock %}
 </head>
 <body class="no-gutters">
