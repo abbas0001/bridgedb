@@ -42,6 +42,14 @@
     background-color: $purple-dark !important;
 }
 
+#bridgedb-pathbar-sep {
+    padding: 0 5px;
+
+    &::before {
+        content: "/";
+    }
+}
+
 #bridgelines {
     white-space: nowrap;
     overflow-x: auto;
