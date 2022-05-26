@@ -22,6 +22,16 @@ function selectText(element) {
   }
 }
 
+function copyText(element) {
+  'use strict';
+  try {
+    let text = document.getElementById(element).innerText;
+    navigator.clipboard.writeText(text);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 function displayOrHide(element) {
   try {
     e = document.getElementById(element);
@@ -43,10 +53,10 @@ function displayOrHide(element) {
 
 window.onload = function() {
   var selectBtn = document.getElementById('bridgedb-selectbtn');
-  if (selectBtn) {
+  if (selectBtn && navigator.clipboard) {
     selectBtn.addEventListener('click',
       function() {
-        selectText('bridgelines');
+        copyText('bridgelines');
       }, false);
     // Make the 'Select All' button clickable:
     selectBtn.classList.remove('disabled');
