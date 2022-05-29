@@ -103,6 +103,8 @@ def start_stream(distributor, token, rdsys_address, hashring):
 
     def delayError(err):
         nonlocal delay
+        logging.warning("Error on the connection with rdsys, will wait %s seconds to retry: %s" % (delay, str(err)))
+
         d = Deferred()
         reactor.callLater(delay, d.errback, err)
         delay *= 2
@@ -134,7 +136,7 @@ def start_stream(distributor, token, rdsys_address, hashring):
         )
         d.addErrback(delayError)
         d.addCallback(cbResponse)
-        d.addErrback(lambda err: logging.warning("Error on the connection with rdsys: " + str(err)))
+        d.addErrback(lambda err: logging.warning("Retry connection to rdsys after error: " + str(err)))
         d.addCallback(connect)
 
     connect()
