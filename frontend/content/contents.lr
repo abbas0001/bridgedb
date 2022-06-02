@@ -8,6 +8,8 @@ _template: jumbotron.html
 ---
 title: Get Bridges for Tor
 ---
+subtitle: Bridges
+---
 html: home.html
 ---
 intro:

@@ -8,6 +8,8 @@ _template: options.html
 ---
 title: BridgeDB
 ---
+subtitle: Bridges
+---
 path_bar: Get Bridges!
 ---
 html:

@@ -8,6 +8,8 @@ _template: bridges.html
 ---
 title: BridgeDB
 ---
+subtitle: Bridges
+---
 path_bar: Get Bridges!
 ---
 html: hero-captcha.html
