@@ -12,8 +12,18 @@
     padding: 20px;
 }
 
-#bridgedb-support-body h3 {
-    color: #7D4698;
+#bridgedb-support-body {
+    h3 {
+        color: #7D4698;
+    }
+
+    summary {
+        list-style: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 
 .bg-dark {

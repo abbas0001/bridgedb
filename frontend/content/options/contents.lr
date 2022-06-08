@@ -4,13 +4,13 @@ section_id: home
 ---
 color: primary
 ---
-_template: options.html
+_template: homepage.html
 ---
 title: BridgeDB
 ---
 path_bar: Get Bridges!
 ---
-html:
+html: options.html
 ---
 body:
 

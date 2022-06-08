@@ -32,11 +32,6 @@
           {% if this.intro %}{{ this.intro }}{% endif %}
         </div>
         {% if this.html %}{% include this.html %}{% endif %}
-        <div class="container pt-5 hero {{ locale.order }} {{ locale.direction }}">
-          <div id="bridgedb-support-body">
-            {% block body %}{{ this.body }}{% endblock %}
-          </div>
-        </div>
       </main>
     </div>
   </div>

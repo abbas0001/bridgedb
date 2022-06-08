@@ -1,6 +1,25 @@
-{% extends 'homepage.html' %}
-
-{% block body %}
+{% macro render_advanced_options() %}
+<div id="bridgedb-advanced-options">
+  <h3>Advanced Options</h3>
+  <p>Please select options for this bridge type:</p>
+  <form action="{{ '/bridges'|url }}">
+    <div class="bridgedb-form-row">
+      <div>
+        <p>Do you need a pluggable transport?</p>
+        <select id="bridgedb-advanced-options-transport" name="transport" accesskey="t" data-toggle="dropdown" class="form-control">
+          <option value="0">none</option>
+          <option value="obfs4" selected>obfs4</option>
+        </select>
+      </div>
+      <div>
+        <p>Do you need IPv6 addresses?</p>
+        <input id="ipv6" name="ipv6" type="checkbox" value="yes" accesskey="y">&nbsp;<u>Y</u>es!
+      </div>
+    </div>
+    <input type="submit" value="Get Bridges" class="btn btn-lg btn-purple mt-4">
+  </form>
+</div>
+{% endmacro %}
 
 {{ md(_('''# Get Bridges!
 
@@ -20,32 +39,4 @@ Additionally, BridgeDB has plenty of plain-ol\'-vanilla bridges — without any 
 
 {{ render_advanced_options() }}
 
-<hr class="margin-4r-0">
-<h5 id="bridgedb-support-header">Support</h5>
-
-  {{ this.body }}
-
-  {% endblock %}
-
-  {% macro render_advanced_options() %}
-  <div id="bridgedb-advanced-options">
-    <h3>Advanced Options</h3>
-    <p>Please select options for this bridge type:</p>
-    <form action="{{ '/bridges'|url }}">
-      <div class="bridgedb-form-row">
-        <div>
-          <p>Do you need a pluggable transport?</p>
-          <select id="bridgedb-advanced-options-transport" name="transport" accesskey="t" data-toggle="dropdown" class="form-control">
-            <option value="0">none</option>
-            <option value="obfs4" selected>obfs4</option>
-          </select>
-        </div>
-        <div>
-          <p>Do you need IPv6 addresses?</p>
-          <input id="ipv6" name="ipv6" type="checkbox" value="yes" accesskey="y">&nbsp;<u>Y</u>es!
-        </div>
-      </div>
-      <input type="submit" value="Get Bridges" class="btn btn-lg btn-purple mt-4">
-    </form>
-  </div>
-  {% endmacro %}
+{% include 'support.jinja2' %}
