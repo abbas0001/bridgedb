@@ -1,4 +1,4 @@
-section: home
+section: Bridges
 ---
 section_id: home
 ---
@@ -7,8 +7,6 @@ color: primary
 _template: bridges.html
 ---
 title: BridgeDB
----
-subtitle: Bridges
 ---
 path_bar: Get Bridges!
 ---

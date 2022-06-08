@@ -2,14 +2,17 @@
 <div class="page">
   <div class="container-fluid bg-primary">
     <div class="row flex-xl-nowrap {{ bag('alternatives', this.alt, 'order') }}">
-      <div class="container bg-primary py-5">
+      <div class="container bg-primary pt-5 mt-3">
         <div class="row">
-          <div class="col-12 content-center pt-5">
+          <div class="col-12 content-center">
             <div class="row">
-              <h6 class="mx-auto text-white pt-3">{{ this.subtitle }}</h6>
+              <h6 class="mx-auto text-white pt-3">{{ this.section }}</h6>
             </div>
             <div class="row">
-              <h2 class="mx-auto display-2 text-center text-white">{{ this.title }}</h2>
+              <h2 class="mx-auto display-3 text-center text-white">{{ this.title }}</h2>
+            </div>
+            <div class="row pb-5">
+                <h4 class="mx-auto text-white {% if not this.subtitle %}invisible" aria-hidden="true{% endif %}">{{ this.subtitle or 'This text is here for spacing' }}</h4>
             </div>
           </div>
         </div>
