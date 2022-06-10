@@ -2,7 +2,11 @@
 <section class="p-20px card">
   <p class="m-0">{{ _("Step " + number|string) }}</p>
   <h4 class="card-text">{{ _(text) }}</h4>
-  <img src="{{ '/static/images/{}'.format(image_name) | asseturl }}">
+  <picture>
+    <source type="image/svg+xml" srcset="{{ '/static/images/{}.svg'.format(image_name) | asseturl }}">
+    <img src="{{ '/static/images/{}.png'.format(image_name) | asseturl }}">
+  </picture>
+  <img src="">
   <div class="text-center pt-3">
     <a class="btn btn-primary w-100" href="{{ link }}">{{ _(text) }}</a>
   </div>
@@ -10,9 +14,9 @@
 {% endmacro %}
 
 <div class="container pt-5 d-flex justify-content-around" id="bridgedb-steps-container">
-  {{ render_step(1, 'Download Tor Browser', 'https://www.torproject.org/projects/torbrowser.html', 'download-tor-browser.png') }}
-  {{ render_step(2, 'Get Bridges', '/options'|url, 'get-bridges.png') }}
-  {{ render_step(3, 'Add the Bridges', '/howto'|url, 'add-bridges.png') }}
+  {{ render_step(1, 'Download Tor Browser', 'https://www.torproject.org/projects/torbrowser.html', 'bridges-download') }}
+  {{ render_step(2, 'Get Bridges', '/options'|url, 'bridges-get') }}
+  {{ render_step(3, 'Add the Bridges', '/howto'|url, 'bridges-add') }}
 </div>
 
 {% include 'support.jinja2' %}
