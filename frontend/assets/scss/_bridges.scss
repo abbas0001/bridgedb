@@ -39,6 +39,11 @@
         font-size: 1.5rem !important;
         font-weight: 500;
     }
+
+    > details {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
 }
 
 .bg-dark {
