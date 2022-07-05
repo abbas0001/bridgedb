@@ -16,10 +16,10 @@
 </div>
 {% endmacro %}
 
-<section class="container pt-5 d-flex justify-content-around" id="bridgedb-steps-container">
+<div class="row">
   {{ render_step(1, 'Download Tor Browser', 'https://www.torproject.org/projects/torbrowser.html', 'bridges-download') }}
   {{ render_step(2, 'Get Bridges', '/options'|url, 'bridges-get') }}
   {{ render_step(3, 'Add the Bridges', '/howto'|url, 'bridges-add') }}
-</section>
+</div>
 
 {% include 'support.jinja2' %}
