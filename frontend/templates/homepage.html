@@ -32,10 +32,14 @@
   <div class="container {{ locale.order }} {{ locale.direction }}">
     <div class="row flex-xl-nowrap {{ locale.order }} {{ locale.direction }}">
       <main role="main" class="container mx-auto col-12 {{ locale.order }} {{ locale.direction }}">
-        <div id="bridgedb-homepage-intro" class="container py-3 mt-5 preamble">
-          {% if this.intro %}{{ this.intro }}{% endif %}
+        <div class="container pt-5 justify-content-center">
+          <section>
+            <div class="container py-3 preamble">
+              {% if this.intro %}{{ this.intro }}{% endif %}
+            </div>
+            {% if this.html %}{% include this.html %}{% endif %}
+          </section>
         </div>
-        {% if this.html %}{% include this.html %}{% endif %}
       </main>
     </div>
   </div>
