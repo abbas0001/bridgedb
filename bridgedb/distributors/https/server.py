@@ -96,6 +96,18 @@ httpsMetrix = metrics.HTTPSMetrics()
 internalMetrix = metrics.InternalMetrics()
 
 
+def getTemplate(langs, template_name):
+    for lang in langs:
+        try:
+            template = lookup.get_template(os.path.join(langs[0], template_name))
+            return template
+        except mako.exceptions.TopLevelLookupException:
+            continue
+
+    template = lookup.get_template(template_name)
+    return template
+
+
 def stringifyRequestArgs(args):
     """Turn the given HTTP request arguments from bytes to str.
 
@@ -410,7 +422,7 @@ class TranslatedTemplateResource(CustomErrorHandlingResource, CSPResource):
         try:
             langs = translations.getLocaleFromHTTPRequest(request)
             rtl = translations.usingRTLLang(langs)
-            template = lookup.get_template(self.template)
+            template = getTemplate(langs, self.template)
             if langs:
                 rendered = template.render(strings=strings,
                                        langs=getSortedLangList(),
@@ -555,7 +567,7 @@ class CaptchaProtectedResource(CustomErrorHandlingResource, CSPResource):
             rtl = translations.usingRTLLang(langs)
             # TODO: this does not work for versions of IE < 8.0
             imgstr = b'data:image/jpeg;base64,%s' % base64.b64encode(image)
-            template = lookup.get_template('captcha.html')
+            template = getTemplate(langs, 'captcha.html')
             if langs:
                 rendered = template.render(strings=strings,
                                        langs=getSortedLangList(),
@@ -1106,8 +1118,9 @@ class BridgesResource(CustomErrorHandlingResource, CSPResource):
             try:
                 langs = translations.getLocaleFromHTTPRequest(request)
                 rtl = translations.usingRTLLang(langs)
-                template = lookup.get_template('bridges.html')
                 if langs:
+                    template = getTemplate(langs, 'bridges.html')
+                    # XXX: We might not be using `langs[0]` depending on the result of getTemplate
                     rendered = template.render(strings=strings,
                                            langs=getSortedLangList(),
                                            rtl=rtl,

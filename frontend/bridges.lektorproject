@@ -9,3 +9,163 @@ name = English (en)
 primary = yes
 url_prefix = /
 locale = en
+
+[alternatives.ar]
+name = (ar) عربية
+url_prefix = /ar/
+locale = ar
+
+[alternatives.be] 
+name = беларуская мова (be)
+url_prefix = /be/
+locale = be
+
+[alternatives.ca]
+name = Català (ca)
+url_prefix = /ca/
+locale = ca
+
+[alternatives.cs]
+name = Czech (cs)
+url_prefix = /cs/
+locale = cs
+
+[alternatives.da]
+name = Dansk (da)
+url_prefix = /da/
+locale = da
+
+[alternatives.de]
+name = Deutsch (de)
+url_prefix = /de/
+locale = de
+
+[alternatives.es]
+name = Español (es)
+url_prefix = /es/
+locale = es
+
+[alternatives.es-AR]
+name = placeholder
+url_prefix = /es-AR/
+locale = es-AR
+
+[alternatives.fr]
+name = Français (fr)
+url_prefix = /fr/
+locale = fr
+
+[alternatives.ga]
+name = Gaeilge (ga)
+url_prefix = /ga/
+locale = ga
+
+[alternatives.he]
+name =  עברית (he)
+url_prefix = /he/
+locale = he
+
+[alternatives.hr]
+name =  hrvatski (hr)
+url_prefix = /hr/
+locale = hr
+
+[alternatives.hu]
+name =  Magyar nyelv (hu)
+url_prefix = /hu/
+locale = hu
+
+[alternatives.is]
+name = Íslenska (is)
+url_prefix = /is/
+locale = is
+
+[alternatives.it]
+name = Italiano (it)
+url_prefix = /it/
+locale = it
+
+[alternatives.ja]
+name = Japanese (ja)
+url_prefix = /ja/
+locale = ja
+
+[alternatives.ka]
+name = ქართული ენა (ka)
+url_prefix = /ka/
+locale = ka
+
+[alternatives.lt]
+name = lietuvių (lt)
+url_prefix = /lt/
+locale = lt
+
+[alternatives.mk]
+name = македонски (mk)
+url_prefix = /mk/
+locale = mk
+
+[alternatives.ml]
+name =  മലയാളം (ml)
+url_prefix = /ml/
+locale = ml
+
+[alternatives.nb]
+name = placeholder
+url_prefix = /nb/
+locale = nb
+
+[alternatives.nl]
+name = Nederlands (nl)
+url_prefix = /nl/
+locale = nl
+
+[alternatives.pl]
+name = polski (pl)
+url_prefix = /pl/
+locale = pl
+
+[alternatives.pt-BR]
+name = Português Brasil (pt-BR)
+url_prefix = /pt-BR/
+locale = pt-BR
+
+[alternatives.pt_PT]
+name = Português
+url_prefix = /pt-PT/
+locale = pt-PT
+
+[alternatives.ro]
+name = Română (ro)
+url_prefix = /ro/
+locale = ro
+
+[alternatives.ru]
+name = Русский (ru)
+url_prefix = /ru/
+locale = ru
+
+[alternatives.sk]
+name = placeholder
+url_prefix = /sk/
+locale = sk
+
+[alternatives.sq]
+name = shqip (sq)
+url_prefix = /sq/
+locale = sq
+
+[alternatives.sv]
+name = placeholder
+url_prefix = /sv/
+locale = sv
+
+[alternatives.tr]
+name = Türkçe (tr)
+url_prefix = /tr/
+locale = tr
+
+[alternatives.zh_CN]
+name = 简体中文 (zh-CN)
+url_prefix = /zh-CN/
+locale = zh-CN

@@ -208,10 +208,11 @@ def get_template_files():
     for root, _, files in os.walk(os.path.join(repo_templates, 'assets')):
         template_files.extend(os.path.join(root, filename) for filename in files)
 
-    for include_pattern in include_patterns:
-        pattern = os.path.join(repo_templates, include_pattern)
-        matches = glob(pattern)
-        template_files.extend(matches)
+    for root, _, files in os.walk(repo_templates):
+        for include_pattern in include_patterns:
+            pattern = os.path.join(root, include_pattern)
+            matches = glob(pattern)
+            template_files.extend(matches)
 
     return template_files
 
