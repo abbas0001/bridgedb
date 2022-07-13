@@ -69,6 +69,7 @@ MOAT_N_IP_CLUSTERS = %r
 MOAT_ROTATION_PERIOD = %r
 MOAT_GIMP_CAPTCHA_HMAC_KEYFILE = %r
 MOAT_GIMP_CAPTCHA_RSA_KEYFILE = %r
+MOAT_SHIM_TOKEN = ""
 """ % (GIMP_CAPTCHA_DIR,
        SERVER_PUBLIC_FQDN,
        SUPPORTED_TRANSPORTS,
@@ -107,7 +108,7 @@ class DummyMoatDistributor(object):
     _bridge_class = util.DummyBridge
     _bridgesPerResponseMin = 3
 
-    def getBridges(self, bridgeRequest=None, epoch=None):
+    def getBridges(self, bridgeRequest=None, epoch=None, dummyBridges=False):
         """Needed because it's called in
         :meth:`BridgesResource.getBridgeRequestAnswer`."""
         return [self._bridge_class() for _ in range(self._bridgesPerResponseMin)]

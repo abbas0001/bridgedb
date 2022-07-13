@@ -337,6 +337,7 @@ HTTPS_SHARE = 10
 EMAIL_SHARE = 5
 RESERVED_SHARE = 2
 RDSYS_TOKEN_FILE = "rdsys-token"
+MOAT_SHIM_TOKEN_FILE = "shim-token"
 """
         configFile = self._writeConfig(config)
         

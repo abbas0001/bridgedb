@@ -101,6 +101,8 @@ def load(cfg, proxyList, key):
             proxyList,
             answerParameters=ringParams)
         moatDistributor.prepopulateRings()
+        if cfg.MOAT_DUMMY_BRIDGES_FILE:
+            moatDistributor.loadDummyBridges(cfg.MOAT_DUMMY_BRIDGES_FILE)
         rdsys.start_stream("moat", cfg.RDSYS_TOKEN, cfg.RDSYS_ADDRESS, moatDistributor.hashring)
 
     # As appropriate, create an IP-based distributor.

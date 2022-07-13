@@ -19,7 +19,11 @@ A Distributor that hands out bridges through a web interface.
 .. inheritance-diagram:: MoatDistributor
     :parts: 1
 """
+import logging
 
+from bridgedb.bridgerings import BridgeRing
+from bridgedb.bridges import Bridge, MalformedBridgeInfo
+from bridgedb.crypto import getHMAC
 from bridgedb.distributors.https.distributor import HTTPSDistributor
 
 class MoatDistributor(HTTPSDistributor):
@@ -63,3 +67,52 @@ class MoatDistributor(HTTPSDistributor):
         """
         super(MoatDistributor, self).__init__(totalSubrings, key, proxies,
                                               answerParameters)
+
+    def prepopulateRings(self):
+        """Prepopulate this distributor's hashrings and subhashrings with
+        bridges.
+        """
+        super(MoatDistributor, self).prepopulateRings()
+        dummyKey = getHMAC(self.key, "dummy-bridges")
+        self.dummyHashring = BridgeRing(dummyKey, self.answerParameters)
+
+    def loadDummyBridges(self, dummyBridgesFile):
+        """Load dummy bridges from a file
+        """
+        with open(dummyBridgesFile) as f:
+            bridge_line = f.readline()
+            bridge = Bridge()
+            try:
+                bridge.updateFromBridgeLine(bridge_line)
+            except MalformedBridgeInfo as e:
+                logging.warning("Got a malformed dummy bridge: %s" % e)
+            self.dummyHashring.insert(bridge)
+
+    def getBridges(self, bridgeRequest, interval, dummyBridges=False):
+        """Return a list of bridges to give to a user.
+
+        :type bridgeRequest: :class:`bridgedb.distributors.https.request.HTTPSBridgeRequest`
+        :param bridgeRequest: A :class:`~bridgedb.bridgerequest.BridgeRequestBase`
+            with the :data:`~bridgedb.bridgerequest.BridgeRequestBase.client`
+            attribute set to a string containing the client's IP address.
+        :param str interval: The time period when we got this request.  This
+            can be any string, so long as it changes with every period.
+        :param bool dummyBridges: if it should provide dummyBridges or actual bridges from
+            from the bridge authority.
+        :rtype: list
+        :return: A list of :class:`~bridgedb.bridges.Bridge`s to include in
+            the response. See
+            :meth:`bridgedb.distributors.https.server.WebResourceBridges.getBridgeRequestAnswer`
+            for an example of how this is used.
+        """
+        if not dummyBridges:
+            return super(MoatDistributor, self).getBridges(bridgeRequest, interval)
+
+        if not len(self.dummyHashring):
+            logging.warn("Bailing! Hashring has zero bridges!")
+            return []
+
+        usingProxy = False
+        subnet = self.getSubnet(bridgeRequest.client, usingProxy)
+        position = self.mapClientToHashringPosition(interval, subnet)
+        return self.dummyHashring.getBridges(position, self._bridgesPerResponseMax, filterBySubnet=True)

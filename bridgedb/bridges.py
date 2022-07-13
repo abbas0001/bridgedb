@@ -1583,6 +1583,43 @@ class Bridge(BridgeBackwardsCompatibility):
         for country in resource["blocked_in"]:
             self.setBlockedIn(country)
 
+    def updateFromBridgeLine(self, bridge_line):
+        """Update this bridge's attributes from a bridge line
+
+        :type bridge_line: str
+        """
+        parts = bridge_line.split(" ")
+        if len(parts) < 2:
+            raise MalformedBridgeInfo("Not a valid bridge line: %s" % (bridge_line,))
+        elif len(parts) == 2:
+            tpe = ""
+            addrstr = parts[0]
+            self.fingerprint = parts[1]
+            arguments = {}
+        else:
+            tpe = parts[0]
+            self.fingerprint = parts[2]
+            addrstr = parts[1]
+            arguments = dict([arg.split("=") for arg in parts[3:]])
+
+        addr = addrstr.split(":")
+        self.address = addr[0]
+        if not self.address or len(addr) != 2:
+            raise MalformedBridgeInfo("Invalid address for a bridge (%s): %s" % (self.fingerprint, addrstr))
+        port = int(addr[1])
+
+        if not tpe:
+            self.orPort = port
+        else:
+            transport = PluggableTransport(
+                    fingerprint=self.fingerprint,
+                    methodname=tpe,
+                    address=addr[0],
+                    port=port,
+                    arguments=arguments
+                    )
+            self.transports = [transport]
+
     def updateFromNetworkStatus(self, descriptor, ignoreNetworkstatus=False):
         """Update this bridge's attributes from a parsed networkstatus
         document.

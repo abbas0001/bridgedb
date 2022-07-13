@@ -492,7 +492,8 @@ class CaptchaCheckResource(CaptchaResource):
 
     def __init__(self, distributor, schedule, N=1,
                  hmacKey=None, publicKey=None, secretKey=None,
-                 useForwardedHeader=True, skipInvalid=False):
+                 useForwardedHeader=True, skipInvalid=False,
+                 shim_token=None):
         """Create a new resource for checking CAPTCHA solutions and returning
         bridges to a client.
 
@@ -507,6 +508,8 @@ class CaptchaCheckResource(CaptchaResource):
             X-Forwarded-For header instead of the source IP address.
         :param bool skipInvalid: Skip invalid (e.g., loopback, private) addresses
             when parsing the X-Forwarded-For header.
+        :param bytes shim_token: the token that should be included on the header
+            'shim-token' on each request or dummy bridges will be provided.
         """
         CaptchaResource.__init__(self, hmacKey, publicKey, secretKey,
                                  useForwardedHeader)
@@ -514,6 +517,7 @@ class CaptchaCheckResource(CaptchaResource):
         self.schedule = schedule
         self.nBridgesToGive = N
         self.useForwardedHeader = useForwardedHeader
+        self.shim_token = shim_token
 
     def createBridgeRequest(self, ip, data):
         """Create an appropriate :class:`MoatBridgeRequest` from the ``data``
@@ -539,8 +543,29 @@ class CaptchaCheckResource(CaptchaResource):
 
         return bridgeRequest
 
-    def getBridges(self, bridgeRequest):
+    def getBridges(self, bridgeRequest, dummyBridges=False):
         """Get bridges for a client's HTTP request.
+
+        :type bridgeRequest: :class:`MoatBridgeRequest`
+        :param bridgeRequest: A valid bridge request object with pre-generated
+            filters (as returned by :meth:`createBridgeRequest`).
+        :param bool dummyBridges: if it should provide dummyBridges or actual bridges from
+            from the bridge authority.
+        :rtype: list
+        :return: A list of :class:`~bridgedb.bridges.Bridge`s.
+        """
+        bridges = list()
+        interval = self.schedule.intervalStart(time.time())
+
+        logging.debug("Replying to JSON API request from %s." % bridgeRequest.client)
+
+        if bridgeRequest.isValid():
+            bridges = self.distributor.getBridges(bridgeRequest, interval, dummyBridges)
+
+        return bridges
+
+    def getDummyBridges(self, bridgeRequest):
+        """Get dummy bridges for a client's HTTP request.
 
         :type bridgeRequest: :class:`MoatBridgeRequest`
         :param bridgeRequest: A valid bridge request object with pre-generated
@@ -737,7 +762,9 @@ class CaptchaCheckResource(CaptchaResource):
         if valid:
             qrcode = None
             bridgeRequest = self.createBridgeRequest(clientIP, client_data)
-            bridges = self.getBridges(bridgeRequest)
+            bridges = []
+            dummyBridges = self.shim_token and request.getHeader('shim-token') == self.shim_token
+            bridges = self.getBridges(bridgeRequest, dummyBridges)
             bridgeLines = self.getBridgeLines(bridgeRequest, bridges)
             moatMetrix.recordValidMoatRequest(request)
 
@@ -810,6 +837,7 @@ def addMoatServer(config, distributor):
     fwdHeaders = config.MOAT_USE_IP_FROM_FORWARDED_HEADER
     numBridges = config.MOAT_BRIDGES_PER_ANSWER
     skipInvalid = config.MOAT_SKIP_LOOPBACK_ADDRESSES
+    shim_token = config.MOAT_SHIM_TOKEN
 
     logging.info("Starting moat servers...")
 
@@ -839,7 +867,8 @@ def addMoatServer(config, distributor):
                                  fwdHeaders, skipInvalid)
     check = CaptchaCheckResource(distributor, sched, numBridges,
                                  hmacKey, publicKey, secretKey,
-                                 fwdHeaders, skipInvalid)
+                                 fwdHeaders, skipInvalid,
+                                 shim_token)
 
     moat.putChild(b"fetch", fetch)
     moat.putChild(b"check", check)

@@ -163,6 +163,15 @@ def loadConfig(configFile=None, configCls=None):
     else:
         config.RDSYS_TOKEN = ""
 
+    if os.path.isfile(config.MOAT_SHIM_TOKEN_FILE):
+        with open(config.MOAT_SHIM_TOKEN_FILE) as f:
+            setattr(config, "MOAT_SHIM_TOKEN", f.read())
+        if not os.path.isfile(config.MOAT_DUMMY_BRIDGES_FILE):
+            logging.warning("The dummy bridges file '%s' doesn't exist" % (config.MOAT_DUMMY_BRIDGES_FILE,))
+    else:
+        config.MOAT_SHIM_TOKEN = None
+        logging.info("No shim-token provided, moat will answer each request with bridge authority bridges.")
+
     return config
 
 

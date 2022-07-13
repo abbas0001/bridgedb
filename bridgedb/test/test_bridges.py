@@ -1840,6 +1840,28 @@ class BridgeTests(unittest.TestCase):
         self.assertNotIn('scramblesuit',
                          [pt.methodname for pt in self.bridge.transports])
 
+    def test_Bridge_updateFromBridgeLine_vanilla(self):
+        self.bridge.updateFromBridgeLine("1.1.1.1:1111 2C3225C4805331025E211F4B6E5BF45C333FDD2C")
+
+        self.assertEqual(self.bridge.fingerprint, "2C3225C4805331025E211F4B6E5BF45C333FDD2C") 
+        self.assertEqual(str(self.bridge.address), "1.1.1.1")
+        self.assertEqual(self.bridge.orPort, 1111)
+        self.assertEqual(len(self.bridge.transports), 0)
+
+    def test_Bridge_updateFromBridgeLine_obfs4(self):
+        self.bridge.updateFromBridgeLine("obfs4 1.1.1.1:1111 2C3225C4805331025E211F4B6E5BF45C333FDD2C cert=UXj/cWm0qolGrROYpkl0UyD/7PEhzkoZkZXrOpjRKwImvkpQZwmF0nSzBXfyfbT9afBZEw iat-mode=1")
+
+        self.assertEqual(self.bridge.fingerprint, "2C3225C4805331025E211F4B6E5BF45C333FDD2C") 
+        self.assertEqual(len(self.bridge.transports), 1)
+
+        pt = self.bridge.transports[0]
+        self.assertEqual(pt.fingerprint, "2C3225C4805331025E211F4B6E5BF45C333FDD2C") 
+        self.assertEqual(pt.methodname, "obfs4")
+        self.assertEqual(str(pt.address), "1.1.1.1")
+        self.assertEqual(pt.port, 1111)
+        self.assertEqual(pt.arguments["iat-mode"], "1")
+        self.assertEqual(pt.arguments["cert"], "UXj/cWm0qolGrROYpkl0UyD/7PEhzkoZkZXrOpjRKwImvkpQZwmF0nSzBXfyfbT9afBZEw")
+
     def test_runsVersions(self):
         """Calling runsVersions() should tell us if a bridge is running any of
         the given versions.
