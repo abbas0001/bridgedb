@@ -21,6 +21,13 @@ copy_lang() {
 
 cd "$(dirname "$0")"
 
+git submodule update --init
+
+if [ ! -d i18n ]
+then
+    git clone https://gitlab.torproject.org/tpo/translation/ --single-branch --branch=bridgedb i18n
+fi
+
 lektor build -O public_tmp
 rm -rf public
 mkdir public
