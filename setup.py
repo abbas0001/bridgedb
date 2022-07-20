@@ -172,6 +172,10 @@ def build_lektor_frontend() -> None:
         ['/usr/bin/env', 'bash', 'frontend/build.sh', 'prod'],
     )
     frontend_build.wait()
+    
+    if frontend_build.returncode != 0:
+        raise Exception(f'Frontend build script failed with non-zero exit code: {frontend_build.returncode}')
+
     template_path = os.path.join(
         'bridgedb',
         'distributors',
