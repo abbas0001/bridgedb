@@ -1,400 +1,360 @@
-# Translations template for bridgedb.
-# Copyright (C) 2020 'The Tor Project, Inc.'
-# This file is distributed under the same license as the bridgedb project.
-# 
-# Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2019-2020
-# runasand <inactive+runasand@transifex.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Tor Project\n"
-"Report-Msgid-Bugs-To: 'https://trac.torproject.org/projects/tor/newticket?component=BridgeDB&keywords=bridgedb-reported,msgid&cc=isis,sysrqb&owner=isis'\n"
-"POT-Creation-Date: 2020-05-14 14:21-0700\n"
-"PO-Revision-Date: 2020-05-15 08:24+0000\n"
+"Report-Msgid-Bugs-To: 'https://gitlab.torproject.org/tpo/anti-censorship/bridgedb\n"
+"POT-Creation-Date: 2022-02-10 12:46+PST\n"
+"PO-Revision-Date: 2022-02-10 12:46+PST\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: English (http://www.transifex.com/otf/torproject/language/en/)\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
-"Language: en\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. -*- coding: utf-8 ; test-case-name: bridgedb.test.test_https_server -*-
-#. This file is part of BridgeDB, a Tor bridge distribution system.
-#. :authors: please see included AUTHORS file
-#. :copyright: (c) 2007-2017, The Tor Project, Inc.
-#. (c) 2013-2017, Isis Lovecruft
-#. :license: see LICENSE for licensing information
-#. : The path to the HTTPS distributor's web templates.  (Should be the
-#. : "templates" directory in the same directory as this file.)
-#. Setting `filesystem_checks` to False is recommended for production servers,
-#. due to potential speed increases. This means that the atimes of the Mako
-#. template files aren't rechecked every time the template is requested
-#. (otherwise, if they are checked, and the atime is newer, the template is
-#. recompiled). `collection_size` sets the number of compiled templates which
-#. are cached before the least recently used ones are removed. See:
-#. http://docs.makotemplates.org/en/latest/usage.html#using-templatelookup
-#. : A list of supported language tuples. Use getSortedLangList() to read this
-#. variable.
-#. We use our metrics singleton to keep track of BridgeDB metrics such as
-#. "number of failed HTTPS bridge requests."
-#. Convert all key/value pairs from bytes to str.
-#. TRANSLATORS: Please DO NOT translate the following words and/or phrases in
-#. any string (regardless of capitalization and/or punctuation):
-#. "BridgeDB"
-#. "pluggable transport"
-#. "pluggable transports"
-#. "obfs4"
-#. "Tor"
-#. "Tor Browser"
-#: bridgedb/distributors/https/server.py:154
-msgid "Sorry! Something went wrong with your request."
+#: https://bridges.torproject.org/ (content/contents+en.lr:page.title)
+msgid "Get Bridges for Tor"
 msgstr ""
 
-#: bridgedb/distributors/https/templates/base.html:42
-msgid "Language"
+#: https://bridges.torproject.org/ (content/contents+en.lr:page.section)
+#: https://bridges.torproject.org/options/
+#: (content/options/contents+en.lr:page.section)
+#: https://bridges.torproject.org/captcha/
+#: (content/captcha/contents+en.lr:page.section)
+#: https://bridges.torproject.org/bridges/
+#: (content/bridges/contents+en.lr:page.section)
+#: https://bridges.torproject.org/howto/
+#: (content/howto/contents+en.lr:page.section)
+msgid "home"
 msgstr ""
 
-#: bridgedb/distributors/https/templates/base.html:94
-msgid "Report a Bug"
+#: https://bridges.torproject.org/ (content/contents+en.lr:page.body)
+#: https://bridges.torproject.org/options/
+#: (content/options/contents+en.lr:page.body)
+#: https://bridges.torproject.org/captcha/
+#: (content/captcha/contents+en.lr:page.body)
+#: https://bridges.torproject.org/bridges/
+#: (content/bridges/contents+en.lr:page.body)
+#: https://bridges.torproject.org/howto/
+#: (content/howto/contents+en.lr:page.body)
+msgid "### What are bridges?"
 msgstr ""
 
-#: bridgedb/distributors/https/templates/base.html:97
-msgid "Source Code"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/base.html:100
-msgid "Changelog"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/bridges.html:35
-msgid "Select All"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/bridges.html:40
-msgid "Show QRCode"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/bridges.html:52
-msgid "QRCode for your bridge lines"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/bridges.html:63
-msgid "It seems there was an error getting your QRCode."
-msgstr ""
-
-#: bridgedb/distributors/https/templates/bridges.html:68
+#: https://bridges.torproject.org/ (content/contents+en.lr:page.body)
+#: https://bridges.torproject.org/options/
+#: (content/options/contents+en.lr:page.body)
+#: https://bridges.torproject.org/captcha/
+#: (content/captcha/contents+en.lr:page.body)
+#: https://bridges.torproject.org/bridges/
+#: (content/bridges/contents+en.lr:page.body)
+#: https://bridges.torproject.org/howto/
+#: (content/howto/contents+en.lr:page.body)
 msgid ""
-"This QRCode contains your bridge lines. Scan it with a QRCode reader to copy"
-" your bridge lines onto mobile and other devices."
+"[Bridges](https://tb-manual.torproject.org/bridges/) are Tor relays that "
+"help you circumvent censorship."
 msgstr ""
 
-#: bridgedb/distributors/https/templates/bridges.html:110
-msgid "BridgeDB encountered an error."
+#: https://bridges.torproject.org/ (content/contents+en.lr:page.body)
+#: https://bridges.torproject.org/options/
+#: (content/options/contents+en.lr:page.body)
+#: https://bridges.torproject.org/captcha/
+#: (content/captcha/contents+en.lr:page.body)
+#: https://bridges.torproject.org/bridges/
+#: (content/bridges/contents+en.lr:page.body)
+#: https://bridges.torproject.org/howto/
+#: (content/howto/contents+en.lr:page.body)
+msgid "### I need an alternative way of getting bridges!"
 msgstr ""
 
-#: bridgedb/distributors/https/templates/bridges.html:116
-msgid "There currently aren't any bridges available..."
-msgstr ""
-
-#: bridgedb/distributors/https/templates/bridges.html:118
-#: bridgedb/distributors/https/templates/bridges.html:122
-#, python-format
+#: https://bridges.torproject.org/ (content/contents+en.lr:page.body)
+#: https://bridges.torproject.org/options/
+#: (content/options/contents+en.lr:page.body)
+#: https://bridges.torproject.org/captcha/
+#: (content/captcha/contents+en.lr:page.body)
+#: https://bridges.torproject.org/bridges/
+#: (content/bridges/contents+en.lr:page.body)
+#: https://bridges.torproject.org/howto/
+#: (content/howto/contents+en.lr:page.body)
 msgid ""
-" Perhaps you should try %s going back %s and choosing a different bridge "
-"type!"
+"Another way to get bridges is to send an email to [bridges@torproject.org]"
+"(mailto:bridges@torproject.org). Leave the email subject empty and write "
+"\"get transport obfs4\" in the email's message body. Please note that you "
+"must send the email using an address from one of the following email "
+"providers: [Riseup](https://riseup.net/) or [Gmail](https://mail.google."
+"com/)."
 msgstr ""
 
-#: bridgedb/distributors/https/templates/index.html:11
-#, python-format
-msgid "Step %s1%s"
+#: https://bridges.torproject.org/ (content/contents+en.lr:page.body)
+#: https://bridges.torproject.org/options/
+#: (content/options/contents+en.lr:page.body)
+#: https://bridges.torproject.org/captcha/
+#: (content/captcha/contents+en.lr:page.body)
+#: https://bridges.torproject.org/bridges/
+#: (content/bridges/contents+en.lr:page.body)
+#: https://bridges.torproject.org/howto/
+#: (content/howto/contents+en.lr:page.body)
+msgid "### My bridges don't work! I need help!"
 msgstr ""
 
-#: bridgedb/distributors/https/templates/index.html:13
-#, python-format
-msgid "Download %s Tor Browser %s"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/index.html:25
-#, python-format
-msgid "Step %s2%s"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/index.html:28
-#: bridgedb/distributors/https/templates/index.html:30
-#, python-format
-msgid "Get %s bridges %s"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/index.html:40
-#, python-format
-msgid "Step %s3%s"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/index.html:43
-#: bridgedb/distributors/https/templates/index.html:47
-#, python-format
-msgid "Now %s add the bridges to Tor Browser %s"
-msgstr ""
-
-#. TRANSLATORS: Please make sure the '%s' surrounding single letters at the
-#. beginning of words are present in your final translation. Thanks!
-#. (These are used to insert HTML5 underlining tags, to mark accesskeys
-#. for disabled users.)
-#: bridgedb/distributors/https/templates/options.html:42
-#, python-format
-msgid "%sJ%sust give me bridges!"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/options.html:55
-msgid "Advanced Options"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/options.html:93
-msgid "No"
-msgstr ""
-
-#: bridgedb/distributors/https/templates/options.html:94
-msgid "none"
-msgstr ""
-
-#. TRANSLATORS: Please make sure the '%s' surrounding single letters at the
-#. beginning of words are present in your final translation. Thanks!
-#. TRANSLATORS: Translate "Yes!" as in "Yes! I do need IPv6 addresses."
-#: bridgedb/distributors/https/templates/options.html:131
-#, python-format
-msgid "%sY%ses!"
-msgstr ""
-
-#. TRANSLATORS: Please make sure the '%s' surrounding single letters at the
-#. beginning of words are present in your final translation. Thanks!
-#. TRANSLATORS: Please do NOT translate the word "bridge"!
-#: bridgedb/distributors/https/templates/options.html:154
-#, python-format
-msgid "%sG%set Bridges"
-msgstr ""
-
-#: bridgedb/strings.py:33
-msgid "[This is an automated email.]"
-msgstr ""
-
-#: bridgedb/strings.py:35
-msgid "Here are your bridges:"
-msgstr ""
-
-#: bridgedb/strings.py:37
-#, python-format
+#: https://bridges.torproject.org/ (content/contents+en.lr:page.body)
+#: https://bridges.torproject.org/options/
+#: (content/options/contents+en.lr:page.body)
+#: https://bridges.torproject.org/captcha/
+#: (content/captcha/contents+en.lr:page.body)
+#: https://bridges.torproject.org/bridges/
+#: (content/bridges/contents+en.lr:page.body)
+#: https://bridges.torproject.org/howto/
+#: (content/howto/contents+en.lr:page.body)
 msgid ""
-"You have exceeded the rate limit. Please slow down! The minimum time between\n"
-"emails is %s hours. All further emails during this time period will be ignored."
+"If your Tor Browser cannot connect, please take a look at the [Tor Browser "
+"Manual](https://tb-manual.torproject.org/circumvention/) and our [Support "
+"Portal](https://support.torproject.org/#censorship)."
 msgstr ""
 
-#: bridgedb/strings.py:40
+#: https://bridges.torproject.org/ (content/contents+en.lr:page.intro)
 msgid ""
-"If these bridges are not what you need, reply to this email with one of\n"
-"the following commands in the message body:"
+"### BridgeDb can provide bridges with several types of Pluggable Transports, "
+"which can help obfuscate your connections to the Tor Network, making it more "
+"difficult for anyone watching your internet traffic to determine that you "
+"are using Tor."
 msgstr ""
 
-#. TRANSLATORS: Please DO NOT translate "BridgeDB".
-#. TRANSLATORS: Please DO NOT translate "Pluggable Transports".
-#. TRANSLATORS: Please DO NOT translate "Tor".
-#. TRANSLATORS: Please DO NOT translate "Tor Network".
-#: bridgedb/strings.py:50
+#: https://bridges.torproject.org/options/
+#: (content/options/contents+en.lr:page.title)
+#: https://bridges.torproject.org/captcha/
+#: (content/captcha/contents+en.lr:page.title)
+#: https://bridges.torproject.org/bridges/
+#: (content/bridges/contents+en.lr:page.title)
+#: https://bridges.torproject.org/howto/
+#: (content/howto/contents+en.lr:page.title)
+msgid "BridgeDB"
+msgstr ""
+
+#: lego/templates/footer.html:13 lego/templates/footer.html:22
+#: lego/templates/navbar.html:97 templates/footer.html:13
+#: templates/footer.html:22 templates/navbar.html:97
+msgid "Download Tor Browser"
+msgstr ""
+
+#: lego/templates/footer.html:14 templates/footer.html:14
+msgid ""
+"Download Tor Browser to experience real private browsing without tracking, "
+"surveillance, or censorship."
+msgstr ""
+
+#: lego/templates/footer.html:35 templates/footer.html:35
+msgid "Our mission:"
+msgstr ""
+
+#: lego/templates/footer.html:36 templates/footer.html:36
+msgid ""
+"To advance human rights and freedoms by creating and deploying free and open "
+"source anonymity and privacy technologies, supporting their unrestricted "
+"availability and use, and furthering their scientific and popular "
+"understanding."
+msgstr ""
+
+#: lego/templates/footer.html:64 lego/templates/footer.html:66
+#: lego/templates/navbar.html:19 lego/templates/navbar.html:21
+#: lego/templates/navbar.html:65 templates/footer.html:64
+#: templates/footer.html:66 templates/navbar.html:19 templates/navbar.html:21
+#: templates/navbar.html:65
+msgid "Donate"
+msgstr ""
+
+#: lego/templates/footer.html:64 lego/templates/footer.html:66
+#: lego/templates/navbar.html:19 lego/templates/navbar.html:21
+#: templates/footer.html:64 templates/footer.html:66 templates/navbar.html:19
+#: templates/navbar.html:21
+msgid "Donate Now"
+msgstr ""
+
+#: lego/templates/footer.html:75 templates/footer.html:75
+msgid "Subscribe to our Newsletter"
+msgstr ""
+
+#: lego/templates/footer.html:76 templates/footer.html:76
+msgid "Get monthly updates and opportunities from the Tor Project:"
+msgstr ""
+
+#: lego/templates/footer.html:77 templates/footer.html:77
+msgid "Sign up"
+msgstr ""
+
+#: lego/templates/footer.html:101 templates/footer.html:101
 #, python-format
 msgid ""
-"BridgeDB can provide bridges with several %stypes of Pluggable Transports%s,\n"
-"which can help obfuscate your connections to the Tor Network, making it more\n"
-"difficult for anyone watching your internet traffic to determine that you are\n"
-"using Tor.\n"
+"Trademark, copyright notices, and rules for use by third parties can be "
+"found in our %(link_to_faq)s"
+msgstr ""
+
+#: lego/templates/navbar.html:26 templates/navbar.html:26
+msgid "Menu"
+msgstr ""
+
+#: lego/templates/navbar.html:56 templates/navbar.html:56
+msgid "About"
+msgstr ""
+
+#: lego/templates/navbar.html:57 templates/navbar.html:57
+msgid "Documentation"
+msgstr ""
+
+#: lego/templates/navbar.html:58 templates/navbar.html:58
+msgid "Support"
+msgstr ""
+
+#: lego/templates/navbar.html:59 templates/navbar.html:59
+msgid "Community"
+msgstr ""
+
+#: lego/templates/navbar.html:60 templates/navbar.html:60
+msgid "Blog"
+msgstr ""
+
+#: lego/templates/navbar.html:61 templates/navbar.html:61
+msgid "PrivChat"
+msgstr ""
+
+#: lego/templates/navbar.html:62 templates/navbar.html:62
+msgid "Jobs"
+msgstr ""
+
+#: lego/templates/navbar.html:63 templates/navbar.html:63
+msgid "Contact"
+msgstr ""
+
+#: lego/templates/navbar.html:64 templates/navbar.html:64
+msgid "Press"
+msgstr ""
+
+#: lego/templates/search.html:5
+msgid "Search"
+msgstr ""
+
+#: lego/templates/secure-connections.html:1
+msgid ""
+"The following visualization shows what information is visible to "
+"eavesdroppers with and without Tor Browser and HTTPS encryption:"
+msgstr ""
+
+#: lego/templates/secure-connections.html:4
+msgid ""
+"Click the “Tor” button to see what data is visible to observers when you're "
+"using Tor. The button will turn green to indicate that Tor is on."
+msgstr ""
+
+#: lego/templates/secure-connections.html:5
+msgid ""
+"Click the “HTTPS” button to see what data is visible to observers when "
+"you're using HTTPS. The button will turn green to indicate that HTTPS is on."
+msgstr ""
+
+#: lego/templates/secure-connections.html:6
+msgid ""
+"When both buttons are green, you see the data that is visible to observers "
+"when you are using both tools."
+msgstr ""
+
+#: lego/templates/secure-connections.html:7
+msgid ""
+"When both buttons are grey, you see the data that is visible to observers "
+"when you don't use either tool."
+msgstr ""
+
+#: lego/templates/secure-connections.html:11
+msgid "HTTPS"
+msgstr ""
+
+#: lego/templates/secure-connections.html:15
+#: lego/templates/secure-connections.html:65
+msgid "Tor"
+msgstr ""
+
+#: lego/templates/secure-connections.html:32
+msgid "POTENTIALLY VISIBLE DATA"
+msgstr ""
+
+#: lego/templates/secure-connections.html:37
+msgid "Site.com"
+msgstr ""
+
+#: lego/templates/secure-connections.html:40
+msgid "The site being visited."
+msgstr ""
+
+#: lego/templates/secure-connections.html:44
+msgid "user / pw"
+msgstr ""
+
+#: lego/templates/secure-connections.html:47
+msgid "Username and password used for authentication."
+msgstr ""
+
+#: lego/templates/secure-connections.html:51
+msgid "data"
+msgstr ""
+
+#: lego/templates/secure-connections.html:54
+msgid "Data being transmitted."
+msgstr ""
+
+#: lego/templates/secure-connections.html:58
+msgid "location"
+msgstr ""
+
+#: lego/templates/secure-connections.html:61
+msgid ""
+"Network location of the computer used to visit the website (the public IP "
+"address)."
+msgstr ""
+
+#: lego/templates/secure-connections.html:68
+msgid "Whether or not Tor is being used."
+msgstr ""
+
+#: templates/hero-bridge-lines.html:53
+msgid ""
+"### How to start using your bridges\n"
 "\n"
+"First, you need to [download Tor Browser](https://www.torproject.org/"
+"projects/torbrowser.html). Our Tor Browser User Manual explains how you can "
+"add your bridges to Tor Browser. If you are using Windows, Linux, or OS X, "
+"[click here](https://tb-manual.torproject.org/bridges/#entering-bridge-"
+"addresses) to learn more. If you are using Android, [click here](https://tb-"
+"manual.torproject.org/mobile-tor/#circumvention)."
 msgstr ""
 
-#. TRANSLATORS: Please DO NOT translate "Pluggable Transports".
-#: bridgedb/strings.py:57
+#: templates/hero-home.html:5 templates/meta.html:6 templates/meta.html:13
 msgid ""
-"Some bridges with IPv6 addresses are also available, though some Pluggable\n"
+"Defend yourself against tracking and surveillance. Circumvent censorship."
+msgstr ""
+
+#: templates/homepage.html:12
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+msgstr ""
+
+#: templates/meta.html:12
+msgid "The Tor Project | Privacy & Freedom Online"
+msgstr ""
+
+#: templates/meta.html:22
+msgid "Tor Project"
+msgstr ""
+
+#: templates/options.html:5
+msgid ""
+"# Get Bridges!\n"
+"\n"
+"BridgeDB can provide bridges with several types of [Pluggable Transports]"
+"(https://support.torproject.org/glossary/#pluggable-transports), which can "
+"help obfuscate your connections to the Tor Network, making it more difficult "
+"for anyone watching your internet traffic to determine that you are using "
+"Tor.\n"
+"\n"
+"Some bridges with IPv6 addresses are also available, though some Pluggable "
 "Transports aren't IPv6 compatible.\n"
 "\n"
-msgstr ""
-
-#. TRANSLATORS: Please DO NOT translate "BridgeDB".
-#. TRANSLATORS: The phrase "plain-ol'-vanilla" means "plain, boring,
-#. regular, or unexciting". Like vanilla ice cream. It refers to bridges
-#. which do not have Pluggable Transports, and only speak the regular,
-#. boring Tor protocol. Translate it as you see fit. Have fun with it.
-#: bridgedb/strings.py:66
-#, python-format
-msgid ""
-"Additionally, BridgeDB has plenty of plain-ol'-vanilla bridges %s without any\n"
-"Pluggable Transports %s which maybe doesn't sound as cool, but they can still\n"
-"help to circumvent internet censorship in many cases.\n"
-"\n"
-msgstr ""
-
-#: bridgedb/strings.py:78 bridgedb/test/test_https.py:356
-msgid "What are bridges?"
-msgstr ""
-
-#: bridgedb/strings.py:79
-#, python-format
-msgid "%s Bridges %s are Tor relays that help you circumvent censorship."
-msgstr ""
-
-#: bridgedb/strings.py:84
-msgid "I need an alternative way of getting bridges!"
-msgstr ""
-
-#. TRANSLATORS: Please DO NOT translate "get transport obfs4".
-#: bridgedb/strings.py:86
-#, python-format
-msgid ""
-"Another way to get bridges is to send an email to %s. Leave the email subject\n"
-"empty and write \"get transport obfs4\" in the email's message body. Please note\n"
-"that you must send the email using an address from one of the following email\n"
-"providers: %s or %s."
-msgstr ""
-
-#: bridgedb/strings.py:94
-msgid "My bridges don't work! I need help!"
-msgstr ""
-
-#. TRANSLATORS: Please DO NOT translate "Tor Browser".
-#. TRANSLATORS: The two '%s' are substituted with "Tor Browser Manual" and
-#. "Support Portal", respectively.
-#: bridgedb/strings.py:98
-#, python-format
-msgid ""
-"If your Tor Browser cannot connect, please take a look at the %s and our %s."
-msgstr ""
-
-#: bridgedb/strings.py:102
-msgid "Here are your bridge lines:"
-msgstr ""
-
-#: bridgedb/strings.py:103
-msgid "Get Bridges!"
-msgstr ""
-
-#: bridgedb/strings.py:107
-msgid "Bridge distribution mechanisms"
-msgstr ""
-
-#. TRANSLATORS: Please DO NOT translate "BridgeDB", "HTTPS", and "Moat".
-#: bridgedb/strings.py:109
-#, python-format
-msgid ""
-"BridgeDB implements four mechanisms to distribute bridges: \"HTTPS\", \"Moat\",\n"
-"\"Email\", and \"Reserved\".  Bridges that are not distributed over BridgeDB use\n"
-"the pseudo-mechanism \"None\".  The following list briefly explains how these\n"
-"mechanisms work and our %sBridgeDB metrics%s visualize how popular each of the\n"
-"mechanisms is."
-msgstr ""
-
-#: bridgedb/strings.py:115
-#, python-format
-msgid ""
-"The \"HTTPS\" distribution mechanism hands out bridges over this website.  To get\n"
-"bridges, go to %sbridges.torproject.org%s, select your preferred options, and\n"
-"solve the subsequent CAPTCHA."
-msgstr ""
-
-#: bridgedb/strings.py:119
-#, python-format
-msgid ""
-"The \"Moat\" distribution mechanism is part of Tor Browser, allowing users to\n"
-"request bridges from inside their Tor Browser settings.  To get bridges, go to\n"
-"your Tor Browser's %sTor settings%s, click on \"request a new bridge\", solve the\n"
-"subsequent CAPTCHA, and Tor Browser will automatically add your new\n"
-"bridges."
-msgstr ""
-
-#: bridgedb/strings.py:125
-#, python-format
-msgid ""
-"Users can request bridges from the \"Email\" distribution mechanism by sending an\n"
-"email to %sbridges@torproject.org%s and writing \"get transport obfs4\" in the\n"
-"email body."
-msgstr ""
-
-#: bridgedb/strings.py:129
-msgid "Reserved"
-msgstr ""
-
-#: bridgedb/strings.py:130
-#, python-format
-msgid ""
-"BridgeDB maintains a small number of bridges that are not distributed\n"
-"automatically.  Instead, we reserve these bridges for manual distribution and\n"
-"hand them out to NGOs and other organizations and individuals that need\n"
-"bridges.  Bridges that are distributed over the \"Reserved\" mechanism may not\n"
-"see users for a long time.  Note that the \"Reserved\" distribution mechanism is\n"
-"called \"Unallocated\" in %sbridge pool assignment%s files."
-msgstr ""
-
-#: bridgedb/strings.py:137
-msgid "None"
-msgstr ""
-
-#: bridgedb/strings.py:138
-msgid ""
-"Bridges whose distribution mechanism is \"None\" are not distributed by BridgeDB.\n"
-"It is the bridge operator's responsibility to distribute their bridges to\n"
-"users.  Note that on Relay Search, a freshly set up bridge's distribution\n"
-"mechanism says \"None\" for up to approximately one day.  Be a bit patient, and\n"
-"it will then change to the bridge's actual distribution mechanism.\n"
-msgstr ""
-
-#: bridgedb/strings.py:148
-msgid "Please select options for bridge type:"
-msgstr ""
-
-#: bridgedb/strings.py:149
-msgid "Do you need IPv6 addresses?"
-msgstr ""
-
-#: bridgedb/strings.py:150
-#, python-format
-msgid "Do you need a %s?"
-msgstr ""
-
-#: bridgedb/strings.py:154
-msgid "Your browser is not displaying images properly."
-msgstr ""
-
-#: bridgedb/strings.py:155
-msgid "Enter the characters from the image above..."
-msgstr ""
-
-#: bridgedb/strings.py:159
-msgid "How to start using your bridges"
-msgstr ""
-
-#. TRANSLATORS: Please DO NOT translate "Tor Browser".
-#: bridgedb/strings.py:161
-#, python-format
-msgid ""
-" First, you need to %sdownload Tor Browser%s. Our Tor Browser User\n"
-" Manual explains how you can add your bridges to Tor Browser. If you are\n"
-" using Windows, Linux, or OS X, %sclick here%s to learn more. If you\n"
-" are using Android, %sclick here%s."
-msgstr ""
-
-#: bridgedb/strings.py:166
-msgid ""
-"Add these bridges to your Tor Browser by opening your browser\n"
-"preferences, clicking on \"Tor\", and then adding them to the \"Provide a\n"
-"bridge\" field."
-msgstr ""
-
-#: bridgedb/strings.py:173
-msgid "(Request unobfuscated Tor bridges.)"
-msgstr ""
-
-#: bridgedb/strings.py:174
-msgid "(Request IPv6 bridges.)"
-msgstr ""
-
-#: bridgedb/strings.py:175
-msgid "(Request obfs4 obfuscated bridges.)"
+"Additionally, BridgeDB has plenty of plain-ol'-vanilla bridges — without any "
+"Pluggable Transports — which maybe doesn't sound as cool, but they can still "
+"help to circumvent internet censorship in many cases."
 msgstr ""

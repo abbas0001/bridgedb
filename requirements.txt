@@ -13,3 +13,27 @@ service_identity==21.1.0
 stem==1.8.0
 zope.interface==5.4.0
 numpy==1.20.3
+
+# lektor/frontend-specific dependencies
+certifi==2021.10.8
+charset-normalizer==2.0.12
+click==8.1.0
+exifread==2.3.2
+filetype==1.0.10
+flask==2.1.0
+idna==3.3
+importlib-metadata==4.11.3
+inifile==0.4.1
+itsdangerous==2.1.2
+jinja2==3.0.3
+lektor==3.3.2
+markupsafe==2.1.1
+mistune==0.8.4
+python-slugify==6.1.1
+pytz==2022.1
+requests[security]==2.27.1
+text-unidecode==1.3
+urllib3==1.26.9
+watchdog==2.1.7
+werkzeug==2.0.3
+zipp==3.7.0

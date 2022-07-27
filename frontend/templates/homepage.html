@@ -1,0 +1,49 @@
+{% include 'meta.html' %}
+<div class="page">
+  <div class="container-fluid bg-primary">
+    <div class="row flex-xl-nowrap {{ bag('alternatives', this.alt, 'order') }}">
+      <div class="container bg-primary pt-1 pt-sm-0">
+        <div class="row">
+          <div class="col-12 content-center pt-5">
+            <div class="row">
+              <h6 class="mx-auto text-white">{{ this.section }}</h6>
+            </div>
+            <div class="row pb-5">
+              <h2 class="mx-auto display-3 text-center text-white">{{ this.title }}</h2>
+            </div>
+            <div class="row header-description">
+              {% if this.subtitle %}
+                <h4 class="mx-auto text-white">
+                  {{ this.subtitle }}
+                </h4>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if this.path_bar %}
+  <div id="bridgedb-pathbar">
+      <a href="{{ '/' | url }}">BridgeDB</a><span id="bridgedb-pathbar-sep-container"><span id="bridgedb-pathbar-sep"></span>{{ this.path_bar }}</span>
+  </div>
+  {% endif %}
+  {% set locale = bag('alternatives', this.alt) %}
+  <div class="container {{ locale.order }} {{ locale.direction }}">
+    <div class="row flex-xl-nowrap {{ locale.order }} {{ locale.direction }}">
+      <main role="main" class="container mx-auto col-12 {{ locale.order }} {{ locale.direction }}">
+        <div class="container pt-5 justify-content-center">
+          <section>
+            <div class="container py-3 preamble">
+              {% if this.intro %}{{ this.intro }}{% endif %}
+            </div>
+            {% if this.html %}{% include this.html %}{% endif %}
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+{% include 'footer.html' %}
+</body>
+</html>

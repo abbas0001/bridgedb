@@ -1,0 +1,17 @@
+section: Bridges
+---
+section_id: home
+---
+color: primary
+---
+_template: jumbotron.html
+---
+title: Get Bridges for Tor
+---
+html: home.html
+---
+intro:
+
+BridgeDb can provide bridges with several types of Pluggable Transports, which can help obfuscate your connections to the Tor Network, making it more difficult for anyone watching your internet traffic to determine that you are using Tor.
+---
+body:

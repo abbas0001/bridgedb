@@ -1,0 +1,42 @@
+{% macro render_advanced_options() %}
+<div id="bridgedb-advanced-options">
+  <h3>Advanced Options</h3>
+  <p>Please select options for this bridge type:</p>
+  <form action="{{ '/bridges'|url }}">
+    <div class="bridgedb-form-row">
+      <div>
+        <p>Do you need a pluggable transport?</p>
+        <select id="bridgedb-advanced-options-transport" name="transport" accesskey="t" data-toggle="dropdown" class="form-control">
+          <option value="0">none</option>
+          <option value="obfs4" selected>obfs4</option>
+        </select>
+      </div>
+      <div>
+        <p>Do you need IPv6 addresses?</p>
+        <input id="ipv6" name="ipv6" type="checkbox" value="yes" accesskey="y">&nbsp;<u>Y</u>es!
+      </div>
+    </div>
+    <input type="submit" value="Get Bridges" id="get-bridges-submit" class="btn btn-lg btn-purple mt-4">
+  </form>
+</div>
+{% endmacro %}
+
+{{ md(_('''# Get Bridges!
+
+BridgeDB can provide bridges with several types of [Pluggable Transports](https://support.torproject.org/glossary/#pluggable-transports), which can help obfuscate your connections to the Tor Network, making it more difficult for anyone watching your internet traffic to determine that you are using Tor.
+
+Some bridges with IPv6 addresses are also available, though some Pluggable Transports aren\'t IPv6 compatible.
+
+Additionally, BridgeDB has plenty of plain-ol\'-vanilla bridges — without any Pluggable Transports — which maybe doesn\'t sound as cool, but they can still help to circumvent internet censorship in many cases.''')) }}
+
+<div class="bs-component" id="bridges-button-container">
+  <a href="{{ '/bridges'|url }}?transport=obfs4">
+    <button class="btn btn-lg btn-purple" id="just-give-me-bridges-btn" type="button" accesskey="j">
+      <u>J</u>ust give me bridges!
+    </button>
+  </a>
+</div>
+
+{{ render_advanced_options() }}
+
+{% include 'support.jinja2' %}

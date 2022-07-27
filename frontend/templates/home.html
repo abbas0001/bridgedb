@@ -1,0 +1,25 @@
+{% macro render_step(number, text, link, image_name) %}
+<div class="col-lg-4 col-md-6 col-sm-12 py-4">
+  <div class="card h-100 p-2">
+    <div class="card-body">
+      <h2 class="card-title ">{{ _('Step ' + number|string) }}</h2>
+      <p class="card-text">{{ _(text) }}</p>
+      <div class="">
+        <picture>
+          <source type="image/svg+xml" srcset="{{ '/static/images/{}.svg'.format(image_name) | asseturl }}">
+          <img src="{{ '/static/images/{}.png'.format(image_name) | asseturl }}">
+        </picture>
+      </div>
+    </div>
+    <a href="{{ link }}" class="btn btn-primary">{{ _(text) }}</a>
+  </div>
+</div>
+{% endmacro %}
+
+<div class="row">
+  {{ render_step(1, 'Download Tor Browser', 'https://www.torproject.org/projects/torbrowser.html', 'bridges-download') }}
+  {{ render_step(2, 'Get Bridges', '/options'|url, 'bridges-get') }}
+  {{ render_step(3, 'Add the Bridges', '/howto'|url, 'bridges-add') }}
+</div>
+
+{% include 'support.jinja2' %}

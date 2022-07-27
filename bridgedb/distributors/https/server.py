@@ -96,6 +96,18 @@ httpsMetrix = metrics.HTTPSMetrics()
 internalMetrix = metrics.InternalMetrics()
 
 
+def getTemplate(langs, template_name):
+    for lang in langs:
+        try:
+            template = lookup.get_template(os.path.join(langs[0], template_name))
+            return template
+        except mako.exceptions.TopLevelLookupException:
+            continue
+
+    template = lookup.get_template(template_name)
+    return template
+
+
 def stringifyRequestArgs(args):
     """Turn the given HTTP request arguments from bytes to str.
 
@@ -410,18 +422,18 @@ class TranslatedTemplateResource(CustomErrorHandlingResource, CSPResource):
         try:
             langs = translations.getLocaleFromHTTPRequest(request)
             rtl = translations.usingRTLLang(langs)
-            template = lookup.get_template(self.template)
+            template = getTemplate(langs, self.template)
             if langs:
-                rendered = template.render(strings,
-                                       getSortedLangList(),
+                rendered = template.render(strings=strings,
+                                       langs=getSortedLangList(),
                                        rtl=rtl,
                                        lang=langs[0],
                                        langOverride=translations.isLangOverridden(request),
                                        showFaq=self.showFaq,
                                        addAccessKeys=self._add_access_keys)
             else:
-                rendered = template.render(strings,
-                                       getSortedLangList(),
+                rendered = template.render(strings=strings,
+                                       langs=getSortedLangList(),
                                        showFaq=self.showFaq,
                                        addAccessKeys=self._add_access_keys)
         except Exception as err:  # pragma: no cover
@@ -555,18 +567,18 @@ class CaptchaProtectedResource(CustomErrorHandlingResource, CSPResource):
             rtl = translations.usingRTLLang(langs)
             # TODO: this does not work for versions of IE < 8.0
             imgstr = b'data:image/jpeg;base64,%s' % base64.b64encode(image)
-            template = lookup.get_template('captcha.html')
+            template = getTemplate(langs, 'captcha.html')
             if langs:
-                rendered = template.render(strings,
-                                       getSortedLangList(),
+                rendered = template.render(strings=strings,
+                                       langs=getSortedLangList(),
                                        rtl=rtl,
                                        lang=langs[0],
                                        langOverride=translations.isLangOverridden(request),
                                        imgstr=imgstr.decode("utf-8"),
                                        challenge_field=challenge)
             else:
-                rendered = template.render(strings,
-                                       getSortedLangList(),
+                rendered = template.render(strings=strings,
+                                       langs=getSortedLangList(),
                                        imgstr=imgstr.decode("utf-8"),
                                        challenge_field=challenge)
         except Exception as err:
@@ -1106,18 +1118,19 @@ class BridgesResource(CustomErrorHandlingResource, CSPResource):
             try:
                 langs = translations.getLocaleFromHTTPRequest(request)
                 rtl = translations.usingRTLLang(langs)
-                template = lookup.get_template('bridges.html')
                 if langs:
-                    rendered = template.render(strings,
-                                           getSortedLangList(),
+                    template = getTemplate(langs, 'bridges.html')
+                    # XXX: We might not be using `langs[0]` depending on the result of getTemplate
+                    rendered = template.render(strings=strings,
+                                           langs=getSortedLangList(),
                                            rtl=rtl,
                                            lang=langs[0],
                                            langOverride=translations.isLangOverridden(request),
                                            answer=bridgeLines,
                                            qrcode=qrcode)
                 else:
-                    rendered = template.render(strings,
-                                           getSortedLangList(),
+                    rendered = template.render(strings=strings,
+                                           langs=getSortedLangList(),
                                            answer=bridgeLines,
                                            qrcode=qrcode)
             except Exception as err:
@@ -1184,7 +1197,7 @@ def addWebServer(config, distributor):
     root = CustomErrorHandlingResource()
     root.putChild(b'', index)
     root.putChild(b'robots.txt', robots)
-    root.putChild(b'assets', assets)
+    root.putChild(b'static', assets)
     root.putChild(b'options', options)
     root.putChild(b'howto', howto)
     root.putChild(b'info', info)

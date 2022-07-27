@@ -1,0 +1,15 @@
+section: Get Bridges
+---
+section_id: home
+---
+color: primary
+---
+_template: homepage.html
+---
+title: Bridge Lines
+---
+path_bar: Get Bridges!
+---
+html: bridges.html
+---
+body:

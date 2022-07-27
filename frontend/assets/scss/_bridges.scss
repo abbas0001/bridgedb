@@ -1,0 +1,94 @@
+#bridgedb-qrcodebtn {
+    color: #fff !important;
+}
+
+#just-give-me-bridges-btn, #get-bridges-submit {
+    &:hover {
+        background-color: #673a7e !important;
+    }
+}
+
+.p-20px {
+    padding: 20px;
+}
+
+#bridgedb-support-body {
+    h4 {
+        color: #7D4698;
+    }
+
+    summary {
+        list-style: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    > details {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+}
+
+.bg-dark {
+    background-color: $purple-dark;
+}
+
+.bridgedb-form-row {
+    display: flex;
+    gap: 50px;
+}
+
+#bridgedb-advanced-options {
+    background-color: #F9FAFB;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 4rem;
+    margin-top: 2rem;
+    border-radius: 4px;
+}
+
+.btn-purple:hover {
+    background-color: $purple-dark !important;
+}
+
+#bridgedb-pathbar {
+    padding: 10px 20px;
+    background-color: #F8F9FA;
+}
+
+#bridgedb-pathbar-sep-container {
+    color: #848E97
+}
+
+#bridgedb-pathbar-sep {
+    padding: 0 5px;
+
+    &::before {
+        content: "/";
+    }
+}
+
+#bridgelines {
+    white-space: nowrap;
+    overflow-x: auto;
+    font-family: monospace;
+    background-color: #F9FAFB;
+}
+
+#bridgedb-captcha-container {
+    width: max-content;
+    margin: 0 auto;
+}
+
+#bridgedb-captcha-input {
+    flex-grow: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#bridgedb-captcha-submit {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

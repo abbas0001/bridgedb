@@ -1,0 +1,15 @@
+section: Bridges
+---
+section_id: home
+---
+color: primary
+---
+_template: homepage.html
+---
+title: BridgeDB
+---
+path_bar: Get Bridges!
+---
+html: howto.html
+---
+body:
