@@ -1,3 +1,13 @@
+Changes in version 0.14.0 - 2022-08-17
+
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/34322
+      Make BridgeDB's web interface look like torproject.org
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/bridgedb/-/issues/40050
+      Change the 'select all' button for a 'copy all' when giving the bridges
+    * FIXES https://gitlab.torproject.org/tpo/anti-censorship/rdsys/-/issues/99
+      Distributors should wait a delay to retry the connection to the rdsys backend
+    * Respond with dummy bridges if the request is not comming from the shim
+
 Changes in version 0.13.2 - 2022-05-04
 
     * Fix the description in /info
