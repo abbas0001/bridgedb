@@ -18,6 +18,7 @@ numpy==1.20.3
 certifi==2021.10.8
 charset-normalizer==2.0.12
 click==8.1.0
+environs==9.5.0
 exifread==2.3.2
 filetype==1.0.10
 flask==2.1.0
