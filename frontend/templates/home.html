@@ -4,12 +4,7 @@
     <div class="card-body">
       <h2 class="card-title ">{{ _('Step ' + number|string) }}</h2>
       <p class="card-text">{{ _(text) }}</p>
-      <div class="">
-        <picture>
-          <source type="image/svg+xml" srcset="{{ '/static/images/{}.svg'.format(image_name) | asseturl }}">
-          <img src="{{ '/static/images/{}.png'.format(image_name) | asseturl }}">
-        </picture>
-      </div>
+      <img src="{{ '/static/images/{}.svg'.format(image_name) | asseturl }}">
     </div>
     <a href="{{ link }}" class="btn btn-primary">{{ _(text) }}</a>
   </div>
