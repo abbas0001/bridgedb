@@ -28,7 +28,7 @@ then
     git clone https://gitlab.torproject.org/tpo/translation/ --single-branch --branch=bridgedb i18n
 fi
 
-lektor build -O public_tmp
+lektor build -O public_tmp -f scss
 rm -rf public
 mkdir public
 
